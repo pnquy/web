@@ -1,0 +1,73 @@
+body{
+    padding:0px;
+    margin : 0px;
+}
+h4{
+    background-color: #F1F1F1;
+    font-size: larger;
+    padding-left: 7px;
+    border: 5px solid #F1F1F1;
+    font-weight: bolder; 
+}
+#Finish{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    color :#ffffff;
+    background-color: #F15E2C;
+    border: none;
+    font-weight: bold;
+}
+.donhang{
+    background-color: #F1F1F1;
+    padding: 15px;
+}
+h5{
+    color: #F15E2C;
+}
+h6{
+    text-align: right;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    text-align: center;
+}
+
+.message-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.special{
+    color:#818181; 
+    font-size: smaller;
+}
+.vitri{
+    color:#fff;
+    font-size: x-small;
+    font-weight: bold;
+    background-color: #F15E2C;
+    padding: 2px;
+}
+#city, #ward, #district{
+    padding-left: 8px;
+}
+
+#continue-buying{
+    background: #fff;
+    border: #fff;
+    color:#ff5f17;
+    font-weight: bold;
+}

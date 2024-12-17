@@ -1,0 +1,44 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Login */
+
+.container-login{
+    width: 500px;
+    height: auto;
+    border: 2px solid black;
+    margin-top: 20px;
+    text-align: center;
+}
+.container-login h2{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+#dangnhap{
+    width: 80%;
+    margin: 0 auto;
+}
+.form-group{
+    margin-bottom: 20px;
+}
+.form-group input{
+    background-color: #F6F7F9;
+}
+
+.btn-sub{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-back{
+    text-align: center;
+    width: 60%;
+    margin-bottom: 20px;
+}
+

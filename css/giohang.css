@@ -1,0 +1,183 @@
+
+hr.dashed {
+    border-top: 2px dashed gray;
+  }
+
+body{
+  padding: 0;
+  margin: 0;
+}
+  /* ---------san pham trong gio hang---------- */
+  .title-1{
+    width: 100%;
+    background-color: #F4F4F4;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .cart-item-name{
+    text-decoration: none;
+    color: black;
+  }
+.form-select{
+  width: 100px;
+  border-radius: 0;
+  border-color: black;
+  text-align: left;
+}
+
+.right-cart-item{
+  position: relative;
+  text-align: right;
+  right: 0px;
+}
+.total-price-item{
+  font-weight: bold;
+  color: #F15E2C;
+}
+.status{
+  color: #F15E2C;
+  right: 0;
+}
+.quantity{
+  margin-left: 100%;
+}
+
+/*  nút thích, nút xóa sản phẩm*/
+.cart-btn{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+
+.container-heart i{
+  position: absolute;
+  font-size: 20px ;
+  cursor: pointer;
+  right: 0px;
+  border: 1px solid black;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 60%;
+  text-align: center;
+}
+.container-trash i{
+  position: absolute;
+  font-size: 20px ;
+  cursor: pointer;
+  right: 0px;
+  border: 1px solid black;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 60%;
+  text-align: center;
+  background-color: black;
+}
+
+  /* ---------ô mã khuyến mãi--------- */
+  .maKM .input-group input{
+    border-radius: 0;
+    width: 70%;
+    height: 100%;
+    box-shadow: inset;
+    border: 1px solid;
+    opacity: 0.5;
+  }
+  .maKM .input-group input:focus{
+    border-radius: 0;
+        border: 1px solid;
+    opacity: 1;
+    outline: none;
+  }
+
+  .maKM .input-group button{
+    border-radius: 0;
+    color: white;
+    background-color:#F15E2C;
+    font-weight: bold;
+    width: 30%;
+    height: 100%;
+  }
+  .maKM .input-group button:focus{
+    color: white;
+    background-color:#F15E2C;
+    font-weight: bold;
+  }
+
+  .maKM .input-group{
+    height: 40px;
+  }
+  
+
+  /* --------------right---------- */
+  .form-don-hang{
+    background: #F1F1F1;
+    padding: 30px;
+  }
+
+  .order-group .group-1{
+    display: flex;
+    position: relative;
+  }
+  .order-group .group-1 .total-price{
+    position: absolute;
+    right: 0;
+  }
+
+  .order-group .group-2{
+    display: flex;
+    position: relative;
+  }
+  .order-group .group-2 .discount{
+    position: absolute;
+    right: 0;
+  }
+
+  .order-group .group-3{
+    display: flex;
+    position: relative;
+    /* font-weight: bolder; */
+  }
+  .order-group .group-3 .finalPrice{
+    position: absolute;
+    right: 0;
+  }
+
+  .btn-thanh-toan {
+    margin-top: auto;
+  }
+  .btnThanhToan{
+    width: 100%;
+    color: white;
+    background: #F15E2C;
+    border: none;
+    font-weight: bold;
+    padding: 18px;
+  }
+
+  /* button xoa het va quay lai */
+  .btn-fi{
+    position: relative;
+    width: 100%;
+  }
+  .btn-fi button{
+    display: inline;
+    background-color: black;
+    color: white;
+    text-align: center;
+    width: 300px;
+    padding: 5px 0px;
+  }
+  
+  .btn-clearAll{
+    position: absolute;
+    float: inline-start;
+    left: 0px;
+  }
+  .btn-prev{
+    position: absolute;
+    right: 0px;
+  }

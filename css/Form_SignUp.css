@@ -1,0 +1,29 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.container-signUp{
+    width: 500px;
+    height: auto;
+    border: 2px solid black;
+}
+.container-signUp h2{
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+#dangki{
+    width: 80%;
+    margin: 0 auto;
+}
+.form-group{
+    margin-bottom: 20px;
+}
+.form-group input{
+    background-color: #F6F7F9;
+}
+
+.btn-sub{
+    width: 100%;
+    margin-bottom: 20px;
+}

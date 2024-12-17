@@ -1,0 +1,285 @@
+.price{
+  color: #FF5F17;
+}
+
+hr.dashed {
+  border-top: 2px dashed gray;
+}
+body{
+  padding: 0;
+  margin: 0;
+}
+.main {
+  font-family:Arial;
+  width:500px;
+}
+
+.slider-item{
+  padding: 1px;
+}
+
+
+.flex{
+  display: flex;
+}
+.form-select{
+  border-radius: 0;
+  border-color: black;
+  width: 70%;
+}
+/* .img-size-chart{
+  width: 100%;
+} */
+
+/* color */
+.color-select{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.color-select input{
+  display: none;
+}
+.color-select span{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+
+.add button{
+  padding: 20px;
+}
+.add-to-cart{
+  color: white;
+  background: black;
+  width: 100%;
+  border: 0px;
+}
+
+.button col-lg-3{
+  position: relative;
+}
+.container-heart i{
+  font-size: 24px ;
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 19px;
+  background-color: black;
+  width: 100%;
+  text-align: center;
+}
+.buy-now{
+  padding: 20px;
+  margin-top: 5px;
+  width: 100%;
+  background: #f15e2c;
+  color: white;
+  border: 0px;
+}
+
+/* Dropdown Button */
+.card-accordion{
+  border: none;
+  box-shadow: 0 2px 20px 0 rgba((110), 130green, 208, .18);
+} 
+.card-accordion , .card-header{
+  width: 100%;
+  background-color: transparent;
+
+}
+.card-header-accordion{
+  border-bottom: 2px dashed #999b9d ;
+  text-align: left;
+  font-weight: bold;
+  width: 100%;
+  height: 60px;
+}
+.card-header-accordion a{
+  text-decoration: none;
+  color: black;
+}
+
+.card-body-accordion{
+  background: #f9f9f9;
+}
+.card-body-accordion p::before{
+  content: '\002B';
+}
+.card-link-accordion:after{
+  content: '\2212';
+  width: 35px;
+  font-size: 25px;
+  text-align: center;
+  border-radius: 5px;
+  right: 15px;
+  top: 11px;
+  position: absolute;
+  background: #f9f9f9;
+}
+.card-link-accordion.collapsed::after{
+  content: '\002B';
+}
+#accordion{
+  margin-top: 20px;
+}
+/*------------------san pham lien quan----------------- */
+.splq {
+  width: 100%;
+  display: block;
+  margin:0 auto;
+  text-align: center;
+}
+
+
+.img-wish{
+  width: 100%;
+  padding: 10px;
+  text-align: center
+}
+.img-wish img{
+  width: 100%;
+
+}
+.img-wish a{
+  text-decoration: none;
+}
+.related-name{
+  color: black;
+  font-weight: bold;
+}
+.related-name:hover{
+  color: #f15e2c;
+}
+
+.curren-price{
+  font-weight: bold;
+}
+.cost{
+  font-style: italic;
+  text-decoration: line-through;
+}
+/* -------------------------san pham da xem------------------------- */
+.spdx {
+  width: 100%;
+  display: block;
+  margin:0 auto;
+  text-align: center;
+}
+
+.viewed-name{
+  color: black;
+  font-weight: bold;
+}
+.viewed-name:hover{
+  color: #f15e2c;
+}
+
+.viewed-price{
+  font-weight: bold;
+}
+.cost{
+  font-style: italic;
+  text-decoration: line-through;
+}
+
+/* -------------Slider thumbnails and Slider Nav Design ---------------*/
+.slick-thumb-nav img {
+  width: 200px;
+}
+.slick-arrow {
+  top: auto;
+  bottom: 0;
+  z-index: 9;
+  display: inline-block;
+  height: auto;
+  width: auto;
+  margin-bottom: 0;
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+.slick-arrow.slick-prev {
+  left: -70px;
+  top: 25%;
+}
+.slick-arrow.slick-next {
+  right: -70px;
+  top: 25%;
+}
+.slick-arrow:before { display: none; }
+.slick-arrow .arrow-icon {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100px;
+  /* background-color: rgba(0, 0, 0, .5); */
+  color: black;
+  font-size: 55px;
+  opacity: 0.2;
+  -webkit-transition: .5s all ease 0s;
+  -moz-transition: .5s all ease 0s;
+  -ms-transition: .5s all ease 0s;
+  transition: .5s all ease 0s;
+}
+
+.slick-arrow .arrow-icon span {
+  display: inline-block;
+  padding: 50px 0;
+  font-size: 55px;
+}
+.slick-arrow .arrow-icon.prev-slick-arrow {
+  left: 0;
+}
+.slick-arrow:hover .arrow-icon.prev-slick-arrow {
+  opacity: 1;
+}
+.slick-arrow:hover .arrow-icon.next-slick-arrow {
+  opacity: 1;
+}
+.slick-arrow .arrow-icon.next-slick-arrow {
+  right: 0;
+
+}
+
+@media (max-width: 992px) {
+  /* Slider Nav Design */
+  .slick-arrow .arrow-icon { display: none; }
+}
+@media (max-width: 640px) {
+  /* Slider thumbnails Design */
+  .slick-thumb-nav img {
+    width: 120px;
+  }
+
+  @media (max-width: 480px) {
+    /* Slider thumbnails Design */
+    .slick-thumb-nav img {
+      width: 85px;
+    }
+    .slick-arrow .slick-thumb-nav {
+      margin-bottom: 0;
+    }
+    .slick-prev .slick-thumb-nav {
+      margin-left: 0;
+    }
+    .slick-next .slick-thumb-nav {
+      margin-right: 0;
+    }
+    /* Slider Caption Design */
+    .slider-image .slider-caption-wrap {
+      position: relative;
+      bottom: auto;
+    }
+    .slider-image .slider-caption-wrap .caption-details {
+      height: 43px;
+      width: -webkit-calc(100% - 185px);
+      width: -moz-calc(100% - 185px);
+      width: -ms-calc(100% - 185px);
+      width: calc(100% - 185px);
+      padding: 3px 0;
+      font-size: 12px;
+    }
+  }
+}
