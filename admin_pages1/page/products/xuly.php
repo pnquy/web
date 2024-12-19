@@ -13,29 +13,27 @@ if (isset($_POST['suasanpham'])) {
     $thongtinsanpham = $_POST['textarea_sua_thongtinsanpham'];
     // Map values using associative arrays
     $dongsp_mapping = [
-        'Basas' => 'dongsp1',
-        'Vintas' => 'dongsp2',
-        'Urbas' => 'dongsp3',
-        'Pattas' => 'dongsp4',
-        'Creas' => 'dongsp5',
-        'Track 6' => 'dongsp6',
+      'Nike' => 'dongsp1',
+      'Adidas' => 'dongsp2',
+      'Bitis' => 'dongsp3',
+      'Puma' => 'dongsp4',
     ];
     $style_mapping = [
-        'Low Top' => 'style1',
-        'High Top' => 'style2',
-        'Mid Top' => 'style3',
-        'Mule' => 'style4',
+      'Bóng đá' => 'style1',
+      'Bóng rổ' => 'style2',
+      'Gym' => 'style3',
+      'Chạy bộ' => 'style4',
     ];
     $dongsanpham = $dongsp_mapping[$dongsanpham] ?? '';
     $styleid = $style_mapping[$styleid] ?? '';
 
-    $sql_sua_sanpham = "UPDATE sanpham 
-                        SET tensp = '" . $tensanpham . "',  
-                            giasp = '" . $giasanpham . "',  
-                            danhmuc = '" . $danhmucsanpham . "', 
-                            dongspid = '" . $dongsanpham . "', 
-                            styleid = '" . $styleid . "', 
-                            thongtinsp = '" . $thongtinsanpham . "'                                           
+    $sql_sua_sanpham = "UPDATE sanpham
+                        SET tensp = '" . $tensanpham . "',
+                            giasp = '" . $giasanpham . "',
+                            danhmuc = '" . $danhmucsanpham . "',
+                            dongspid = '" . $dongsanpham . "',
+                            styleid = '" . $styleid . "',
+                            thongtinsp = '" . $thongtinsanpham . "'
                         WHERE sanphamid = '" . $sanphamid . "'";
 
     $anc_sua_sanpham =  mysqli_query($mysqli, $sql_sua_sanpham);
@@ -55,22 +53,22 @@ if (isset($_POST['suasanpham'])) {
 
     if ($hinhanh1 != "") {
         move_uploaded_file($hinhanh_tmp1, 'uploads/' . $hinhanh1);
-        $sql_sua_hinhanh = "UPDATE productcolor 
+        $sql_sua_hinhanh = "UPDATE productcolor
                         SET img1 = '" . $hinhanh1 . "'
                         WHERE productid = '" . $sanphamid . "' AND colorid='" . $colorid . "'";
     } else if ($hinhanh2 != "") {
         move_uploaded_file($hinhanh_tmp2, 'uploads/' . $hinhanh2);
-        $sql_sua_hinhanh = "UPDATE productcolor 
+        $sql_sua_hinhanh = "UPDATE productcolor
                         SET img2 = '" . $hinhanh2 . "'
                         WHERE productid = '" . $sanphamid . "' AND colorid='" . $colorid . "'";
     } else if ($hinhanh3 != "") {
         move_uploaded_file($hinhanh_tmp3, 'uploads/' . $hinhanh3);
-        $sql_sua_hinhanh = "UPDATE productcolor 
+        $sql_sua_hinhanh = "UPDATE productcolor
                         SET img3 = '" . $hinhanh3 . "'
                         WHERE productid = '" . $sanphamid . "' AND colorid='" . $colorid . "'";
     } else if ($hinhanh4 != "") {
         move_uploaded_file($hinhanh_tmp4, 'uploads/' . $hinhanh4);
-        $sql_sua_hinhanh = "UPDATE productcolor 
+        $sql_sua_hinhanh = "UPDATE productcolor
                         SET img4 = '" . $hinhanh4 . "'
                         WHERE productid = '" . $sanphamid . "' AND colorid='" . $colorid . "'";
     } else if ($hinhanh1 != "" && $hinhanh2 != "" && $hinhanh3 != "" && $hinhanh4 != "") {
@@ -78,21 +76,21 @@ if (isset($_POST['suasanpham'])) {
         move_uploaded_file($hinhanh_tmp3, 'uploads/' . $hinhanh3);
         move_uploaded_file($hinhanh_tmp2, 'uploads/' . $hinhanh2);
         move_uploaded_file($hinhanh_tmp1, 'uploads/' . $hinhanh1);
-        $sql_sua_hinhanh = "UPDATE productcolor 
+        $sql_sua_hinhanh = "UPDATE productcolor
                         SET img1 = '" . $hinhanh1 . "', img2 = '" . $hinhanh2 . "', img3 = '" . $hinhanh3 . "', img4 = '" . $hinhanh4 . "'
                         WHERE productid = '" . $sanphamid . "' AND colorid='" . $colorid . "'";
     }else{
         $sql_sua_hinhanh = "5";
-        
+
     }
 
-    
+
     if($sql_sua_hinhanh != "5"){
         $anc_sua_hinhanh =  mysqli_query($mysqli, $sql_sua_hinhanh);
     }else{
         $anc_sua_hinhanh = "4";
     }
-    
+
 
 
     // Handle quantity updates
@@ -102,10 +100,10 @@ if (isset($_POST['suasanpham'])) {
         $sql_sua_soluong = "UPDATE procolorsize
                              SET sl='" . $quantity . "'
                              WHERE procolorid = (SELECT productcolorid FROM productcolor WHERE productid = '" . $sanphamid . "' AND colorid='" . $colorid . "') AND size = '" . $size . "'";
-        
-        
+
+
         $anc_sua_soluong =  mysqli_query($mysqli, $sql_sua_soluong);
-        
+
     }
 
     if ($anc_sua_sanpham  && $anc_sua_hinhanh && $anc_sua_soluong ) {
@@ -117,5 +115,5 @@ if (isset($_POST['suasanpham'])) {
 } else {
     // Delete existing product
 
-    
+
 }

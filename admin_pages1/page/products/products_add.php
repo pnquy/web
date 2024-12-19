@@ -326,7 +326,7 @@
 
         .btn-themsanpham {
             display: flex;
-            background-color: #ff5f17;
+            background-color: #FFCC57;
             border: none;
             color: white;
             padding: 5px 15px;
@@ -340,10 +340,13 @@
             border-radius: 5px;
             height: fit-content;
             width: fit-content;
+            transition: 0.3s;
         }
 
         .btn-themsanpham:hover {
-            background: #d54e10;
+            background: #FFCC57;
+            color: black;
+            transition: 0.3s;
         }
     </style>
 
@@ -1002,7 +1005,7 @@
         var image_name = property.name;
         var image_extension = image_name.split('.').pop().toLowerCase();
 
-        if(jQuery.inArray(image_extension,['gif','jpg','jpeg','']) == -1){
+        if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
           alert("Invalid image file");
         }
 
@@ -1031,7 +1034,7 @@
           var image_name = property.name;
           var image_extension = image_name.split('.').pop().toLowerCase();
 
-          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','']) == -1){
+          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
             alert("Invalid image file");
           }
 
@@ -1060,7 +1063,7 @@
           var image_name = property.name;
           var image_extension = image_name.split('.').pop().toLowerCase();
 
-          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','']) == -1){
+          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
             alert("Invalid image file");
           }
 
@@ -1090,7 +1093,7 @@
           var image_name = property.name;
           var image_extension = image_name.split('.').pop().toLowerCase();
 
-          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','']) == -1){
+          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
             alert("Invalid image file");
           }
 
@@ -1116,123 +1119,7 @@
 
 
 </script>
-<!-- <script>
-    const fileUploader_2 = document.getElementById('input_upload_anh_2');
-    const reader_2 = new FileReader();
-    const imageGrid_2 = document.getElementById('div_hienthi_anh2');
-    let currentImage_2 = null;
 
-    fileUploader_2.addEventListener('change', (event) => {
-        const files = event.target.files;
-        const file = files[0];
-        reader_2.readAsDataURL(file);
-
-        reader_2.addEventListener('load', (event) => {
-            const img = document.createElement('img');
-            imageGrid_2.innerHTML = ''; // Clear existing images
-            imageGrid_2.appendChild(img);
-            img.src = event.target.result;
-            img.alt = file.name;
-
-            // Update the currentImage variable with the new image information
-            currentImage_2 = {
-                src: event.target.result,
-                alt: file.name
-            };
-
-            document.getElementById("img2").src = img.src;
-            document.getElementById("img2").alt = img.alt;
-        });
-    });
-
-    // Hiển thị ảnh đã upload lần cuối vào div_hienthi_anh1
-    if (currentImage_2) {
-        const img = document.createElement('img');
-        imageGrid_2.innerHTML = ''; // Clear existing images
-        imageGrid_2.appendChild(img);
-        img.src = currentImage_2.src;
-        img.alt = currentImage_2.alt;
-    }
-</script>
-<script>
-    const fileUploader_3 = document.getElementById('input_upload_anh_3');
-    const reader_3 = new FileReader();
-    const imageGrid_3 = document.getElementById('div_hienthi_anh3');
-    let currentImage_3 = null;
-
-    fileUploader_3.addEventListener('change', (event) => {
-        const files = event.target.files;
-        const file = files[0];
-        reader_3.readAsDataURL(file);
-
-
-
-        reader_3.addEventListener('load', (event) => {
-            const img = document.createElement('img');
-            imageGrid_3.innerHTML = ''; // Clear existing images
-            imageGrid_3.appendChild(img);
-            img.src = event.target.result;
-            img.alt = file.name;
-
-            // Update the currentImage variable with the new image information
-            currentImage_3 = {
-                src: event.target.result,
-                alt: file.name
-            };
-            document.getElementById("img3").src = img.src;
-            document.getElementById("img3").alt = img.alt;
-        });
-    });
-
-    // Hiển thị ảnh đã upload lần cuối vào div_hienthi_anh1
-    if (currentImage_3) {
-        alert(src);
-
-        const img = document.createElement('img');
-        imageGrid_3.innerHTML = ''; // Clear existing images
-        imageGrid_3.appendChild(img);
-        img.src = currentImage_3.src;
-        img.alt = currentImage_3.alt;
-    }
-</script>
-<script>
-    const fileUploader_4 = document.getElementById('input_upload_anh_4');
-    const reader_4 = new FileReader();
-    const imageGrid_4 = document.getElementById('div_hienthi_anh4');
-    let currentImage_4 = null;
-
-    fileUploader_4.addEventListener('change', (event) => {
-        const files = event.target.files;
-        const file = files[0];
-        reader_4.readAsDataURL(file);
-
-        reader_4.addEventListener('load', (event) => {
-            const img = document.createElement('img');
-            imageGrid_4.innerHTML = ''; // Clear existing images
-            imageGrid_4.appendChild(img);
-            img.src = event.target.result;
-            img.alt = file.name;
-
-            // Update the currentImage variable with the new image information
-            currentImage_4 = {
-                src: event.target.result,
-                alt: file.name
-            };
-
-            document.getElementById("img4").src = img.src;
-            document.getElementById("img4").alt = img.alt;
-        });
-    });
-
-    // Hiển thị ảnh đã upload lần cuối vào div_hienthi_anh1
-    if (currentImage_4) {
-        const img = document.createElement('img');
-        imageGrid_4.innerHTML = ''; // Clear existing images
-        imageGrid_4.appendChild(img);
-        img.src = currentImage_4.src;
-        img.alt = currentImage_4.alt;
-    }
-</script> -->
 
 
 
@@ -1357,7 +1244,7 @@
 
             flag = true;
 
-            const isAlpha = /^[a-zA-Z-' ]*$/;
+            const isAlpha = /^[a-zA-Z0-9-' ]*$/;
             if(isAlpha.test(tensp) == false || tensp == ""){
                 document.getElementById("input_tensanpham").style.borderColor = "red";
                 flag = false;

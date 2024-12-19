@@ -35,34 +35,8 @@
     <!-- Hero Section Begin -->
     <section class="hero">
         <div class="hero__slider owl-carousel">
-            <div class="hero__items set-bg" data-setbg="img/img_homepage/hero1.png">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text" style="padding-left: 50px;">
-                                <h6>Winter Collection</h6>
-                                <h2>Thu - Đông Collections 2023</h2>
-                                <p>Sự kết hợp hài hòa của các gam màu đa dạng không chỉ làm cho mùa thu đông trở nên sống động và tươi mới, mà còn làm nổi bật vẻ đẹp độc lập và sáng tạo của đôi giày, tạo nên bước chân phong cách và ấn tượng trong mỗi bước đi.</p>
-                                <a href="index.php?quanly=chitietsanpham&id=29" class="primary-btn">Mua ngay <i class='bx bx-right-arrow-alt'></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="hero__items set-bg" data-setbg="img/img_homepage/hero2.png">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-7 col-md-8">
-                            <div class="hero__text" style="padding-left: 50px;">
-                                <h6>Winter Collection</h6>
-                                <h2>Thu - Đông Collections 2023</h2>
-                                <p>Thiết kế đơn giản và tinh tế, sử dụng một bảng màu đa dạng để tạo nên vẻ thanh lịch. Trang bị công nghệ giữ nhiệt hiện đại, mang lại sự ấm áp và thoải mái cho những ngày đông lạnh giá.</p>
-                                <a href="index.php?quanly=chitietsanpham&id=34" class="primary-btn">Mua ngay <i class='bx bx-right-arrow-alt'></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="container">
+              <img src="img/img_homepage/banner.png" alt="">
             </div>
         </div>
     </section>
@@ -71,103 +45,157 @@
     <!-- Banner Section Begin -->
     <section class="banner spad">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-7 offset-lg-4">
-                    <div class="banner__item">
-                        <div class="banner__item__pic">
-                            <img src="img/img_homepage/banner-1.jpg" alt="">
-                        </div>
-                        <div class="banner__item__text">
-                            <h2>Man<br> Collections 2023</h2>
-                            <a href="index.php?quanly=danhmucsanpham&id=2">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="banner__item banner__item--middle">
-                        <div class="banner__item__pic">
-                            <img src="img/img_homepage/banner-2.jpg" alt="">
-                        </div>
-                        <div class="banner__item__text">
-                            <h2>Woman Collections 2023</h2>
-                            <a href="index.php?quanly=danhmucsanpham&id=3">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="banner__item banner__item--last">
-                        <div class="banner__item__pic">
-                            <img src="img/img_homepage/banner-3.jpg" alt="">
-                        </div>
-                        <div class="banner__item__text">
-                            <h2>SALE OFF</h2>
-                            <a href="index.php?quanly=danhmucsanpham&id=4">Shop now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h1 class="title-1">Giới tính</h1>
+            <ul class="option-sex">
+              <li>
+                <a href="index.php?quanly=danhmucsanpham&id=2">
+                    <img src="img/img_homepage/Nam.png" alt="">
+                    <p class="category">Nam</p>
+                </a>
+              </li>
+              <li>
+                <a href="index.php?quanly=danhmucsanpham&id=3">
+
+                    <img src="img/img_homepage/Nu.png" alt="">
+                    <p class="category">Nữ</p>
+
+                </a>
+              </li>
+              <li>
+                <a href="index.php?quanly=danhmucsanpham&id=1">
+
+                    <img src="img/img_homepage/Unisex.png" alt="">
+                    <p class="category">Unisex</p>
+
+                </a>
+              </li>
+
+            </ul>
         </div>
     </section>
     <!-- Banner Section End -->
 
     <!-- Start Product Section -->
-    <div class="product-section">
-        <div class="container">
-            <div class="row">
+    <section class="brand">
+      <div class="container">
+        <h1 class="title-1">Thương hiệu</h1>
+        <div class="">
+          <?php
+// Truy vấn 4 sản phẩm từ dòng Nike
+$str_nike = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp1' LIMIT 4";
 
-                <!-- Start Column 1 -->
-                <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-                    <h2 class="mb-4 section-title text-left">MẪU GIÀY<span style="color:#F15E2C; font-size: larger;">'HOT TREND'</span> NHẤT 2023</h2>
-                    <p class="mb-4" style="font-size: smaller; color:#6A6A6A">Những đôi giày luôn là phụ kiện không thể thiếu trong bất kỳ outfits thời trang nào. Một đôi giày phù hợp không chỉ giúp bạn tự tin thể hiện cá tính mà còn nâng đỡ và bảo vệ bàn chân trước tác động địa hình. </p>
-                    <p><a href="index.php?quanly=chitietsanpham&id=34" class="btn-khampha" type="button"><b>Khám phá</b></a></p>
-                </div>
-                <!-- End Column 1 -->
+// Truy vấn 4 sản phẩm từ dòng Adidas
+$str_adidas = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp2' LIMIT 4";
+// Truy vấn 4 sản phẩm từ dòng Adidas
+$str_bitis = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp3' LIMIT 4";
 
-                <!-- Start Column 2 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="index.php?quanly=chitietsanpham&id=33">
-                        <img src="img/img_homepage/product-1.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Track 6 OG - Low Top</h3>
-                        <strong class="product-price">990.000 VND</strong>
+// Truy vấn dữ liệu Nike
+$rs_nike = $connect->query($str_nike);
+if ($rs_nike->num_rows > 0) {
+    echo "<h3>Nike</h3>";
+    echo "<div class='product-group nike-products'>";
 
-                        <span class="icon-cross">
-                            <img src="img/img_homepage/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 2 -->
+    while ($row = $rs_nike->fetch_row()) {
+        ?>
+        <div class="col-sm-4 item">
+            <div class="item-img">
+                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">
+                    <?php
+                    echo "<img src='uploads/$row[3]' alt=''>";
+                    echo "<img src='uploads/$row[4]' alt=''>";
+                    ?>
+                </a>
+            </div>
+            <div class="img-button">
+                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">Mua hàng</a>
+            </div>
+            <div class="item-info" style="text-align: left;">
 
-                <!-- Start Column 3 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="index.php?quanly=chitietsanpham&id=29">
-                        <img src="img/img_homepage/product-2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Urbas Corluray Mix - High Top</h3>
-                        <strong class="product-price">650.000 VND</strong>
-
-                        <span class="icon-cross">
-                            <img src="img/img_homepage/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 3 -->
-
-                <!-- Start Column 4 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="index.php?quanly=chitietsanpham&id=34">
-                        <img src="img/img_homepage/product-3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Track 6 OG - Low Top</h3>
-                        <strong class="product-price">990.000 VND</strong>
-
-                        <span class="icon-cross">
-                            <img src="img/img_homepage/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 4 -->
-
+                <?php
+                echo "<a href='index.php?quanly=chitietsanpham&id=$row[0]' id='#tieuDe'>$row[1]</a> <br>";
+                echo "<span style='font-weight: bold;' id='tien'>{$row[2]} VNĐ</span>";
+                ?>
             </div>
         </div>
-    </div>
+        <?php
+    }
+    echo "</div>"; // Đóng div cho Nike
+} else {
+    echo "Không có sản phẩm Nike";
+}
+
+// Truy vấn dữ liệu Adidas
+$rs_adidas = $connect->query($str_adidas);
+if ($rs_adidas->num_rows > 0) {
+  echo "<h3>Adidas</h3>";
+    echo "<div class='product-group adidas-products'>";
+
+    while ($row = $rs_adidas->fetch_row()) {
+        ?>
+        <div class="col-sm-4 item">
+            <div class="item-img">
+                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">
+                    <?php
+                    echo "<img src='uploads/$row[3]' alt=''>";
+                    echo "<img src='uploads/$row[4]' alt=''>";
+                    ?>
+                </a>
+            </div>
+            <div class="img-button">
+                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">Mua hàng</a>
+            </div>
+            <div class="item-info" style="text-align: left;">
+
+                <?php
+                echo "<a href='index.php?quanly=chitietsanpham&id=$row[0]' id='#tieuDe'>$row[1]</a> <br>";
+                echo "<span style='font-weight: bold;' id='tien'>{$row[2]} VNĐ</span>";
+                ?>
+            </div>
+        </div>
+        <?php
+    }
+    echo "</div>"; // Đóng div cho Adidas
+} else {
+    echo "Không có sản phẩm Adidas";
+}
+// Truy vấn dữ liệu Bitis
+$rs_bitis = $connect->query($str_bitis);
+if ($rs_adidas->num_rows > 0) {
+      echo "<h3>Biti's</h3>";
+    echo "<div class='product-group adidas-products'>";
+
+    while ($row = $rs_adidas->fetch_row()) {
+        ?>
+        <div class="col-sm-4 item">
+            <div class="item-img">
+                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">
+                    <?php
+                    echo "<img src='uploads/$row[3]' alt=''>";
+                    echo "<img src='uploads/$row[4]' alt=''>";
+                    ?>
+                </a>
+            </div>
+            <div class="img-button">
+                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">Mua hàng</a>
+            </div>
+            <div class="item-info" style="text-align: left;">
+                <?php
+                echo "<a href='index.php?quanly=chitietsanpham&id=$row[0]' id='#tieuDe'>$row[1]</a> <br>";
+                echo "<span style='font-weight: bold;' id='tien'>{$row[2]} VNĐ</span>";
+                ?>
+            </div>
+        </div>
+        <?php
+    }
+    echo "</div>"; // Đóng div cho Adidas
+} else {
+    echo "Không có sản phẩm Adidas";
+}
+?>
+
+        </div>
+      </div>
+    </section>
     <!-- End Product Section -->
 
     <!-- Categories COUNTDOWN Section Begin -->
@@ -320,7 +348,7 @@
     <BR><BR>
     <section class="features-area section_gap">
         <div class="container">
-            
+
             <div class="row features-inner">
                 <!-- single features -->
                 <div class="col-lg-3 col-md-6 col-sm-6">

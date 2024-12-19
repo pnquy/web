@@ -12,7 +12,7 @@
         display: flex;
         height: 35px;
         padding: 0;
-        background: #ff5f17;
+        background: #FFCC57;
         border: none;
         outline: none;
         border-radius: 5px;
@@ -24,7 +24,7 @@
     }
 
     .promotion-hnm .btn-add-promotion:hover {
-        background: #d54e10;
+        background: #FFCC57;
     }
 
     .promotion-hnm .btn-add-promotion .btn-add-promotion-text,
@@ -51,7 +51,7 @@
     }
 
     .promotion_list tr th {
-        background-color: #ff5f17;
+        background-color: #FFCC57;
         color: white;
     }
 
