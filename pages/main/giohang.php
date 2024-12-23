@@ -36,7 +36,7 @@
             ?>
             <!-- giỏ hàng demo  -->
             <?php
-                
+
             // Nếu như đổi size của sản phẩm thì phải unset sản phẩm cũ vì pcs khác nhau
             if (isset($_COOKIE['masp'])) {
                 if(isset($_SESSION['cart'])){
@@ -46,7 +46,7 @@
                         unset($_SESSION['cart'][$_COOKIE['masp']]);
                     }
                 }
-                
+
             }
 
 
@@ -62,7 +62,7 @@
                         // Nếu như đổi size thì tạo ra 1 session của sản phẩm mới
                         if (isset($_COOKIE['size_change'])) {
                             echo '<script>
-    $("#alert-update-size-quantity").html("<p style=\'color: red;font-weight:bold\'>Cập nhật kích thước thành công!</p>")
+    $("#alert-update-size-quantity").html("<p style=\'color: #E6A32D;font-weight:bold\'>Cập nhật kích thước thành công!</p>")
         .addClass("show");
     setTimeout(function(){
         $("#alert-update-size-quantity").removeClass("show");
@@ -114,14 +114,14 @@
                         if (isset($_COOKIE['masp_change'])) {
                             $_SESSION['cart'][$_COOKIE['masp_change']]['sl'] = $_COOKIE['masp_sl'];
                             echo '<script>
-    $("#alert-update-size-quantity").html("<p style=\'color: red;font-weight:bold\'>Cập nhật số lượng thành công!</p>")
+    $("#alert-update-size-quantity").html("<p style=\'color: #E6A32D;font-weight:bold\'>Cập nhật số lượng thành công!</p>")
         .addClass("show");
     setTimeout(function(){
         $("#alert-update-size-quantity").removeClass("show");
     }, 3000);
 </script>';
                         }
-                        
+
                         if (!isset($_SESSION['cart'])) {
                             echo "<p> Chưa có sản phẩm </p>";
                         } else {
@@ -164,23 +164,23 @@
                                                                     while ($rw = $res->fetch_row()) {
                                                                         if($rw[1] == 0){
                                                                             continue;
-                                                                        }else{ ?> 
-                                                                            <option value='<?php echo $rw[0] ?>' <?php if ($pro['productcolorsizeid'] == $rw[2]) echo ' selected="selected"'; ?>> <?php echo $rw[0] ?></option>                           
+                                                                        }else{ ?>
+                                                                            <option value='<?php echo $rw[0] ?>' <?php if ($pro['productcolorsizeid'] == $rw[2]) echo ' selected="selected"'; ?>> <?php echo $rw[0] ?></option>
                                                                         <?php
-                                                                            
+
 
                                                                         }
                                                                     }
                                                                     }
                                                                 ?>
-                                                                    
+
                                                                 </select>
                                                             </div>
 
                                                             <div class="mt-2 quantity">
                                                                 <p class="text-muted mb-2">Số lượng</p>
                                                                 <select class="form-select form-select-quantity" id="form-select-quantity">
-                                                                    
+
                                                                     <option value="1" <?php if ($pro['sl'] == '1') echo ' selected="selected"'; ?>>1</option>
                                                                     <option value="2" <?php if ($pro['sl'] == '2') echo ' selected="selected"'; ?>>2</option>
                                                                     <option value="3" <?php if ($pro['sl'] == '3') echo ' selected="selected"'; ?>>3</option>
@@ -199,7 +199,7 @@
                                                     <p class="status"><i>Còn hàng</i> </p>
 
                                                     <div class="cart-btn">
-                                                        <div class="container-heart"><i class="like fa-regular fa-heart" style="color: #E91926;" onclick="like()"></i></div>
+                                                        <div class="container-heart"><i class="like fa-regular fa-heart" style="color: #FFCC57;" onclick="like()"></i></div>
                                                         <br /> <br />
                                                         <!-- <a href="/DoAN/pages/main/giohang.php?xoa=<?php echo $pro['productcolorsizeid'] ?>"> -->
                                                         <div class="container-trash btnXoaSP"><i class="fa-regular fa-trash-can" id="btn-xoa" style="color: #ffffff;"></i></div>
@@ -217,7 +217,7 @@
 
 <?php
 
-                                
+
                             }
                         }
 ?>
@@ -248,7 +248,7 @@
 
 
     <script>
-        <!-- -----chỉnh sửa xóa tất cả-- 
+        <!-- -----chỉnh sửa xóa tất cả--
         -->
         $(".btn-clearAll").click(function()
         {
@@ -415,21 +415,21 @@
                 var temp = total - total * parseFloat(discount) / 100;
                 $(".finalPrice").html(temp);
                 // code cũ
-                // $(".total-price").html(total.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, "$1.").toString()+ " VND");  
+                // $(".total-price").html(total.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, "$1.").toString()+ " VND");
                 // var temp = total - parseFloat($('.discount').text());
-                // $(".finalPrice").html(temp.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, "$1.").toString()+ " VND");    
+                // $(".finalPrice").html(temp.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, "$1.").toString()+ " VND");
             }
             // <!-- -----------tổng giá tiền cho từng loại sản phẩm khi thay đổi số lượng -------------- -->
             $(".form-select-quantity").change(function() {
                 masp = $(this).closest(".cart-items").find("#masp").text();
 
                 var selectedQuantity = $(this).val();
-                
+
                 createCookie('masp_change', masp, "10");
                 createCookie('masp_sl', selectedQuantity, "10");
                 history.go(0);
 
-                
+
                 var price = $(this).closest(".cart-items").find(".price").text();
                 var totalPrice = selectedQuantity * parseInt(price);
                 // var format =  totalPrice.toFixed(3).replace(/(\d)(?=(\d{3})+\.)/g, "$1.").toString();

@@ -39,8 +39,8 @@
         }
 
         .lookup_order_list tr th {
-            background-color: #ff5f17;
-            color: white;
+            background-color: #FFCC57;
+            color: black;
         }
 
         .lookup_order_list tr td {
@@ -54,7 +54,7 @@
         }
 
         .bx-receipt:hover {
-            color: #ff5f17;
+            color: #FFCC57;
         }
 
         #lookup-order-section {
@@ -119,7 +119,7 @@
                             }else{
                                 echo "Vui lòng đăng nhập để xem đơn hàng";
                             }
-                        
+
                         ?>
                     </tbody>
                 </table>

@@ -70,13 +70,13 @@ body{
 }
 
 .item-img img:last-child {
-    display: none;  
+    display: none;
 }
 .item:hover img:last-child {
-    display: block;  
+    display: block;
 }
 .item:hover img:first-child {
-    display: none;  
+    display: none;
 }
 
 .item-img img{
@@ -97,8 +97,8 @@ body{
 .img-button a{
     width: 150px;
     height: auto;
-    background-color: #F15E2C;
-    color: white;
+    background-color: #FFCC57;
+    color: black;
     padding: 13px;
     display: inline-block;
     text-decoration: none;
@@ -106,7 +106,12 @@ body{
     font-size: 20px;
 }
 
-
+.img-button:hover a{
+  transition: 0.3s;
+  color: white;
+  background-color: #E6A32D;
+  text-decoration: none;
+}
 
 .item:hover .img-button{
     display: block;
@@ -202,7 +207,7 @@ body{
     text-decoration: none;
     color: black;
     font-size: 17px;
-    
+
 }
 
 .status-item li:hover{

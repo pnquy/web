@@ -24,7 +24,7 @@
     }
 
     .promotion-hnm .btn-add-promotion:hover {
-        background: #FFCC57;
+        background: #E6A32D;
     }
 
     .promotion-hnm .btn-add-promotion .btn-add-promotion-text,
@@ -32,7 +32,7 @@
         display: inline-flex;
         align-items: center;
         padding: 0 5px;
-        color: #fff;
+        color: black;
         height: 100%;
     }
 
@@ -52,7 +52,7 @@
 
     .promotion_list tr th {
         background-color: #FFCC57;
-        color: white;
+        color: black;
     }
 
     .promotion_list tr td {

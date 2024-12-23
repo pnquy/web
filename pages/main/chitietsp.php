@@ -153,7 +153,7 @@
             </div>
             <div class="price mt-4">
               <!-- Ktr sp co giam ko -->
-              <?php 
+              <?php
                 $str1 = "SELECT * FROM saleoff";
 
                 date_default_timezone_set('Asia/Jakarta');
@@ -175,7 +175,7 @@
                           $arr["$saleid"] = "$giam_value";
                         }
                     }
-                } else { ?> 
+                } else { ?>
                   <p><strong> <?php echo number_format($row[3], 0, ',', '.') . ' VND' ?> </strong></p>
                       <input type="hidden" id="giaSP" value="<?php echo $row[3] ?>">
                 <?php
@@ -186,43 +186,43 @@
                   foreach($arr as $u=>$y){
                     $sql = "select giatrigiam from saleoff, saleoffct where saleoff.saleoffid = saleoffct.saleoffid and saleoffct.procolorid = '".$_GET['id']."' and saleoff.saleoffid = '".$u."' LIMIT 1";
                     $res = $connect->query($sql);
-                    
+
                     if($res->num_rows > 0){
                       while($ro = $res->fetch_row()){
                         $value =  $ro[0];
                         $giasp = $row[3];
-                        $giasp_giam = $giasp - ($giasp * $value)/100; ?> 
-                          
+                        $giasp_giam = $giasp - ($giasp * $value)/100; ?>
+
                         <?php
-                        
+
                       }
-                    }else{ ?> 
-                      
+                    }else{ ?>
+
                   <?php
 
                     }
                   }
 
-                  if($giasp == 0){ ?> 
+                  if($giasp == 0){ ?>
                     <p><strong> <?php echo number_format($row[3], 0, ',', '.') . ' VND' ?> </strong></p>
                     <input type="hidden" id="giaSP" value="<?php echo $row[3] ?>">
                   <?php
 
-                  }else{ ?> 
+                  }else{ ?>
                     <p><strong> <?php echo number_format($giasp_giam, 0, ',', '.') . ' VND' ?> </strong></p>
                     <input type="hidden" id="giaSP" value="<?php echo $giasp_giam ?>">
                   <?php
 
                   }
-                   
-                }else{ ?> 
+
+                }else{ ?>
                   <p><strong> <?php echo number_format($row[3], 0, ',', '.') . ' VND' ?> </strong></p>
                       <input type="hidden" id="giaSP" value="<?php echo $row[3] ?>">
                 <?php
                 }
 
               ?>
-              
+
             </div>
             <hr class="dashed">
             <div class="product-text mt-4">
@@ -262,11 +262,11 @@
             <hr class="dashed">
             <div class="row mb-4">
               <!-- bang size -->
-              
+
               <div class="col-lg-6 size-select">
                 <div class="mt-2 size">
                   <p class="mb-2" style="font-weight: bold;">Kích thước</p>
-                  
+
                     <select class="form-select form-select-size" name="Size" id="Size">
                       <option></option>
                       <?php
@@ -277,9 +277,9 @@
                             if($rw[1] == 0){
                               continue;
                             }else{
-                              
+
                               echo "<option value='$rw[0]'>$rw[0]</option>";
-                              
+
                             }
                           }
                         }
@@ -295,7 +295,7 @@
                 <div class="mt-2 quantity">
                   <p class="mb-2" style="font-weight: bold;">Số lượng</p>
                   <select class="form-select form-select-quantity" name="sl" id="sl">
-                      
+
 
                   </select>
                 </div>
@@ -315,14 +315,14 @@
               <div class="add row">
                 <p style="font-size: 20px; color:blue" id="rs"></p>
                 <div id="alert-addtocart-success" style="margin-bottom:20px;">
-                  
+
                 </div>
                 <div class="col-lg-9">
                   <input type="submit" id="addToCartBtn" class="button add-to-cart" name="themgiohang" value="THÊM VÀO GIỎ HÀNG" style="height: 100%; font-weight: 700;"></input>
 
                 </div>
                 <div class="col-lg-3">
-                  <div class="container-heart"><i class="like fa-regular fa-heart" style="color: #E91926;" onclick="like()"></i></div>
+                  <div class="container-heart"><i class="like fa-regular fa-heart" style="color: #FFCC57;" onclick="like()"></i></div>
                 </div>
               </div>
               <div class="row">
@@ -441,7 +441,7 @@
   <!-- ---------------------------chỉnh--------------------- -->
   <!-- ------------------------San pham da xem----------------- -------------->
   <!-- đang chỉnh php theo sản phẩm liên quan -->
-  
+
   </div>
 
 
@@ -467,7 +467,7 @@
     });
   </script>
   <script>
-    
+
   </script>
 
   <script>
@@ -644,7 +644,7 @@
               size = document.getElementById('Size').value;
               id = <?php echo $_GET['id'] ?>;
               if(size == ""){
-                
+
               }else{
                 $.post("pages/main/chage_size_Ajax.php",
                   {
@@ -671,14 +671,14 @@
                             x.add(option);
                           }
                         }
-                        
 
-                          
+
+
                       }
                   }
-              ); 
+              );
               }
-              
+
             });
 
             $("#addToCartBtn").click(function(){
@@ -695,7 +695,7 @@
                 ten = $("#tenSP").text();
                 gia = document.getElementById("giaSP").value;
                 img = document.getElementById("imgSP").value;
-                
+
                 $.post("pages/main/themGioHang_CTSP_Ajax.php",
                     {
                         id:id,
@@ -712,13 +712,13 @@
                           setTimeout(function(){
                               $("#alert-addtocart-success").removeClass("show");
                           }, 3000);
-                            
+
                         }
                     }
-                ); 
+                );
               }
 
-              
+
             });
 
             $("#muangay").click(function(){
@@ -735,7 +735,7 @@
                 ten = $("#tenSP").text();
                 gia = document.getElementById("giaSP").value;
                 img = document.getElementById("imgSP").value;
-                
+
                 $.post("pages/main/themGioHang_CTSP_Ajax.php",
                     {
                         id:id,
@@ -753,9 +753,9 @@
                     }
                 );
               }
-               
+
             });
-        });   
+        });
     </script>
 
 </body>

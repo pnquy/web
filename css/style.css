@@ -547,12 +547,12 @@ body {
 }
 
 .btn-learn-more-nm:hover {
-    background-color: #F15E2C;
+    background-color: #FFCC57;
     color: #fff;
 }
 
 .btn-nav-link-nm:hover {
-    color: #F15E2C !important;
+    color: #FFCC57 !important;
 }
 
 /* ==================================================
@@ -577,7 +577,7 @@ FOOTER
 }
 
 .footer-section a:hover {
-    color: #F15E2C;
+    color: #FFCC57;
 }
 
 .footer-section .subscription-form {
@@ -665,7 +665,7 @@ FOOTER
     font-size: 32px;
     font-weight: 500;
     text-decoration: none;
-    color: #F15E2C;
+    color: #FFCC57;
 }
 
 .footer-section .custom-social li {
@@ -679,14 +679,14 @@ FOOTER
     text-align: center;
     line-height: 40px;
     display: inline-block;
-    background: #F15E2C;
-    color: white;
+    background: #FFCC57;
+    color: black;
     border-radius: 50%;
 }
 
 .footer-section .custom-social li a:hover {
     background: #fdfdfd;
-    color: #F15E2C;
+    color: #FFCC57;
 }
 
 .footer-section .border-top {

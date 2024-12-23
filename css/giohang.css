@@ -32,10 +32,10 @@ body{
 }
 .total-price-item{
   font-weight: bold;
-  color: #F15E2C;
+  color: #E6A32D;
 }
 .status{
-  color: #F15E2C;
+  color: #E6A32D;
   right: 0;
 }
 .quantity{
@@ -95,22 +95,24 @@ body{
 
   .maKM .input-group button{
     border-radius: 0;
-    color: white;
-    background-color:#F15E2C;
+    color: black;
+    background-color:#FFCC57;
     font-weight: bold;
     width: 30%;
     height: 100%;
+    transition: 0.3s;
   }
   .maKM .input-group button:focus{
     color: white;
-    background-color:#F15E2C;
+    background-color:#E6A32D;
     font-weight: bold;
+    transition: 0.3s;
   }
 
   .maKM .input-group{
     height: 40px;
   }
-  
+
 
   /* --------------right---------- */
   .form-don-hang{
@@ -151,8 +153,8 @@ body{
   }
   .btnThanhToan{
     width: 100%;
-    color: white;
-    background: #F15E2C;
+    color: black;
+    background: #FFCC57;
     border: none;
     font-weight: bold;
     padding: 18px;
@@ -171,7 +173,7 @@ body{
     width: 300px;
     padding: 5px 0px;
   }
-  
+
   .btn-clearAll{
     position: absolute;
     float: inline-start;

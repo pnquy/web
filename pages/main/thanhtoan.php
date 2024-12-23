@@ -101,7 +101,7 @@ if (!isset($_SESSION['dangnhap'])) {
                             <div class="col-9">
                                 <input type="radio" name="LoaiGiaoHang" id="TieuChuan">
                                 <label for="TieuChuan">Tốc độ tiêu chuẩn <span class="special">(từ 2 - 5 ngày làm
-                                        việc)</span> <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Tuỳ vào địa chỉ giao hàng mà tốc độ giao hàng tiêu chuẩn sẽ khác nhau. Chúng tôi luôn cố gắng để đơn hàng đến tay bạn sớm nhất."><i style="color:#F15E2C;" class="fa-solid fa-question"></i></button></label><br>
+                                        việc)</span> <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Tuỳ vào địa chỉ giao hàng mà tốc độ giao hàng tiêu chuẩn sẽ khác nhau. Chúng tôi luôn cố gắng để đơn hàng đến tay bạn sớm nhất."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button></label><br>
                             </div>
                             <div class="col-3">
                                 <h6 class="text-secondary">0 VNĐ</h6>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['dangnhap'])) {
                         <div class="row">
                             <div class="col-9">
                                 <input type="radio" name="LoaiGiaoHang" id="HoaToc" checked>
-                                <label for="HoaToc">Giao hàng hỏa tốc <span class="special">(trong vòng 24h)</span> <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Tuỳ vào địa chỉ giao hàng mà tốc độ giao hàng sẽ khác nhau. Chúng tôi luôn cố gắng để đơn hàng đến tay bạn sớm nhất."><i style="color:#F15E2C;" class="fa-solid fa-question"></i></button></label><br>
+                                <label for="HoaToc">Giao hàng hỏa tốc <span class="special">(trong vòng 24h)</span> <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Tuỳ vào địa chỉ giao hàng mà tốc độ giao hàng sẽ khác nhau. Chúng tôi luôn cố gắng để đơn hàng đến tay bạn sớm nhất."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button></label><br>
                             </div>
                             <div class="col-3">
                                 <h6 class="text-secondary">40 000 VNĐ</h6>
@@ -124,7 +124,7 @@ if (!isset($_SESSION['dangnhap'])) {
                             <label for="ThanhToanTrucTiep">
                                 Thanh toán trực tiếp khi giao hàng <span class="special">(COD)</span>
                                 <input type="hidden" name="thanhtoan" id="a" value="tructiep" />
-                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Là phương thức thanh toán bằng tiền mặt trực tiếp khi nhận hàng"><i style="color:#F15E2C;" class="fa-solid fa-question"></i></button>
+                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Là phương thức thanh toán bằng tiền mặt trực tiếp khi nhận hàng"><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button>
                             </label>
                         </div>
 
@@ -133,7 +133,7 @@ if (!isset($_SESSION['dangnhap'])) {
                             <label for="ThanhToanThe">
                                 Thanh toán bằng Thẻ quốc tế / Thẻ nội địa / QR Code
                                 <input type="hidden" name="thanhtoan" id="a" value="the" />
-                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Phương thức thanh toán sử dụng các loại thẻ quốc tế như Visa, Master, JCB,… hoặc các loại thẻ thanh toán nội địa (ATM) hoặc thanh toán bằng QR ngân hàng hoặc ví điện tử. Vui lòng đọc kĩ các cam kết thanh toán khi chọn phương thức này. Phí thanh toán đối với phương thức này hiện là 1% trên tổng giá trị giao dịch."><i style="color:#F15E2C;" class="fa-solid fa-question"></i></button>
+                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Phương thức thanh toán sử dụng các loại thẻ quốc tế như Visa, Master, JCB,… hoặc các loại thẻ thanh toán nội địa (ATM) hoặc thanh toán bằng QR ngân hàng hoặc ví điện tử. Vui lòng đọc kĩ các cam kết thanh toán khi chọn phương thức này. Phí thanh toán đối với phương thức này hiện là 1% trên tổng giá trị giao dịch."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button>
                             </label>
                         </div>
 
@@ -142,7 +142,7 @@ if (!isset($_SESSION['dangnhap'])) {
                             <label for="ThanhToanMoMo">
                                 Thanh toán bằng ví MoMo
                                 <input type="hidden" name="thanhtoan" id="a" value="momo" />
-                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Phương thức dành cho khách hàng có tài khoản và lựa chọn thanh toán qua ví điện tử MoMo. Vui lòng đọc kĩ các cam kết về phương thức này trước khi quyết định. Phí thanh toán đang được áp dụng là 1% trên tổng thanh toán."><i style="color:#F15E2C;" class="fa-solid fa-question"></i></button>
+                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Phương thức dành cho khách hàng có tài khoản và lựa chọn thanh toán qua ví điện tử MoMo. Vui lòng đọc kĩ các cam kết về phương thức này trước khi quyết định. Phí thanh toán đang được áp dụng là 1% trên tổng thanh toán."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button>
                             </label>
                         </div>
                     </div>
@@ -223,7 +223,7 @@ if (!isset($_SESSION['dangnhap'])) {
                                 <tr>
                                     <td style="font-weight: bold;">TỔNG CỘNG</td>
                                     <td style="text-align: right;">
-                                        <h5 style='color: #F15E2C;' id="tongcong"></h5>
+                                        <h5 style='color: #E6A32D;' id="tongcong"></h5>
                                         <input type="hidden" name="a" id="a" value="process" />
                                     </td>
                                 </tr>
@@ -239,7 +239,7 @@ if (!isset($_SESSION['dangnhap'])) {
                     <div class="message-box">
                         <p>Đặt hàng thành công!</p>
                         <input type="submit" id="continue-buying" value="Tiếp tục mua sắm">
-                        
+
                     </div>
                 </div>
             </div>
@@ -269,7 +269,7 @@ if (isset($_SESSION['cart'])) {
     <script>
         // PHÍ SẢN PHẨM
         var productFee = <?php echo $total; ?>;
-        
+
         document.getElementById("DonHang").innerText = formatCurrency(productFee);
 
         // GIẢM GIÁ
@@ -361,7 +361,7 @@ if (isset($_SESSION['cart'])) {
         $('#ward').change(function(){
             alertSignupphuongxa.hide();
         });
-        });   
+        });
         // var checkContinue=false;
         document.addEventListener('DOMContentLoaded', function() {
             var nameOutput = document.getElementById('name');
@@ -444,7 +444,7 @@ if (isset($_SESSION['cart'])) {
             if (flag == true) {
                 return false;
             }
-            
+
         }
 
         function isAlphabetic(input) {
@@ -499,17 +499,17 @@ if (isset($_SESSION['cart'])) {
                                     }else{
                                         $("#success-message").show();
                                     }
-                                    
+
                                 }
                             }
-                        ); 
+                        );
                     }
-                    
+
                 }
-                
+
 
             });
-        });   
+        });
     </script>
 
     <?php ob_end_flush(); ?>

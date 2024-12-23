@@ -14,7 +14,7 @@
 
     .customer_list tr th {
         background-color: #FFCC57;
-        color: white;
+        color: black;
     }
 
     .customer_list tr td {

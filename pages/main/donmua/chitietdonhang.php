@@ -104,7 +104,7 @@
         }
 
         .order_detail_list tr th {
-            background-color: #ff5f17;
+            background-color: #FFCC57;
             color: white;
         }
 
@@ -153,7 +153,7 @@
                         <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
                             <div class="card-body p-5">
 
-                                <p class="lead fw-bold mb-5" style="color: #f37a27;">Chi tiết đơn hàng</p>
+                                <p class="lead fw-bold mb-5" style="color: #E6A32D;">Chi tiết đơn hàng</p>
                                 <div class="row">
                                     <div class="col mb-8">
                                         <p class="small text-muted mb-1">Ngày đặt hàng</p>
@@ -232,11 +232,11 @@
 
                                 <div class="row my-4">
                                     <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                                        <p class="lead fw-bold mb-0" style="color: #f37a27;"><?php echo $row_select_donhang['tongtien'] ?> VND</p>
+                                        <p class="lead fw-bold mb-0" style="color: #E6A32D;"><?php echo $row_select_donhang['tongtien'] ?> VND</p>
                                     </div>
                                 </div>
 
-                                <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Tình trạng</p>
+                                <p class="lead fw-bold mb-4 pb-2" style="color: #E6A32D;">Tình trạng</p>
 
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -249,22 +249,22 @@
                                             if ($trangthai == "Đã xác nhận") {
                                                 echo '<ul class="list-inline items d-flex justify-content-between">
                 <li class="list-inline-item items-list">
-                    <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Đặt hàng</p>
+                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Đặt hàng</p>
                 </li>
                 <li class="list-inline-item items-list">
-                    <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Chờ xác nhận</p>
+                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Chờ xác nhận</p>
                 </li>
                 <li class="list-inline-item items-list text-end">
-                    <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Đã xác nhận</p>
+                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Đã xác nhận</p>
                 </li>
             </ul>';
                                             } else if ($trangthai == "Chờ xác nhận") {
                                                 echo '<ul class="list-inline items d-flex justify-content-between">
                 <li class="list-inline-item items-list">
-                    <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Đặt hàng</p>
+                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Đặt hàng</p>
                 </li>
                 <li class="list-inline-item items-list text-end">
-                    <p class="py-1 px-2 rounded text-white" style="background-color: #f37a27;">Chờ xác nhận</p>
+                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Chờ xác nhận</p>
                 </li>
             </ul>';
                                             }

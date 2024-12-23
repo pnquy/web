@@ -146,8 +146,8 @@ include('../../../config/config.php');
         }
 
         .order_detail_list tr th {
-            background-color: #ff5f17;
-            color: white;
+            background-color: #FFCC57;
+            color: black;
             text-align: center;
         }
 
@@ -182,7 +182,7 @@ include('../../../config/config.php');
     <?php
 
     $sql = "SELECT khachhangid, thanhtoanid, ngayorder, hinhthucthanhtoan, tongtien, giatrigiam  , trangthai,phiship,tienhang
-                        FROM thanhtoan 
+                        FROM thanhtoan
                         LEFT JOIN magiamgia ON thanhtoan.magiamgiaid = magiamgia.magiamgiaid
                         WHERE thanhtoanid = '$_GET[thanhtoanid]'; ";
     $rs = $mysqli->query($sql);
@@ -204,7 +204,7 @@ include('../../../config/config.php');
                     </thead>
                     <tbody>
                         <?php
-                        $sql1 = "SELECT tensp, thanhtoanct.productcolorsizeid, soluong, giasp 
+                        $sql1 = "SELECT tensp, thanhtoanct.productcolorsizeid, soluong, giasp
                             FROM thanhtoanct, productcolor, sanpham , procolorsize
                             WHERE thanhtoanct.productcolorsizeid = procolorsize.procolorsizeid and productcolor.productid = sanpham.sanphamid and procolorsize.procolorid = productcolor.productcolorid and thanhtoanid = '$_GET[thanhtoanid]'; ";
                         $rs1 = $mysqli->query($sql1);
@@ -231,7 +231,7 @@ include('../../../config/config.php');
                 </table>
             </div>
             <br>
-                        
+
 
             <div class="row d-flex cart justify-content-center">
                 <div class="col-md-10">

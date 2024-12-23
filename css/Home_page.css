@@ -109,12 +109,31 @@ ol {
 /*---------------------
   Helper CSS
 -----------------------*/
-
+.section-3 .block{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  object-fit: cover;
+}
+.section-3 .title-1{
+  padding-top: 15px;
+}
 .section-title {
     margin-bottom: 45px;
     text-align: center;
 }
-
+.section-3 h5{
+  font-size: 30px;
+}
+.section-3 .count{
+  display: flex;
+  flex-direction: row;
+  gap:5px;
+}
+.section-3 p{
+  font-size: 20px;
+  font-weight: bold;
+}
 .section-title span {
     color: #e53637;
     font-size: 14px;

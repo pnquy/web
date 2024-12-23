@@ -1,5 +1,5 @@
 .price{
-  color: #FF5F17;
+  color: #FFCC57;
 }
 
 hr.dashed {
@@ -74,8 +74,8 @@ body{
   padding: 20px;
   margin-top: 5px;
   width: 100%;
-  background: #f15e2c;
-  color: white;
+  background: #FFCC57;
+  color: black;
   border: 0px;
 }
 
@@ -83,7 +83,7 @@ body{
 .card-accordion{
   border: none;
   box-shadow: 0 2px 20px 0 rgba((110), 130green, 208, .18);
-} 
+}
 .card-accordion , .card-header{
   width: 100%;
   background-color: transparent;

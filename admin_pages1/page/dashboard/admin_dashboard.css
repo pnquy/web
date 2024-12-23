@@ -120,8 +120,8 @@ header .image-text-hnm .header-text-hnm {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: black;
     border-radius: 50%;
-    color: var(--sidebar-color);
     font-size: 22px;
     transition: var(--tran-03);
 }
@@ -157,7 +157,8 @@ header .image-text-hnm .header-text-hnm {
 
 .sidebar-hnm li a:hover .icon,
 .sidebar-hnm li a:hover .nav-text-hnm {
-    color: var(--sidebar-color);
+    color: black;
+    transition: var(--tran-04);
 }
 
 

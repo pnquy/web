@@ -7,14 +7,14 @@ h4{
     font-size: larger;
     padding-left: 7px;
     border: 5px solid #F1F1F1;
-    font-weight: bolder; 
+    font-weight: bolder;
 }
 #Finish{
     width: 100%;
     height: 50px;
     font-size: 20px;
     color :#ffffff;
-    background-color: #F15E2C;
+    background-color: #FFCC57;
     border: none;
     font-weight: bold;
 }
@@ -23,7 +23,7 @@ h4{
     padding: 15px;
 }
 h5{
-    color: #F15E2C;
+    color: #FFCC57!important;
 }
 h6{
     text-align: right;
@@ -51,7 +51,7 @@ h6{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 .special{
-    color:#818181; 
+    color:#818181;
     font-size: smaller;
 }
 .vitri{
@@ -68,6 +68,6 @@ h6{
 #continue-buying{
     background: #fff;
     border: #fff;
-    color:#ff5f17;
+    color:#E6A32D;
     font-weight: bold;
 }
