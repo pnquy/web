@@ -1,112 +1,96 @@
-<?php
-$mysqli = new mysqli("localhost", "root", "", "dbdoan");
-?>
+<div class="admin-card">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="admin-title border-0 mb-0">Quản Lý Đơn Hàng</h2>
+        <div class="text-muted small">Tổng hợp tất cả đơn hàng</div>
+    </div>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-  <main id="main" class="main">
-    <?php
-    $sql_lietke_danhmuc_dh = "SELECT thanhtoanid,khachhangid,DATE_FORMAT(ngayorder, '%d/%m/%Y') AS ngayorder,hinhthucthanhtoan,magiamgiaid,tongtien,trangthai
-                        FROM thanhtoan tt";
-    $query_lietke_danhmuc_dh = $mysqli->query($sql_lietke_danhmuc_dh);
-    ?>
-    <div class="pagetitle">
-      <h1>Data Tables</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
-
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-              <thead>
-                    <th>ID đơn hàng</th>
-                    <th>ID khách hàng</th>
-                    <th>Ngày đặt hàng</th>
-                    <th>Hình thức thanh toán</th>
-                    <th>ID mã giảm giá</th>
-                    <th>Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Chi tiết</th>
-                </thead>
-                <?php
-                while ($row = mysqli_fetch_array($query_lietke_danhmuc_dh)) {
-                    $trangthai = $row['trangthai'];
-                    $trangthaiStyle = 'background-color: white';
-
-                    if ($trangthai == "Đã xác nhận") {
-                        $trangthaiStyle = "background-color: white";
-                    } else if ($trangthai == "Chờ xác nhận") {
-                        $trangthaiStyle = "background-color: #CCEABB";
-                    }
-                ?>
-                    <tbody id="myTable">
-                        <tr style="<?php echo $trangthaiStyle; ?>">
-                            <td id="id_order_list_idorder" name="id_order_list_idorder"> <?php echo $row['thanhtoanid']; ?> </td>
-                            <td id="id_order_list_idcustomer" name="id_order_list_idcustomer"> <?php echo $row['khachhangid']; ?> </td>
-                            <td id="id_order_list_orderdate" name="id_order_list_orderdate"> <?php echo $row['ngayorder']; ?> </td>
-                            <td id="id_order_list_purchasetype" name="id_order_list_purchasetype"> <?php echo $row['hinhthucthanhtoan']; ?> </td>
-                            <td id="id_order_list_idpromotion" name="id_order_list_idpromotion"> <?php echo $row['magiamgiaid']; ?> </td>
-                            <td id="id_order_list_tongtien" name="id_order_list_tongtien"> <?php echo $row['tongtien']; ?>₫</td>
-                            <td id="id_order_list_trangthai" name="id_order_list_trangthai"> <?php echo $row['trangthai']; ?></td>
-                            <td><a href="order_detail.php?thanhtoanid=<?php echo $row['thanhtoanid']; ?>"><i class='bx bx-receipt'></i></a></td>
-                        </tr>
-                    <?php
-                }
-                    ?>
-                    </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-
+    <div class="row mb-4">
+        <div class="col-md-4 ms-auto">
+            <div class="input-group">
+                <input type="text" class="form-control rounded-start-pill" id="orderSearch" placeholder="Tìm mã đơn, tên khách...">
+                <button class="btn btn-outline-secondary rounded-end-pill" type="button">
+                    <i class='bx bx-search'></i>
+                </button>
             </div>
-          </div>
-
         </div>
-      </div>
-    </section>
+    </div>
 
-  </main><!-- End #main -->
+    <div class="table-responsive">
+        <table class="table table-admin align-middle">
+            <thead>
+                <tr>
+                    <th>ID Đơn</th>
+                    <th>Khách hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Thanh toán</th>
+                    <th>Mã KM</th>
+                    <th>Tổng tiền</th>
+                    <th class="text-center">Trạng thái</th>
+                    <th class="text-center">Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <?php
+                if(!isset($mysqli)){
+                    $mysqli = new mysqli("localhost", "root", "", "dbdoan");
+                }
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+                // Lấy danh sách đơn hàng + Tên khách hàng (nếu có thể join)
+                // Ở đây tôi dùng bảng thanhtoan, bạn có thể join thêm bảng khachhang nếu muốn hiện tên
+                $sql_order = "SELECT * FROM thanhtoan ORDER BY thanhtoanid DESC";
+                $rs_order = $mysqli->query($sql_order);
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+                if($rs_order && $rs_order->num_rows > 0) {
+                    while($row = $rs_order->fetch_assoc()) {
+                        // Xử lý màu trạng thái
+                        $status_class = 'bg-secondary';
+                        if($row['trangthai'] == 'Chờ xác nhận') $status_class = 'bg-warning text-dark';
+                        elseif($row['trangthai'] == 'Đã xác nhận') $status_class = 'bg-info text-dark';
+                        elseif($row['trangthai'] == 'Đang giao') $status_class = 'bg-primary';
+                        elseif($row['trangthai'] == 'Hoàn thành') $status_class = 'bg-success';
+                ?>
+                <tr>
+                    <td><span class="fw-bold text-primary">#<?php echo $row['thanhtoanid']; ?></span></td>
+                    <td>KH<?php echo $row['khachhangid']; ?></td>
+                    <td><?php echo date("d/m/Y", strtotime($row['ngayorder'])); ?></td>
+                    <td>
+                        <?php 
+                            if($row['hinhthucthanhtoan'] == 'momo') echo '<i class="bx bxs-wallet text-danger me-1"></i> MoMo';
+                            elseif($row['hinhthucthanhtoan'] == 'thẻ ngân hàng') echo '<i class="bx bxs-credit-card text-primary me-1"></i> Thẻ';
+                            else echo '<i class="bx bxs-truck text-secondary me-1"></i> COD';
+                        ?>
+                    </td>
+                    <td><?php echo ($row['magiamgiaid']) ? $row['magiamgiaid'] : '-'; ?></td>
+                    <td class="fw-bold text-danger"><?php echo number_format($row['tongtien'], 0, ',', '.'); ?> ₫</td>
+                    <td class="text-center">
+                        <span class="badge rounded-pill <?php echo $status_class; ?> px-3 py-2">
+                            <?php echo $row['trangthai']; ?>
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <a href="order_detail.php?thanhtoanid=<?php echo $row['thanhtoanid']; ?>" class="btn btn-sm btn-outline-primary rounded-circle" title="Xem chi tiết">
+                            <i class='bx bx-show'></i>
+                        </a>
+                    </td>
+                </tr>
+                <?php
+                    }
+                } else {
+                    echo "<tr><td colspan='8' class='text-center py-4 text-muted'>Chưa có đơn hàng nào.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-</body>
-
-</html>
+<script>
+    $(document).ready(function(){
+        $("#orderSearch").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#orderTableBody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

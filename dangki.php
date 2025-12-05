@@ -1,356 +1,233 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Đăng ký - MTP</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="css/Form_SignUp.css">
 </head>
 
 <body>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var nameInput = document.getElementById('name');
-      var emailInput = document.getElementById('email');
-      var passwordInput = document.getElementById('pwd');
-      var confirmPasswordInput = document.getElementById('confirmPwd');
-      var phoneNumberInput = document.getElementById('phoneNumber');
-      var addressInput = document.getElementById('address');
-      var genderMale = document.getElementById('gender-male');
-      var genderFemale = document.getElementById('gender-female');
-      var alertSignupName = $('#alert-signup-name');
-      var alertSignupEmail = $('#alert-signup-email');
-      var alertSignupPassword = $('#alert-signup-password');
-      var alertSignupConfirmPassword = $('#alert-signup-confirmpassword');
-      var alertSignupPhoneNumber = $('#alert-signup-phonenumber');
-      var alertSignupAddress = $('#alert-signup-address');
-      var alertSignupGender = $('#alert-signup-gender');
 
-      tinhthanh = document.getElementById('city');
-      quanhuyen = document.getElementById('district');
-      phuongxa = document.getElementById('ward');
-
-     
-
-      nameInput.addEventListener('click', function() {
-        alertSignupName.hide();
-      });
-
-      emailInput.addEventListener('click', function() {
-        alertSignupEmail.hide();
-      });
-
-      passwordInput.addEventListener('click', function() {
-        alertSignupPassword.hide();
-      });
-
-      confirmPasswordInput.addEventListener('click', function() {
-        alertSignupConfirmPassword.hide();
-      });
-
-      phoneNumberInput.addEventListener('click', function() {
-        alertSignupPhoneNumber.hide();
-      });
-      
-      addressInput.addEventListener('click', function() {
-        alertSignupAddress.hide();
-      });
-
-      genderMale.addEventListener('click', function() {
-        alertSignupGender.hide();
-      });
-
-      genderFemale.addEventListener('click', function() {
-        alertSignupGender.hide();
-      });
-    });
-    
-
-    function validateForm() {
-      var name = document.getElementById('name').value;
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('pwd').value;
-      var confirmPassword = document.getElementById('confirmPwd').value;
-      var phoneNumber = document.getElementById('phoneNumber').value;
-      var address = document.getElementById('address').value;
-      var genderMale = document.getElementById('gender-male');
-      var genderFemale = document.getElementById('gender-female');
-      var alertSignupName = $('#alert-signup-name');
-      var alertSignupEmail = $('#alert-signup-email');
-      var alertSignupPassword = $('#alert-signup-password');
-      var alertSignupConfirmPassword = $('#alert-signup-confirmpassword');
-      var alertSignupPhoneNumber = $('#alert-signup-phonenumber');
-      var alertSignupAddress = $('#alert-signup-address');
-      var alertSignupGender = $('#alert-signup-gender');
-      tinhthanh = document.getElementById('city').value;
-      quanhuyen = document.getElementById('district').value;
-      phuongxa = document.getElementById('ward').value;
-      var flag = false;
-
-      var alertSignuptinhthanh = $('#alert-signup-tinhthanh');
-      var alertSignupquanhuyen = $('#alert-signup-quanhuyen');
-      var alertSignupphuongxa = $('#alert-signup-phuongxa');
-
-      if(tinhthanh == ""){
-        $('#alert-signup-tinhthanh').text('Vui lòng nhập đầy đủ thông tin');
-        alertSignuptinhthanh.show();
-        flag = true;
-      }
-
-      if(quanhuyen == ""){
-        $('#alert-signup-quanhuyen').text('Vui lòng nhập đầy đủ thông tin');
-        alertSignupquanhuyen.show();
-        flag = true;
-      }
-
-      if(phuongxa == ""){
-        $('#alert-signup-phuongxa').text('Vui lòng nhập đầy đủ thông tin');
-        alertSignupphuongxa.show();
-        flag = true;
-      }
-
-      if (!isAlphabetic(name)) {
-        $('#alert-signup-name').text('Tên sai định dạng');
-        alertSignupName.show();
-        flag = true;
-      }
-
-      if (!isValidEmail(email)) {
-        $('#alert-signup-email').text('Nhập sai định dạng email');
-        alertSignupEmail.show();
-        flag = true;
-      }
-
-      if (!isValidPassword(password)) {
-        $('#alert-signup-password').text('Mật khẩu không đúng định dạng');
-        alertSignupPassword.show();
-        flag = true;
-      }
-      if (confirmPassword !== password ||confirmPassword==='') {
-        $('#alert-signup-confirmpassword').text('Xác nhận mật khẩu không khớp');
-        alertSignupConfirmPassword.show();
-        flag = true;
-      }
-
-      if (!isValidPhoneNumber(phoneNumber)) {
-        $('#alert-signup-phonenumber').text('Số điện thoại không đúng định dạng');
-        alertSignupPhoneNumber.show();
-        flag = true;
-      }
-      if (address === '') {
-        $('#alert-signup-address').text('Địa chỉ không được để trống');
-        alertSignupAddress.show();
-        flag = true;
-      }
-      return flag;
-    }
-
-
-
-    function isAlphabetic(input) {
-      var alphabeticRegex = /^[A-Za-zÀ-ỹ][A-Za-zÀ-ỹ\s]*$/;
-      return alphabeticRegex.test(input);
-    }
-
-    function isValidEmail(email) {
-      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-
-    function isValidPassword(password) {
-      // Kiểm tra xem mật khẩu có ít nhất một ký tự số, một chữ hoa, một chữ thường, và một ký tự đặc biệt hay không
-      var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{4,}$/;
-      return passwordRegex.test(password);
-    }
-
-    function isValidPhoneNumber(phoneNumber) {
-      var phoneRegex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-      return phoneRegex.test(phoneNumber);
-    }
-  </script>
-
-  
-  <div class="container container-signUp" style="margin-top: 20px; margin-bottom: 20px;">
-    <h2>Đăng kí</h2>
+  <div class="container-signUp">
+    <div class="text-center mb-2">
+       <img src="img/img_homepage/logo1.png" alt="Logo" style="width: 40px;">
+    </div>
+    <h2>Đăng Ký Tài Khoản</h2>
 
     <div id="dangki">
       <div class="form-group">
-          <input type="text" class="form-control rounded-pill" id="name" placeholder="Họ và tên" name="name">
+          <input type="text" class="form-control" id="name" placeholder="Họ và tên" name="name">
           <p id="alert-signup-name" style="color:red"></p>
-        </div>
-        <div class="form-group">
-          <input type="email" class="form-control rounded-pill" id="email" placeholder="Email" name="email">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="email" class="form-control" id="email" placeholder="Email" name="email">
           <p id="alert-signup-email" style="color:red"></p>
         </div>
-        <div class="form-group">
-          <input type="password" class="form-control rounded-pill" id="pwd" placeholder="Mật khẩu" name="pswd">
-          <p id="alert-signup-password" style="color:red"></p>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control rounded-pill" id="confirmPwd" placeholder="Xác nhận mật khẩu" name="confirmPswd">
-          <p id="alert-signup-confirmpassword" style="color:red"></p>
-        </div>
-        <div class="form-group">
-          <input type="number" class="form-control rounded-pill" id="phoneNumber" placeholder="Số điện thoại" name="phoneNumber">
+        <div class="form-group col-md-6">
+          <input type="number" class="form-control" id="phoneNumber" placeholder="Số điện thoại" name="phoneNumber">
           <p id="alert-signup-phonenumber" style="color:red"></p>
         </div>
-        <div class="form-group">
-          <input type="text" class="form-control rounded-pill" id="address" placeholder="Địa chỉ" name="address">
-          <p id="alert-signup-address" style="color:red"></p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="password" class="form-control" id="pwd" placeholder="Mật khẩu" name="pswd">
+          <p id="alert-signup-password" style="color:red"></p>
         </div>
-        <div class="form-group">
-          <select class="form-select form-select-sm mb-3 rounded-pill"  style='width: 100%; height: 40px; margin-top: 2px;' name="city" id="city" aria-label=".form-select-sm">
+        <div class="form-group col-md-6">
+          <input type="password" class="form-control" id="confirmPwd" placeholder="Xác nhận MK" name="confirmPswd">
+          <p id="alert-signup-confirmpassword" style="color:red"></p>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <input type="text" class="form-control" id="address" placeholder="Địa chỉ cụ thể (Số nhà, đường...)" name="address">
+          <p id="alert-signup-address" style="color:red"></p>
+      </div>
+
+      <div class="form-group" style="display:flex; flex-direction: column;">
+          <select class="form-select mb-3" name="city" id="city">
             <option value="" selected>Chọn tỉnh thành</option>           
           </select>
           <p id="alert-signup-tinhthanh" style="color:red"></p>
           
-          <select class="form-select form-select-sm mb-3 rounded-pill" style='width: 100%; height: 40px; margin-top: 2px;' id="district" name="district" aria-label=".form-select-sm">
+          <select class="form-select mb-3" id="district" name="district">
             <option value="" selected>Chọn quận huyện</option>
           </select>
           <p id="alert-signup-quanhuyen" style="color:red"></p>
 
-          <select class="form-select form-select-sm rounded-pill" style='width: 100%; height: 40px; margin-top: 2px;' id="ward" name="ward" aria-label=".form-select-sm">
+          <select class="form-select" id="ward" name="ward">
             <option value="" selected>Chọn phường xã</option>
           </select>
           <p id="alert-signup-phuongxa" style="color:red"></p>
-        </div>
-
-        <div class="form-group">
-          Nam: <input type="radio" name="sex" value="Nam" checked style="margin-right:40px;"/>
-	        Nữ: <input type="radio" name="sex" value="Nữ"/>
-        </div>
-        <span style="font-weight: bold; color:red;" id="rs"></span>
-
-        <button type="submit" class="btn btn-primary rounded-pill btn-sub" id="dk" name="dangki">Đăng kí</button>
-
       </div>
 
+      <div class="gender-group">
+          <label class="gender-option">
+            <input type="radio" name="sex" value="Nam" checked> Nam
+          </label>
+          <label class="gender-option">
+            <input type="radio" name="sex" value="Nữ"> Nữ
+          </label>
+      </div>
+
+      <div class="text-center mb-2">
+        <span style="font-weight: bold; color:red;" id="rs"></span>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-sub" id="dk" name="dangki">ĐĂNG KÝ NGAY</button>
       
+      <div class="btn-back-wrap">
+        <a href="index.php?quanly=dangnhap"><i class='bx bx-arrow-back'></i> Quay lại đăng nhập</a>
+      </div>
+
+    </div>
   </div>
-</body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-        function displayRadioValue() {
-            var ele = document.getElementsByName('sex');
- 
-            for (i = 0; i < ele.length; i++) {
-                if (ele[i].checked)
-                    return ele[i].value;
-            }
-            return 1;
-        }
-  </script>
-    <script>
-var citis = document.getElementById("city");
-var districts = document.getElementById("district");
-var wards = document.getElementById("ward");
-var Parameter = {
-  url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", 
-  method: "GET", 
-  responseType: "application/json", 
-};
-var promise = axios(Parameter);
-promise.then(function (result) {
-  renderCity(result.data);
-});
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script>
+    // 1. Tự động ẩn lỗi khi click vào input
+    $(document).ready(function() {
+      $('input, select').on('focus click change', function() {
+         var id = $(this).attr('id');
+         // Mapping ID input sang ID thông báo lỗi tương ứng
+         var alertMap = {
+             'name': '#alert-signup-name',
+             'email': '#alert-signup-email',
+             'pwd': '#alert-signup-password',
+             'confirmPwd': '#alert-signup-confirmpassword',
+             'phoneNumber': '#alert-signup-phonenumber',
+             'address': '#alert-signup-address',
+             'city': '#alert-signup-tinhthanh',
+             'district': '#alert-signup-quanhuyen',
+             'ward': '#alert-signup-phuongxa'
+         };
+         if(alertMap[id]) {
+             $(alertMap[id]).hide();
+         }
+      });
+    });
 
-function renderCity(data) {
-  for (const x of data) {
-    citis.options[citis.options.length] = new Option(x.Name, x.Name);
-  }
-  citis.onchange = function () {
-    district.length = 1;
-    ward.length = 1;
-    if(this.value != ""){
-      const result = data.filter(n => n.Name === this.value);
+    // 2. Logic Validate Form (Giữ nguyên logic của bạn)
+    function validateForm() {
+      var flag = false;
+      
+      // Lấy giá trị
+      var name = $('#name').val();
+      var email = $('#email').val();
+      var password = $('#pwd').val();
+      var confirmPassword = $('#confirmPwd').val();
+      var phoneNumber = $('#phoneNumber').val();
+      var address = $('#address').val();
+      var city = $('#city').val();
+      var district = $('#district').val();
+      var ward = $('#ward').val();
 
-      for (const k of result[0].Districts) {
-        district.options[district.options.length] = new Option(k.Name, k.Name);
-      }
+      // Check trống địa chỉ hành chính
+      if(city == "") { $('#alert-signup-tinhthanh').text('Vui lòng chọn Tỉnh/Thành').show(); flag = true; }
+      if(district == "") { $('#alert-signup-quanhuyen').text('Vui lòng chọn Quận/Huyện').show(); flag = true; }
+      if(ward == "") { $('#alert-signup-phuongxa').text('Vui lòng chọn Phường/Xã').show(); flag = true; }
+
+      // Validate Regex
+      if (!isAlphabetic(name)) { $('#alert-signup-name').text('Tên không hợp lệ').show(); flag = true; }
+      if (!isValidEmail(email)) { $('#alert-signup-email').text('Email không hợp lệ').show(); flag = true; }
+      if (!isValidPassword(password)) { $('#alert-signup-password').text('Mật khẩu cần: Chữ hoa, thường, số, ký tự đặc biệt').show(); flag = true; }
+      if (confirmPassword !== password || confirmPassword === '') { $('#alert-signup-confirmpassword').text('Mật khẩu không khớp').show(); flag = true; }
+      if (!isValidPhoneNumber(phoneNumber)) { $('#alert-signup-phonenumber').text('SĐT không hợp lệ').show(); flag = true; }
+      if (address === '') { $('#alert-signup-address').text('Nhập địa chỉ cụ thể').show(); flag = true; }
+
+      return flag;
     }
-  };
-  district.onchange = function () {
-    ward.length = 1;
-    const dataCity = data.filter((n) => n.Name === citis.value);
-    if (this.value != "") {
-      const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
 
-      for (const w of dataWards) {
-        wards.options[wards.options.length] = new Option(w.Name, w.Name);
+    function isAlphabetic(input) { return /^[A-Za-zÀ-ỹ][A-Za-zÀ-ỹ\s]*$/.test(input); }
+    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+    function isValidPassword(password) { return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{4,}$/.test(password); }
+    function isValidPhoneNumber(phoneNumber) { return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(phoneNumber); }
+    function displayRadioValue() { return $('input[name="sex"]:checked').val(); }
+
+    // 3. API Địa chính (Giữ nguyên)
+    var citis = document.getElementById("city");
+    var districts = document.getElementById("district");
+    var wards = document.getElementById("ward");
+    var Parameter = {
+      url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json", 
+      method: "GET", 
+      responseType: "application/json", 
+    };
+    axios(Parameter).then(function (result) {
+      renderCity(result.data);
+    });
+
+    function renderCity(data) {
+      for (const x of data) {
+        citis.options[citis.options.length] = new Option(x.Name, x.Name);
       }
-    }
-  };
-}
-$(document).ready(function(){
-  var alertSignuptinhthanh = $('#alert-signup-tinhthanh');
-  var alertSignupquanhuyen = $('#alert-signup-quanhuyen');
-  var alertSignupphuongxa = $('#alert-signup-phuongxa');
-
-  $('#city').change(function(){
-    alertSignuptinhthanh.hide();
-  });
-
-  $('#district').change(function(){
-    alertSignupquanhuyen.hide();
-  });
-
-  $('#ward').change(function(){
-    alertSignupphuongxa.hide();
-  });
-});   
-
-$('#dk').click(function(e) {
-  hoten = document.getElementById('name').value;
-  Email = document.getElementById('email').value;
-  matkhau = document.getElementById('pwd').value;
-  xacnhanmatkhau = document.getElementById('confirmPwd').value;
-  sodt = document.getElementById('phoneNumber').value;
-  diachi = document.getElementById('address').value;
-  tinhthanh = document.getElementById('city').value;
-  quanhuyen = document.getElementById('district').value;
-  phuongxa = document.getElementById('ward').value;
-  gioitinh = displayRadioValue();
-
-
-  if(validateForm() == false){
-    $.post("dangki_ajax.php",
-          {
-              hoten:hoten,
-              Email:Email,
-              matkhau:matkhau,
-              xacnhanmatkhau:xacnhanmatkhau,
-              sodt:sodt,
-              diachi:diachi,
-              tinhthanh:tinhthanh,
-              quanhuyen:quanhuyen,
-              phuongxa:phuongxa,
-              gioitinh:gioitinh,
-          },
-          function(data,status){
-              if(status=="success")
-              {
-                if(data == 1){
-                  window.location.href = "index.php?quanly=dangnhap";
-                }else{
-                  $("#rs").text(data)
-                }
-              }
+      citis.onchange = function () {
+        districts.length = 1;
+        wards.length = 1;
+        if(this.value != ""){
+          const result = data.filter(n => n.Name === this.value);
+          for (const k of result[0].Districts) {
+            districts.options[districts.options.length] = new Option(k.Name, k.Name);
           }
-      ); 
-  }else{
-  }
-          
-    
-  });
-	</script>
+        }
+      };
+      districts.onchange = function () {
+        wards.length = 1;
+        const dataCity = data.filter((n) => n.Name === citis.value);
+        if (this.value != "") {
+          const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
+          for (const w of dataWards) {
+            wards.options[wards.options.length] = new Option(w.Name, w.Name);
+          }
+        }
+      };
+    }
+
+    // 4. Xử lý Submit
+    $('#dk').click(function(e) {
+      if(validateForm() == false){ // Nếu không có lỗi (flag = false)
+        // Hiệu ứng loading
+        var btn = $(this);
+        var originalText = btn.text();
+        btn.html('<span class="spinner-border spinner-border-sm"></span> Đang xử lý...').prop('disabled', true);
+
+        $.post("dangki_ajax.php",
+              {
+                  hoten: $('#name').val(),
+                  Email: $('#email').val(),
+                  matkhau: $('#pwd').val(),
+                  xacnhanmatkhau: $('#confirmPwd').val(),
+                  sodt: $('#phoneNumber').val(),
+                  diachi: $('#address').val(),
+                  tinhthanh: $('#city').val(),
+                  quanhuyen: $('#district').val(),
+                  phuongxa: $('#ward').val(),
+                  gioitinh: displayRadioValue(),
+              },
+              function(data,status){
+                  btn.text(originalText).prop('disabled', false); // Reset nút
+                  if(status=="success")
+                  {
+                    if(data == 1){
+                      alert("Đăng ký thành công!");
+                      window.location.href = "index.php?quanly=dangnhap";
+                    }else{
+                      $("#rs").text(data);
+                    }
+                  }
+              }
+          ); 
+      }
+    });
+  </script>
+</body>
 </html>

@@ -1,42 +1,39 @@
-<!-- 21522336 start -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List San pham</title>
+    <title>Danh Sách Sản Phẩm - MTP</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/ListSp.css">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body>
-    <div class="container container-list" style="margin-top: 20px;">
-        <div class="row row-info">
-            <div class="col-sm-3 col-menu">
-                <div class="row left-row-menu">
-                    <ul class="nav nav-menu">
-                        <li class="nav-item nav-item-menu">
-                            <a class="nav-link nav-link-a ajax-link" href="index.php?quanly=danhmucsanpham&id=1">Tất cả </a> <span>|</span>
-                        </li>
-                        <li class="nav-item nav-item-menu">
-                            <a class="nav-link nav-link-a ajax-link" href="index.php?quanly=danhmucsanpham&id=2">Nam </a> <span>|</span>
-                        </li>
-                        <li class="nav-item nav-item-menu">
-                            <a class="nav-link nav-link-a ajax-link" href="index.php?quanly=danhmucsanpham&id=3">Nữ</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="container container-list">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="col-menu">
+                    <div class="left-row-menu">
+                        <ul class="nav nav-menu align-items-center">
+                            <li class="nav-item-menu">
+                                <a class="nav-link-a ajax-link" href="index.php?quanly=danhmucsanpham&id=1">Tất cả</a><span>|</span>
+                            </li>
+                            <li class="nav-item-menu" style="display:contents">
+                                <a class="nav-link-a ajax-link" href="index.php?quanly=danhmucsanpham&id=2">Nam</a><span>|</span>
+                            </li>
+                            <li class="nav-item-menu" style="display:contents">
+                                <a class="nav-link-a ajax-link" href="index.php?quanly=danhmucsanpham&id=3">Nữ</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div class="row left-row-item">
-                    <div class="container row-menu-under row-menu-kieudangsanpham">
-                        <a type="button" class="btn btn-style btn-same" data-toggle="collapse" data-target="#demo2" style="color: #FFCC57;font-size: 18px;">Loại giày <span class="fa fa-chevron-up"></span></a>
+                    <div class="row-menu-under row-menu-kieudangsanpham">
+                        <a type="button" class="btn btn-same" data-toggle="collapse" data-target="#demo2">
+                            LOẠI GIÀY <i class="fa fa-chevron-up"></i>
+                        </a>
                         <div id="demo2" class="collapse show">
                             <ul class="status-item">
                                 <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=17">Bóng đá</a></li>
@@ -46,11 +43,11 @@
                             </ul>
                         </div>
                     </div>
-                </div>
 
-                <div class="row left-row-item">
-                    <div class="container row-menu-under row-menu-dongsanpham">
-                        <a type="button" class="btn btn-productline btn-same" data-toggle="collapse" data-target="#demo" style="color: #FFCC57;font-size: 18px;">Hãng giày <span class="fa fa-chevron-up"></span></a>
+                    <div class="row-menu-under row-menu-dongsanpham">
+                        <a type="button" class="btn btn-same" data-toggle="collapse" data-target="#demo">
+                            THƯƠNG HIỆU <i class="fa fa-chevron-up"></i>
+                        </a>
                         <div id="demo" class="collapse show">
                             <ul class="status-item">
                                 <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=5">Nike</a></li>
@@ -60,157 +57,71 @@
                             </ul>
                         </div>
                     </div>
-                </div>
 
-                <div class="row left-row-item">
-                    <div class="container row-menu-under row-menu-giasanpham" style="width: 100%;">
-                        <a type="button" class="btn btn-price btn-same" data-toggle="collapse" data-target="#demo1" style="color: #FFCC57;font-size: 18px;">GIÁ <span class="fa fa-chevron-up"></span></a>
-                        <div id="demo1" class="collapse show" style="width: 100%;">
+                    <div class="row-menu-under row-menu-giasanpham border-0">
+                        <a type="button" class="btn btn-same" data-toggle="collapse" data-target="#demo1">
+                            MỨC GIÁ <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <div id="demo1" class="collapse show">
                             <ul class="status-item">
-                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=11">≥ 6M</a></li>
-                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=12">5M - 5.99M</a></li>
-                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=13">4M - 4.99M</a></li>
-                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=14">3M - 3.99M</a></li>
-                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=15">2M - 2.99M</a></li>
-                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=16">
-                                        < 2M</a>
-                                </li>
+                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=11">Trên 6 triệu</a></li>
+                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=12">5.000.000 - 5.999.000</a></li>
+                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=13">4.000.000 - 4.999.000</a></li>
+                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=14">3.000.000 - 3.999.000</a></li>
+                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=15">2.000.000 - 2.999.000</a></li>
+                                <li><a class="ajax-link" href="index.php?quanly=danhmucsanpham&id=16">Dưới 2 triệu</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            <div class="col-sm-9 col-list" id="dynamic-content-container">
+
+            <div class="col-lg-9 col-md-8" id="dynamic-content-container">
                 <div class="row right-item">
                     <?php
-                    switch ($_GET['id']) {
-                        case 1:
-                            $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid;";
-                            break;
-                        case 2:
-                            $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and danhmuc = 'Nam';";
-                            break;
-                        case 3:
-                            $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and danhmuc = 'Nữ';";
-                            break;
-                        case 4:
-                            $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid;";
-                            break;
-                        case 5:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp1';";
-                            break;
-                        case 6:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp2';";
-                            break;
-                        case 7:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp3';";
-                            break;
-                        case 8:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp4';";
-                            break;
-                        case 9:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp5';";
-                            break;
-                        case 10:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp6';";
-                            break;
-                        case 11:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 600000;";
-                            break;
-                        case 12:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 500000 and sanpham.giasp <=599000;";
-                            break;
-                        case 13:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 400000 and sanpham.giasp <=499000;";
-                            break;
-                        case 14:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 300000 and sanpham.giasp <=399000;";
-                            break;
-                        case 15:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 200000 and sanpham.giasp <=299000;";
-                            break;
-                        case 16:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp <200000;";
-                            break;
-                        case 17:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style1';";
-                            break;
-                        case 18:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style2';";
-                            break;
-                        case 19:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style3';";
-                            break;
-                        case 20:
-                            $str = "select productcolorid, tensp, giasp, img1, img2
-                                            from sanpham, productcolor, dongsp
-                                            where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style4';";
-                            break;
+                    // Logic Query Database giữ nguyên (chỉ format lại cho dễ nhìn)
+                    $id = isset($_GET['id']) ? $_GET['id'] : 1;
+                    $str = "";
+                    
+                    switch ($id) {
+                        case 1: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid;"; break;
+                        case 2: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and danhmuc = 'Nam';"; break;
+                        case 3: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and danhmuc = 'Nữ';"; break;
+                        case 4: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid;"; break;
+                        case 5: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp1';"; break;
+                        case 6: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp2';"; break;
+                        case 7: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp3';"; break;
+                        case 8: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp4';"; break;
+                        case 9: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp5';"; break;
+                        case 10: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp6';"; break;
+                        case 11: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 600000;"; break;
+                        case 12: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 500000 and sanpham.giasp <=599000;"; break;
+                        case 13: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 400000 and sanpham.giasp <=499000;"; break;
+                        case 14: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 300000 and sanpham.giasp <=399000;"; break;
+                        case 15: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp >= 200000 and sanpham.giasp <=299000;"; break;
+                        case 16: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.giasp <200000;"; break;
+                        case 17: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style1';"; break;
+                        case 18: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style2';"; break;
+                        case 19: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style3';"; break;
+                        case 20: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style4';"; break;
                     }
 
-
-                    $str1 = "SELECT * FROM saleoff";
-
+                    // Logic Sale Off
                     date_default_timezone_set('Asia/Jakarta');
-                    $format = "Y-m-d G:i:s";
-                    $datenow =  date($format, time());
-
+                    $datenow = date("Y-m-d G:i:s", time());
                     $arr = array();
-                    $rs1 = $connect->query($str1);
+                    $rs1 = $connect->query("SELECT * FROM saleoff");
                     if ($rs1->num_rows > 0) {
                         while ($row1 = $rs1->fetch_row()) {
-                            $ngaybd = date($row1[1]);
-                            $ngaykt = date($row1[2]);
-                            $giam_value = $row1[3];
-                            $saleid = $row1[0];
-
-                            // Kiem tra ngay hien tai dang co trong chuong trinh khuyen mai nao ko. Neu co thi them saleoffid vao mang
-                            if("$datenow" >= $ngaybd && "$datenow" < $ngaykt){
-                                $arr["$saleid"] = "$giam_value";
+                            if("$datenow" >= date($row1[1]) && "$datenow" < date($row1[2])){
+                                $arr["$row1[0]"] = "$row1[3]";
                             }
                         }
-                    } else {
-                        echo "Không có record nào";
                     }
-
                     $arr_info = array();
-
                     if(count($arr) != 0){
                         foreach($arr as $x=>$x_value){
-                            $str1 = "SELECT * FROM `saleoffct` WHERE saleoffid = '$x'";
-                            $rs1 = $connect->query($str1);
+                            $rs1 = $connect->query("SELECT * FROM `saleoffct` WHERE saleoffid = '$x'");
                             if($rs1->num_rows > 0){
                                 while($row1 = $rs1->fetch_row()){
                                     $arr_info["$row1[2]"]= "$row1[1]";
@@ -222,176 +133,94 @@
                     $rs = $connect->query($str);
                     if($rs->num_rows > 0){
                         while($row = $rs->fetch_row()){
-                            if($_GET['id'] != 4){ ?>
-                                <!-- Ko phai trang saleoff -->
-                                <div class="col-sm-4 item">
+                            $giasp = $row[2];
+                            $giasp_giam = $giasp;
+                            $has_sale = false;
+
+                            if(array_key_exists("$row[0]", $arr_info)){
+                                $saleoffid = $arr_info["$row[0]"];
+                                $value =  $arr["$saleoffid"];
+                                $giasp_giam = $giasp - ($giasp * $value)/100;
+                                $has_sale = true;
+                            }
+
+                            // Chỉ hiển thị sản phẩm giảm giá nếu đang ở trang Sale Off (id=4)
+                            if($id == 4 && !$has_sale) continue; 
+                            ?>
+                            
+                            <div class="col-lg-4 col-md-6 col-6 mb-4">
+                                <div class="product-card">
                                     <div class="item-img">
                                         <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">
-                                            <?php
-                                            echo "<img src='uploads/$row[3]' alt=''>";
-                                            echo "<img src='uploads/$row[4]' alt=''>";
-                                            ?>
+                                            <img src='uploads/<?php echo $row[3] ?>' alt='<?php echo $row[1] ?>'>
+                                            <img src='uploads/<?php echo $row[4] ?>' class="hover-img" alt='<?php echo $row[1] ?>'>
                                         </a>
+                                        <div class="add-to-cart-btn">
+                                            <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>" class="btn">Xem chi tiết</a>
+                                        </div>
                                     </div>
-                                    <div class="img-button">
-                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">Mua hàng</a>
-                                    </div>
+                                    
                                     <div class="item-info">
-                                        <hr>
-                                        <?php
-                                        echo "<a href='index.php?quanly=chitietsanpham&id=$row[0]' id='#tieuDe'>$row[1]</a> <br>";
-
-                                        ?>
-
-                                        <?php
-                                            if(array_key_exists( "$row[0]", $arr_info)){
-                                                $saleoffid = $arr_info["$row[0]"];
-                                                $value =  $arr["$saleoffid"];
-                                                $giasp = $row[2];
-                                                $giasp_giam = $giasp - ($giasp * $value)/100; ?>
-                                                            <!-- Neu ton tai sp co giam gia thi echo ra  -->
-                                                <span style="font-weight: bold; margin-right:10px;"><?php echo $giasp_giam ?> VNĐ</span>
-                                                <span style="text-decoration: line-through; font-weight:200; font-size:14px;" id="tien"><?php echo $giasp ?> VNĐ</span>
-
-                                        <?php
-                                            }else{ ?>
-                                                <span style="font-weight: bold;" id="tien"><?php echo $row[2] ?> VNĐ</span>
-
-                                        <?php
-
-                                            }
-                                        ?>
-
-
-
+                                        <a href='index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>' class="product-name">
+                                            <?php echo $row[1] ?>
+                                        </a>
+                                        
+                                        <div class="price-group">
+                                            <?php if($has_sale): ?>
+                                                <span class="price-new"><?php echo number_format($giasp_giam, 0, ',', '.') ?> VNĐ</span>
+                                                <span class="price-old"><?php echo number_format($giasp, 0, ',', '.') ?>đ</span>
+                                            <?php else: ?>
+                                                <span class="price-new" style="color:#333;"><?php echo number_format($giasp, 0, ',', '.') ?> VNĐ</span>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
                                 </div>
-                            <?php
-                            }else{
-                                if(count($arr_info) != 0){ ?>
+                            </div>
 
-                                    <?php
-
-                                            if(array_key_exists( "$row[0]", $arr_info)){
-                                                $saleoffid = $arr_info["$row[0]"];
-                                                $value =  $arr["$saleoffid"];
-                                                $giasp = $row[2];
-                                                $giasp_giam = $giasp - ($giasp * $value)/100; ?>
-                                                <div class="col-sm-4 item">
-                                                    <div class="item-img">
-                                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">
-                                                            <?php
-                                                            echo "<img src='uploads/$row[3]' alt=''>";
-                                                            echo "<img src='uploads/$row[4]' alt=''>";
-                                                            ?>
-                                                        </a>
-                                                    </div>
-                                                    <div class="img-button">
-                                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">Mua hàng</a>
-                                                    </div>
-                                                    <div class="item-info">
-                                                        <hr>
-                                                        <?php
-                                                        echo "<a href='index.php?quanly=chitietsanpham&id=$row[0]' id='#tieuDe'>$row[1]</a> <br>";
-
-                                                        ?>
-                                                            <!-- Neu ton tai sp co giam gia thi echo ra  -->
-                                                    <span style="font-weight: bold; margin-right:10px;"><?php echo $giasp_giam ?> VNĐ</span>
-                                                    <span style="text-decoration: line-through; font-weight:200; font-size:14px;" id="tien"><?php echo $giasp ?> VNĐ</span>
-                                                    </div>
-                                                </div>
-                                        <?php
-                                            }?>
-
-
-                                <?php
-
-                                }else{
-                                    echo "Khong co sp";
-                                }
-                            }
-                        }
-                    }else{
-                        echo "Khong co san pham";
+                        <?php }
+                    } else {
+                        echo "<div class='col-12 text-center'><p>Không tìm thấy sản phẩm nào.</p></div>";
                     }
-
                     ?>
-
-
-
-
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        $(document).ready(function() {
-            $(".row-menu-kieudangsanpham").on("hide.bs.collapse", function() {
-                $(".btn-style").html('KIỂU DÁNG <span class="fa fa-chevron-down"></span>');
-                $(".btn-style").css("color", "black");
-            });
-            $(".row-menu-kieudangsanpham").on("show.bs.collapse", function() {
-                $(".btn-style").html('KIỂU DÁNG <span class="fa fa-chevron-up"></span>');
-                $(".btn-style").css("color", "orange");
-            });
-        });
-        $(document).ready(function() {
-            $(".row-menu-dongsanpham").on("hide.bs.collapse", function() {
-                $(".btn-productline").html('DÒNG SẢN PHẨM <span class="fa fa-chevron-down"></span>');
-                $(".btn-productline").css({
-                    "color": "black",
-                    "font-size": "18px"
-                });
-            });
-            $(".row-menu-dongsanpham").on("show.bs.collapse", function() {
-                $(".btn-productline").html('DÒNG SẢN PHẨM <span class="fa fa-chevron-up"></span>');
-                $(".btn-productline").css({
-                    "color": "orange",
-                    "font-size": "18px"
-                });
-            });
+        // Tự động đổi icon chevron khi đóng mở menu
+        $('.collapse').on('shown.bs.collapse', function () {
+            $(this).prev().find(".fa").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            $(this).prev().css("color", "#CF7486");
+        }).on('hidden.bs.collapse', function () {
+            $(this).prev().find(".fa").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            $(this).prev().css("color", "#333");
         });
 
-        $(document).ready(function() {
-            $(".row-menu-giasanpham").on("hide.bs.collapse", function() {
-                $(".btn-price").html('GIÁ <span class="fa fa-chevron-down"></span>');
-                $(".btn-price").css("color", "black");
-            });
-            $(".row-menu-giasanpham").on("show.bs.collapse", function() {
-                $(".btn-price").html('GIÁ <span class="fa fa-chevron-up"></span>');
-                $(".btn-price").css("color", "orange");
-            });
-        });
-    </script>
-    <script>
-
-
+        // AJAX Load (Giữ nguyên logic của bạn)
         $(document).ready(function() {
             $('.ajax-link').click(function(e) {
                 e.preventDefault();
-
-                // Lấy giá trị của tham số 'id' từ href
                 var href = $(this).attr('href');
-                var urlParams = new URLSearchParams(href);
-                var idValue = urlParams.get('id');
+                var idValue = new URLSearchParams(href).get('id');
+                
+                // Hiệu ứng loading nhẹ
+                $('.right-item').css('opacity', '0.5');
 
-
-                var $idsanpham = idValue;
                 $.ajax({
-                    url: 'pages/main/xuli-listsp.php', //current page
+                    url: 'pages/main/xuli-listsp.php',
                     type: 'get',
                     dataType: 'html',
-                    data: {
-                        idsp: $idsanpham
-                    }
+                    data: { idsp: idValue }
                 }).done(function(ketqua) {
-                    $('.right-item').html(ketqua);
+                    $('.right-item').html(ketqua).css('opacity', '1');
                 });
             });
         });
     </script>
 </body>
-
 </html>
-<!-- 21522336 end -->

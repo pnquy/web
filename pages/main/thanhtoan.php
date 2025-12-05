@@ -2,7 +2,11 @@
 
 <?php
 if (!isset($_SESSION['dangnhap'])) {
-    echo "<p> Vui lòng đăng nhập </p>";
+    echo "<div class='container py-5 text-center'>
+            <img src='img/img_homepage/login.png' style='width: 100px; opacity: 0.5;'>
+            <h4 class='mt-3'>Vui lòng đăng nhập để thanh toán</h4>
+            <a href='index.php?quanly=dangnhap' class='btn btn-dark rounded-pill px-4 mt-2'>Đăng nhập ngay</a>
+          </div>";
 } else {
 ?>
 
@@ -12,508 +16,309 @@ if (!isset($_SESSION['dangnhap'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Icon -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Connect CSS -->
+        <title>Thanh Toán</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="css/Thanhtoan.css" />
-        <!-- javascripts -->
-        <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-        <script src="js/Thanhtoan.js"></script>
-        <!-- Title -->
-        <title>Thanh toán</title>
     </head>
 
     <body>
-        <div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="container" style="margin-top: 40px; margin-bottom: 60px;">
             <div class="row">
-                <!--Ben Trai-->
                 <div class="col-lg-8">
-                    <div class="Thongtin">
-                        <h4>THÔNG TIN GIAO HÀNG</h4>
+                    <form id="order-form" action="" method="post">
+                        <div class="Thongtin mb-4">
+                            <h4><i class="fa fa-map-marker-alt me-2"></i> Thông tin giao hàng</h4>
+                            
+                            <?php
+                            $sodt = $_SESSION['dangnhap'];
+                            $sql = "SELECT * FROM khachhang WHERE sodt = '$sodt'";
+                            $result = $connect->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) { 
+                            ?>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Họ và tên" id="name" name="name" value="<?php echo $row['hoten']; ?>">
+                                        <p id="alert-order-name" style="color:red; font-size:12px; margin-left:15px; margin-bottom:0;"></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control" placeholder="Số điện thoại" id="phone" name="phone" value="<?php echo $row['sodt']; ?>" readonly style="background-color: #eee;">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="email" class="form-control" placeholder="Email" id="email" name="email" value="<?php echo $row['email']; ?>">
+                                        <p id="alert-order-email" style="color:red; font-size:12px; margin-left:15px; margin-bottom:0;"></p>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Địa chỉ cụ thể (Số nhà, đường...)" id="address" name="diachi" value="<?php echo $row['diachi']; ?>">
+                                        <p id="alert-order-address" style="color:red; font-size:12px; margin-left:15px; margin-bottom:0;"></p>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <select class="form-select" id="city" name="city">
+                                            <option value="" >Chọn Tỉnh/Thành</option>
+                                            <option value="<?php echo $row['tinhthanh']; ?>" selected><?php echo $row['tinhthanh']; ?></option>
+                                        </select>
+                                        <p id="alert-signup-tinhthanh" style="color:red; font-size:12px;"></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" id="district" name="district">
+                                            <option value="" >Chọn Quận/Huyện</option>
+                                            <option value="<?php echo $row['quanhuyen']; ?>" selected><?php echo $row['quanhuyen']; ?></option>
+                                        </select>
+                                        <p id="alert-signup-quanhuyen" style="color:red; font-size:12px;"></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select class="form-select" id="ward" name="ward">
+                                            <option value="" >Chọn Phường/Xã</option>
+                                            <option value="<?php echo $row['phuongxa']; ?>" selected><?php echo $row['phuongxa']; ?></option>
+                                        </select>
+                                        <p id="alert-signup-phuongxa" style="color:red; font-size:12px;"></p>
+                                    </div>
+                                </div>
+                            <?php } } ?>
+                            
+                            <div class="mt-3">
+                                <input type="checkbox" name="Capnhatthongtin" id="Capnhatthongtin">
+                                <label for="Capnhatthongtin" class="small text-secondary">Cập nhật thông tin này cho tài khoản của tôi</label>
+                            </div>
+                        </div>
 
-                        <form id="order-form" action="" method="post" >
+                        <div class="PhuongThucGiaoHang mb-4">
+                            <h4><i class="fa fa-truck me-2"></i> Phương thức giao hàng</h4>
+                            <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                                <div>
+                                    <input type="radio" name="LoaiGiaoHang" id="TieuChuan">
+                                    <label for="TieuChuan">Tiêu chuẩn <span class="special">(2-5 ngày)</span></label>
+                                </div>
+                                <span class="fw-bold">0 đ</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <input type="radio" name="LoaiGiaoHang" id="HoaToc" checked>
+                                    <label for="HoaToc">Hỏa tốc <span class="special">(Trong 24h)</span></label>
+                                </div>
+                                <span class="fw-bold">40.000 đ</span>
+                            </div>
+                        </div>
+
+                        <div class="PhuongThucThanhToan mb-4">
+                            <h4><i class="fa fa-credit-card me-2"></i> Phương thức thanh toán</h4>
+                            
+                            <div class="mb-3">
+                                <input type="radio" id="ThanhToanTrucTiep" name="ThanhToan" value="trực tiếp" checked>
+                                <label for="ThanhToanTrucTiep">
+                                    Thanh toán khi nhận hàng (COD)
+                                    <i class="fa fa-money-bill-wave text-success ms-2"></i>
+                                </label>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="radio" id="ThanhToanThe" name="ThanhToan" value="thẻ ngân hàng">
+                                <label for="ThanhToanThe">
+                                    Thẻ ATM / Visa / Master Card
+                                    <i class="fab fa-cc-visa text-primary ms-2"></i>
+                                </label>
+                            </div>
+
                             <div>
-
-                                <?php
-                                // $ten = $_SESSION['dangnhap'];
-                                // $sql = "SELECT * FROM khachhang WHERE hoten = '$ten'";
-                                $sodt = $_SESSION['dangnhap'];
-                                $sql = "SELECT * FROM khachhang WHERE sodt = '$sodt'";
-                                $result = $connect->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) { ?> <?php
-                                                                                echo "<div class='form-group'>";
-                                                                                echo "<input type='text' class='form-control' placeholder='Họ và tên' id='name' name='name' value='" . $row['hoten'] . "'>";
-                                                                                echo "<p id='alert-order-name' style='color:red'></p>";
-                                                                                echo "</div>";
-                                                                                echo "<div class='form-group'>";
-                                                                                echo "<input type='number' class='form-control' placeholder='Số điện thoại' id='phone' name='phone' value='" . $row['sodt'] . "' readonly >";
-                                                                                echo "</div>";
-                                                                                echo "<div class='form-group'>";
-                                                                                echo "<input type='email' class='form-control' placeholder='Email' id='email' name='email' value='" . $row['email'] . "'>";
-                                                                                echo "<p id='alert-order-email' style='color:red'></p>";
-                                                                                echo "</div>";
-                                                                                echo "<div class='form-group'>";
-                                                                                echo "<input type='text' class='form-control' placeholder='Địa chỉ' id='address' name='diachi' value='" . $row['diachi'] . "'>";
-                                                                                echo "<p id='alert-order-address' style='color:red'></p>";
-                                                                                echo "</div>";
-                                                                                echo "<div>";
-
-                                                                                // Assuming $row['tinhthanh'], $row['quanhuyen'], and $row['phuongxa'] contain the corresponding data
-                                                                                echo "<select class='form-select' id='city' name='city' style='width: 100%; height: 40px; margin-top: 2px;'>";
-                                                                                echo "<option value='' >Chọn tỉnh thành</option>    ";
-                                                                                echo "<option value='" . $row['tinhthanh'] . "' selected>" . $row['tinhthanh'] . "</option>";
-                                                                                echo "</select>";
-                                                                                echo "<p id='alert-signup-tinhthanh' style='color:red'></p>";
-
-                                                                                echo "<select class='form-select' id='district' name='district' style='width: 100%; height: 40px; margin-top: 18px;'>";
-                                                                                echo "<option value='' >Chọn quận huyện</option>";
-                                                                                echo "<option value='" . $row['quanhuyen'] . "' selected>" . $row['quanhuyen'] . "</option>";
-                                                                                echo "</select>";
-                                                                                echo "<p id='alert-signup-quanhuyen' style='color:red'></p>";
-
-                                                                                echo "<select class='form-select' id='ward' name='ward' style='width: 100%; height: 40px; margin-top: 18px;'>";
-                                                                                echo "<option value='' >Chọn phường xã</option>";
-                                                                                echo "<option value='" . $row['phuongxa'] . "' selected>" . $row['phuongxa'] . "</option>";
-                                                                                echo "</select>";
-                                                                                echo "<p id='alert-signup-phuongxa' style='color:red'></p>";
-                                                                                echo "</div>";
-                                                                                ?>
-
-                                        <input type="checkbox" name="Capnhatthongtin" id="Capnhatthongtin">
-                                        <label for="Capnhatthongtin">Cập nhật các thông tin mới nhất về chương trình từ Blocks
-                                            Magic</label>
-                            </div>
-                    </div>
-                    <div class="PhuongThucGiaoHang">
-                        <h4>PHƯƠNG THỨC GIAO HÀNG </h4>
-                        <div class="row">
-                            <div class="col-9">
-                                <input type="radio" name="LoaiGiaoHang" id="TieuChuan">
-                                <label for="TieuChuan">Tốc độ tiêu chuẩn <span class="special">(từ 2 - 5 ngày làm
-                                        việc)</span> <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Tuỳ vào địa chỉ giao hàng mà tốc độ giao hàng tiêu chuẩn sẽ khác nhau. Chúng tôi luôn cố gắng để đơn hàng đến tay bạn sớm nhất."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button></label><br>
-                            </div>
-                            <div class="col-3">
-                                <h6 class="text-secondary">0 VNĐ</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-9">
-                                <input type="radio" name="LoaiGiaoHang" id="HoaToc" checked>
-                                <label for="HoaToc">Giao hàng hỏa tốc <span class="special">(trong vòng 24h)</span> <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Tuỳ vào địa chỉ giao hàng mà tốc độ giao hàng sẽ khác nhau. Chúng tôi luôn cố gắng để đơn hàng đến tay bạn sớm nhất."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button></label><br>
-                            </div>
-                            <div class="col-3">
-                                <h6 class="text-secondary">40 000 VNĐ</h6>
+                                <input type="radio" id="ThanhToanMoMo" name="ThanhToan" value="momo">
+                                <label for="ThanhToanMoMo">
+                                    Ví MoMo
+                                    <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" style="width: 20px; margin-left: 5px;">
+                                </label>
                             </div>
                         </div>
                     </div>
-                    <div class="PhuongThucThanhToan">
-                        <h4>PHƯƠNG THỨC THANH TOÁN</h4>
-                        <div>
-                            <input type="radio" id="ThanhToanTrucTiep" name="ThanhToan" value="trực tiếp" checked>
-                            <label for="ThanhToanTrucTiep">
-                                Thanh toán trực tiếp khi giao hàng <span class="special">(COD)</span>
-                                <input type="hidden" name="thanhtoan" id="a" value="tructiep" />
-                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Là phương thức thanh toán bằng tiền mặt trực tiếp khi nhận hàng"><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button>
-                            </label>
-                        </div>
 
-                        <div>
-                            <input type="radio" id="ThanhToanThe" name="ThanhToan" value="thẻ ngân hàng">
-                            <label for="ThanhToanThe">
-                                Thanh toán bằng Thẻ quốc tế / Thẻ nội địa / QR Code
-                                <input type="hidden" name="thanhtoan" id="a" value="the" />
-                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Phương thức thanh toán sử dụng các loại thẻ quốc tế như Visa, Master, JCB,… hoặc các loại thẻ thanh toán nội địa (ATM) hoặc thanh toán bằng QR ngân hàng hoặc ví điện tử. Vui lòng đọc kĩ các cam kết thanh toán khi chọn phương thức này. Phí thanh toán đối với phương thức này hiện là 1% trên tổng giá trị giao dịch."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button>
-                            </label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="ThanhToanMoMo" name="ThanhToan" value="momo">
-                            <label for="ThanhToanMoMo">
-                                Thanh toán bằng ví MoMo
-                                <input type="hidden" name="thanhtoan" id="a" value="momo" />
-                                <button style="border: none; background-color: #ffff;" type="button" data-toggle="tooltip" data-placement="top" title="Phương thức dành cho khách hàng có tài khoản và lựa chọn thanh toán qua ví điện tử MoMo. Vui lòng đọc kĩ các cam kết về phương thức này trước khi quyết định. Phí thanh toán đang được áp dụng là 1% trên tổng thanh toán."><i style="color:#E6A32D;" class="fa-solid fa-question"></i></button>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <!--Ben Phai-->
                 <div class="col-lg-4">
                     <div class="donhang">
-                        <div class="row">
-                            <div class="col-10">
-                                <h4>ĐƠN HÀNG</h4>
-                            </div>
-                            <div class="col-2">
-                                <a href="index.php?quanly=giohang" style="text-decoration: none;">Sửa</a>
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0 border-0 p-0 text-dark">ĐƠN HÀNG</h4>
+                            <a href="index.php?quanly=giohang" class="text-secondary small text-decoration-none"><i class="fa fa-edit"></i> Sửa</a>
                         </div>
-                        <hr style="border-top: 1px dashed #909090;">
+                        <hr class="dashed">
+                        
                         <div class="SanPham">
-                            <table class="table table-borderless donhang">
+                            <table class="table table-borderless table-sm">
                                 <?php
-                                        if (!isset($_SESSION['dangnhap'])) {
-                                            echo "<p> Vui lòng đăng nhập </p>";
-                                        } else {
-                                            if (!isset($_SESSION['cart'])) {
-                                                echo "<p> Chưa có sản phẩm </p>";
-                                            } else {
-                                                foreach ($_SESSION['cart'] as $pro) { ?>
-                                            <tr>
-                                                <td colspan="2" style="font-weight: bold">
-                                                    <?php echo $pro['ten'] ?>
-                                                </td>
-                                                <td style="text-align: right;" id="giasp">
-                                                    <?php echo $pro['gia'] ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    Size: <?php echo $pro['size'] ?>
-                                                </td>
-                                                <td colspan="2" style="text-align: left;" id="soluong">
-                                                    x <?php echo $pro['sl'] ?>
-                                                </td>
-                                            </tr>
-                                <?php
-                                                }
-                                            }
-                                        }
+                                $total = 0;
+                                if (isset($_SESSION['cart'])) {
+                                    foreach ($_SESSION['cart'] as $pro) { 
+                                        $total += $pro['gia'] * $pro['sl'];
                                 ?>
+                                    <tr>
+                                        <td colspan="2" class="fw-bold text-dark"><?php echo $pro['ten'] ?></td>
+                                        <td class="text-end"><?php echo number_format($pro['gia'], 0, ',', '.') ?>đ</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ps-3 text-muted small">Size: <?php echo $pro['size'] ?></td>
+                                        <td class="text-muted small">x <?php echo $pro['sl'] ?></td>
+                                        <td></td>
+                                    </tr>
+                                <?php } } ?>
                             </table>
-                            <hr style="border-top: 1px dashed #909090;">
-                            <table class="table table-borderless">
-                                <tr>
-                                    <td style="font-weight: bold">Đơn hàng</td>
-                                    <td style="text-align: right" id="DonHang" name="DonHang">0 đ</td>
-                                </tr>
-                                <?php
-                                        // Kiểm tra đã add mã giảm giá bên giỏ hàng chưa nếu add rồi thì cập nhật qua trang thanh toán
-                                        if (isset($_SESSION['magiamgia'])) {
-                                            $sql_giamgia = "SELECT DISTINCT giatrigiam from magiamgia where codemagiamgia = '" . $_SESSION['magiamgia'] . "';";
-                                            $row_giamgia = $connect->query($sql_giamgia);
-                                            if ($row_giamgia->num_rows > 0) {
-                                                $giamgia = $row_giamgia->fetch_row();
-                                                $giatrigiam = round((float)$giamgia[0] * 100) . '%'; ?>
-                                        <tr>
-                                            <td style="font-weight: bold">Giảm</td>
-                                            <td style="text-align: right" id="GiamGia"><?php echo $giatrigiam ?></td>
-                                        </tr>
-                                <?php
-                                            }
-                                        }
-                                ?>
-                                <tr>
-                                    <td style="font-weight: bold">Phí vận chuyển</td>
-                                    <td style="text-align: right" id="PhiVanChuyen">0 đ</td>
-                                </tr>
-                            </table>
-                            <hr style="border-top: 2px dashed #909090;">
-                            <table class="table table-borderless">
-                                <tr>
-                                    <td style="font-weight: bold;">TỔNG CỘNG</td>
-                                    <td style="text-align: right;">
-                                        <h5 style='color: #E6A32D;' id="tongcong"></h5>
-                                        <input type="hidden" name="a" id="a" value="process" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <!-- <button style="text-align: center" id="Finish" name="Finish">HOÀN TẤT ĐẶT HÀNG</button> -->
-                        <input type="button" style="text-align: center" id="Finish" name="Finish" value="HOÀN TẤT ĐẶT HÀNG">
-                        <span id="ketqua" style="color: red; font-weight: bold;"></span>
-                    </form>
-                    </div>
-                </div>
-                <div id="success-message" class="overlay">
-                    <div class="message-box">
-                        <p>Đặt hàng thành công!</p>
-                        <input type="submit" id="continue-buying" value="Tiếp tục mua sắm">
+                            
+                            <hr class="dashed">
+                            
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-secondary">Tạm tính</span>
+                                <span class="fw-bold text-dark" id="DonHang">0 đ</span>
+                            </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-<?php
-                                    }
-                                }
-?>
-<?php
-}
-
-?>
-<?php
-$total = 0;
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $pro) {
-        $total += $pro['gia'] * $pro['sl'];
-    }
-}
-?>
-
-
-
-    </body>
-
-    </html>
-    <script>
-        // PHÍ SẢN PHẨM
-        var productFee = <?php echo $total; ?>;
-
-        document.getElementById("DonHang").innerText = formatCurrency(productFee);
-
-        // GIẢM GIÁ
-        var discount = $('#GiamGia').text();
-
-        // PHÍ VẬN CHUYỂN
-        var feeMapping = {
-            "TieuChuan": 0,
-            "HoaToc": 40000,
-            // Add more mappings for other options if needed
-        };
-        tongcong = 0;
-        shippingFee = 0;
-
-        // Function to update the total
-        function updateTotal() {
-            // Lấy giá trị của radio button được chọn
-            var selectedValue = $('input[name="LoaiGiaoHang"]:checked').attr("id");
-
-            // Hiển thị phí vận chuyển dựa trên giá trị được chọn
-            shippingFee = feeMapping[selectedValue] || 0;
-            $("#PhiVanChuyen").text(formatCurrency(shippingFee));
-            var temp = productFee;
-            // TÍNH TỔNG CỘNG
-            if (discount != 0) {
-                discount = discount.substring(0, discount.length - 1);
-
-
-                var total = temp - temp * parseFloat(discount) / 100;
-                tongcong = total + shippingFee;
-                formattedTotal = formatCurrency(total + shippingFee);
-            } else {
-                var total = productFee + shippingFee;
-                tongcong = productFee + shippingFee;
-                formattedTotal = formatCurrency(total);
-            }
-
-
-            // Hiển thị màu cho #TongCong
-            $("#tongcong").text(formattedTotal);
-            createCookie("tongtien", total, "10");
-        }
-
-        // Call the function on page load
-        updateTotal();
-
-        function createCookie(name, value, days) {
-            var expires;
-
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime() + (days * 1 * 1000));
-                expires = "; expires=" + date.toGMTString();
-            } else {
-                expires = "";
-            }
-
-            document.cookie = escape(name) + "=" +
-                escape(value) + expires + "; path=/";
-        }
-
-        // Call the function when the shipping option changes
-        $('input[name="LoaiGiaoHang"]').change(function() {
-            updateTotal();
-        });
-
-        // Format currency function
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN', {
-                style: 'currency',
-                currency: 'VND'
-            }).format(amount);
-        }
-    </script>
-    <script>
-        $(document).ready(function(){
-        var alertSignuptinhthanh = $('#alert-signup-tinhthanh');
-        var alertSignupquanhuyen = $('#alert-signup-quanhuyen');
-        var alertSignupphuongxa = $('#alert-signup-phuongxa');
-
-        $('#city').change(function(){
-            alertSignuptinhthanh.hide();
-        });
-
-        $('#district').change(function(){
-            alertSignupquanhuyen.hide();
-        });
-
-        $('#ward').change(function(){
-            alertSignupphuongxa.hide();
-        });
-        });
-        // var checkContinue=false;
-        document.addEventListener('DOMContentLoaded', function() {
-            var nameOutput = document.getElementById('name');
-            var emailOutput = document.getElementById('email');
-            var addressOutput = document.getElementById('address');
-            var alertOrderName = $('#alert-order-name');
-            var alertOrderEmail = $('#alert-order-email');
-            var alertOrderAddress = $('#alert-order-address');
-            nameOutput.addEventListener('click', function() {
-                alertOrderName.hide();
-            });
-
-            emailOutput.addEventListener('click', function() {
-                alertOrderEmail.hide();
-            });
-
-            addressOutput.addEventListener('click', function() {
-                alertOrderAddress.hide();
-            });
-            $('#continue-buying').on('click', function() {
-                $('#order-form').submit();
-                window.location.href = 'index.php?quanly=danhmucsanpham&id=1';
-            });
-
-        });
-
-
-        function validateOrderForm() {
-            var name = document.getElementById('name').value;
-            var email = document.getElementById('email').value;
-            var address = document.getElementById('address').value;
-            var alertOrderName = $('#alert-order-name');
-            var alertOrderEmail = $('#alert-order-email');
-            var alertOrderAddress = $('#alert-order-address');
-            tinhthanh = document.getElementById('city').value;
-            quanhuyen = document.getElementById('district').value;
-            phuongxa = document.getElementById('ward').value;
-
-            var alertSignuptinhthanh = $('#alert-signup-tinhthanh');
-            var alertSignupquanhuyen = $('#alert-signup-quanhuyen');
-            var alertSignupphuongxa = $('#alert-signup-phuongxa');
-
-            var flag = false;
-            if(tinhthanh == ""){
-                $('#alert-signup-tinhthanh').text('Vui lòng nhập đầy đủ thông tin');
-                alertSignuptinhthanh.show();
-                flag = true;
-            }
-
-            if(quanhuyen == ""){
-                $('#alert-signup-quanhuyen').text('Vui lòng nhập đầy đủ thông tin');
-                alertSignupquanhuyen.show();
-                flag = true;
-            }
-
-            if(phuongxa == ""){
-                $('#alert-signup-phuongxa').text('Vui lòng nhập đầy đủ thông tin');
-                alertSignupphuongxa.show();
-                flag = true;
-            }
-
-            if (!isAlphabetic(name)) {
-                $('#alert-order-name').text('Tên sai định dạng');
-                alertOrderName.show();
-                flag = true;
-            }
-
-            if (!isValidEmail(email)) {
-                $('#alert-order-email').text('Nhập sai định dạng email');
-                alertOrderEmail.show();
-                flag = true;
-            }
-
-            if (address === '') {
-                $('#alert-order-address').text('Địa chỉ không được để trống');
-                alertOrderAddress.show();
-                flag = true;
-            }
-
-            if (flag == true) {
-                return false;
-            }
-
-        }
-
-        function isAlphabetic(input) {
-            var alphabeticRegex = /^[A-Za-zÀ-ỹ][A-Za-zÀ-ỹ\s]*$/;
-            return alphabeticRegex.test(input);
-        }
-
-        function isValidEmail(email) {
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-    </script>
-
-    <script>
-        $(document).ready(function(){
-            $("#Finish").click(function(){
-                if(tongcong == 0 || tongcong == 40000){
-                    $("#ketqua").text("Vui lòng chọn sản phẩm");
-                }else{
-                    if(validateOrderForm() == false){
-                    }else{
-                        tenkh = document.getElementById('name').value;
-                        tinhthanh = document.getElementById('city').value;
-                        quanhuyen = document.getElementById('district').value;
-                        phuongxa = document.getElementById('ward').value;
-                        diachi = document.getElementById('address').value;
-                        email = document.getElementById('email').value;
-                        sdt = document.getElementById('phone').value;
-                        tienhang = <?php echo $total; ?>;
-
-                        phuongthuc = document.querySelector('input[name="ThanhToan"]:checked').value;
-
-                        $.post("pages/main/thanhtoanAjax.php",
-                            {
-                                tenkh:tenkh,
-                                tinhthanh:tinhthanh,
-                                quanhuyen:quanhuyen,
-                                phuongxa:phuongxa,
-                                diachi:diachi,
-                                email:email,
-                                sdt:sdt,
-                                tienhang:tienhang,
-                                phuongthuc:phuongthuc,
-                                tongcong:tongcong,
-                                shippingFee:shippingFee,
-                            },
-                            function(data,status){
-                                if(status=="success")
-                                {
-                                    if(data == "Chưa có giỏ hàng"){
-                                        $("#ketqua").text(data);
-                                    }else{
-                                        $("#success-message").show();
-                                    }
-
+                            <?php
+                            $giatrigiam_percent = 0;
+                            if (isset($_SESSION['magiamgia'])) {
+                                $sql_giamgia = "SELECT DISTINCT giatrigiam from magiamgia where codemagiamgia = '" . $_SESSION['magiamgia'] . "'";
+                                $row_giamgia = $connect->query($sql_giamgia);
+                                if ($row_giamgia->num_rows > 0) {
+                                    $giatrigiam_percent = $row_giamgia->fetch_row()[0];
                                 }
                             }
-                        );
-                    }
+                            ?>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-secondary">Giảm giá</span>
+                                <span class="fw-bold text-success" id="GiamGia"><?php echo ($giatrigiam_percent * 100); ?>%</span>
+                            </div>
 
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="text-secondary">Phí vận chuyển</span>
+                                <span class="fw-bold text-dark" id="PhiVanChuyen">0 đ</span>
+                            </div>
+
+                            <hr class="dashed">
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <h5 class="mb-0 text-dark">TỔNG CỘNG</h5>
+                                <h5 id="tongcong" class="mb-0">0 đ</h5>
+                            </div>
+                        </div>
+
+                        <input type="button" id="Finish" name="Finish" value="ĐẶT HÀNG NGAY">
+                        <div id="ketqua" class="text-center mt-2 text-danger fw-bold small"></div>
+                    </div>
+                    </form> </div>
+            </div>
+        </div>
+
+        <div id="success-message" class="overlay">
+            <div class="message-box">
+                <i class="fa fa-check-circle text-success mb-3" style="font-size: 50px;"></i>
+                <p>Đặt hàng thành công!</p>
+                <button id="continue-buying">Tiếp tục mua sắm</button>
+            </div>
+        </div>
+
+    </body>
+    </html>
+
+    <script>
+        // ... (Phần logic tính tiền, format tiền giữ nguyên như cũ) ...
+        var productFee = <?php echo $total; ?>;
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+        document.getElementById("DonHang").innerText = formatCurrency(productFee);
+
+        var discountPercent = <?php echo $giatrigiam_percent; ?>; 
+        var feeMapping = { "TieuChuan": 0, "HoaToc": 40000 };
+        var tongcong = 0;
+        var shippingFee = 0;
+
+        function updateTotal() {
+            var selectedValue = $('input[name="LoaiGiaoHang"]:checked').attr("id");
+            shippingFee = feeMapping[selectedValue] || 0;
+            $("#PhiVanChuyen").text(formatCurrency(shippingFee));
+
+            var totalAfterDiscount = productFee - (productFee * discountPercent);
+            tongcong = totalAfterDiscount + shippingFee;
+
+            $("#tongcong").text(formatCurrency(tongcong));
+        }
+
+        updateTotal(); 
+        $('input[name="LoaiGiaoHang"]').change(function() { updateTotal(); });
+
+        // --- LOGIC ĐẶT HÀNG VÀ CHUYỂN HƯỚNG ---
+        $(document).ready(function(){
+            $('input').on('click focus', function() {
+                var id = $(this).attr('id');
+                $('#alert-order-' + id).hide();
+            });
+
+            $('#continue-buying').click(function() {
+                window.location.href = 'index.php';
+            });
+
+            $("#Finish").click(function(){
+                if(tongcong == 0 || tongcong == 40000){
+                    $("#ketqua").text("Giỏ hàng đang trống!");
+                    return;
                 }
 
+                // Validate
+                var name = $('#name').val();
+                var phone = $('#phone').val();
+                var address = $('#address').val();
+                var flag = false;
 
+                if(name == "") { $('#alert-order-name').text("Vui lòng nhập tên").show(); flag = true; }
+                if(address == "") { $('#alert-order-address').text("Vui lòng nhập địa chỉ").show(); flag = true; }
+
+                if(!flag){
+                    var phuongthuc = $('input[name="ThanhToan"]:checked').val();
+                    
+                    // Hiệu ứng loading
+                    var btn = $(this);
+                    btn.val("ĐANG XỬ LÝ...").prop('disabled', true);
+
+                    $.post("pages/main/thanhtoanAjax.php",
+                        {
+                            tenkh: name,
+                            tinhthanh: $('#city').val(),
+                            quanhuyen: $('#district').val(),
+                            phuongxa: $('#ward').val(),
+                            diachi: address,
+                            email: $('#email').val(),
+                            sdt: phone,
+                            tienhang: productFee,
+                            phuongthuc: phuongthuc,
+                            tongcong: tongcong,
+                            shippingFee: shippingFee,
+                        },
+                        function(data,status){
+                            btn.val("ĐẶT HÀNG NGAY").prop('disabled', false);
+                            
+                            if(status=="success") {
+                                if(data.trim() == "Chưa có giỏ hàng"){
+                                    $("#ketqua").text(data);
+                                } else {
+                                    // === LOGIC CHUYỂN HƯỚNG MỚI TẠI ĐÂY ===
+                                    if(phuongthuc == 'momo'){
+                                        // Chuyển sang trang QR MoMo (kèm tổng tiền)
+                                        window.location.href = "pages/main/thanh_toan_momo.php?tongtien=" + tongcong;
+                                    } 
+                                    else if(phuongthuc == 'thẻ ngân hàng'){
+                                        // Chuyển sang trang nhập thẻ
+                                        window.location.href = "pages/main/thanh_toan_the.php?tongtien=" + tongcong;
+                                    } 
+                                    else {
+                                        // Thanh toán trực tiếp -> Hiện Popup thành công
+                                        $("#success-message").fadeIn();
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
             });
         });
     </script>
 
-    <?php ob_end_flush(); ?>
-
-    <?php
-    $connect->close();
-    ?>
+<?php
+}
+ob_end_flush(); 
+?>

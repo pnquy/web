@@ -5,1402 +5,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm sản phẩm - Admin MTP</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../dashboard/admin_dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Thêm sản phẩm</title>
-    <style>
-        .edit{
-            padding: 10px;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: auto auto;
-            padding: 30px;
-        }
-
-        .QuantityPicture {
-            padding-left: 50px;
-        }
-
-        #div_themsanpham,
-        #div_giasanpham,
-        #div_danhmucsanpham,
-        #div_dongsanpham,
-        #div_kieudang,
-        #div_thongtinsanpham {
-            margin-bottom: 10px;
-        }
-
-        #label_tensanpham,
-        #label_giasanpham,
-        #label_danhmucsanpham,
-        #label_dongsanpham,
-        #label_kieudang,
-        #label_thongtinsanpham,
-        #label_mausanpham {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        #input_tensanpham,
-        #input_giasanpham {
-            width: 100%;
-            max-width: 460px;
-            padding: 8px;
-        }
-
-        #select_danhmucsanpham,
-        #select_dongsanpham,
-        #select_kieudang {
-            padding: 4px;
-        }
-
-        #textarea_thongtinsanpham {
-            width: 100%;
-            max-width: 460px;
-        }
-
-        select {
-            cursor: pointer;
-        }
-
-        #textarea_thongtinsanpham {
-            resize: vertical;
-        }
-
-        /* Style cho phần "Thêm sản phẩm" */
-        .text-hnm {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .section_themsanpham {
-            position: relative;
-            left: 250px;
-            height: 100vh;
-            width: calc(100% - 250px);
-            background: var(--body-color);
-            transition: var(--tran-05);
-        }
-
-        .sidebar-hnm.close~.section_themsanpham {
-            left: 88px;
-            width: calc(100% - 88px);
-        }
-
-        .section_themsanpham .text-hnm {
-            font-size: 30px;
-            font-weight: 500;
-            color: var(--text-color);
-            padding: 8px 40px;
-            caret-color: transparent;
-        }
-
-        .section_themsanpham {
-            display: flex;
-            align-items: stretch;
-        }
-
-        .div_products_add_1 {
-            flex: 1;
-            padding: 10px;
-            align-items: center;
-        }
-
-        .div_products_add_2 {
-            flex: 2;
-            padding: 10px;
-        }
-
-        #label_mausanpham {
-            margin-top: 72px;
-        }
-
-
-        #color-box_OffwhiteGum {
-            margin-right: 10px;
-            background-color: #FEFBEF;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_Rustic {
-            margin-right: 10px;
-            background-color: #EBD0A2;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_RealTeal {
-            margin-right: 10px;
-            background-color: #1C487C;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_White {
-            margin-right: 10px;
-            background-color: #FFFFFF;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_Evergreen {
-            margin-right: 10px;
-            background-color: #6D9951;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_BlackGum {
-            margin-right: 10px;
-            background-color: #464646;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_CorlurayMix {
-            margin-right: 10px;
-            background-color: #F5D255;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        #color-box_MonksRobe {
-            margin-right: 10px;
-            background-color: #77553D;
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        .color-option {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            cursor: pointer;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .color-option.selected {
-            border: 2px solid #F15E2C;
-        }
-
-        #div_table_size {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #div_table_size table form tr td {
-            margin-right: 10px;
-        }
-
-
-        #label_size36,
-        #label_size37,
-        #label_size38,
-        #label_size39,
-        #label_size40,
-        #label_size41,
-        #label_size42,
-        #label_size43,
-        #label_size44 {
-            font-weight: bold;
-        }
-
-        #div_table_size table tr td {
-            padding: 15px;
-        }
-
-        .input_size {
-            max-width: 140px;
-            padding: 6px;
-        }
-
-        #div_hienthi_anh1 img {
-            width: 270px;
-            height: 180px;
-        }
-
-        #div_hienthi_anh2 img {
-            width: 270px;
-            height: 180px;
-        }
-
-        #div_hienthi_anh3 img {
-            width: 270px;
-            height: 180px;
-        }
-
-        #div_hienthi_anh4 img {
-            width: 270px;
-            height: 180px;
-        }
-
-
-        .div_upload {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        #div_upload_anh_1,
-        #div_upload_anh_2,
-        #div_upload_anh_3,
-        #div_upload_anh_4 {
-            flex: 0 0 calc(48% - 10px);
-            box-sizing: border-box;
-        }
-
-        #div_upload_anh_1,
-        #div_upload_anh_2,
-        #div_upload_anh_3,
-        #div_upload_anh_4 {
-            margin-bottom: 30px;
-        }
-
-        #div_color_size_uploadimage {
-            display: none;
-        }
-
-        .div_upload {
-            display: flex;
-            max-width: 600px;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .div_upload {
-            margin: auto;
-        }
-
-        #div_color_size_uploadimage {
-            border-style: solid;
-            max-width: 1000px;
-            border-color: #ff5f17;
-        }
-
-        #div_products_add_enter {
-            margin-left: 40px;
-        }
-
-        #div_danhmucsanpham,
-        #div_dongsanpham,
-        #div_kieudang {
-            flex: 1;
-            margin-right: 0px;
-        }
-
-        #div_danhmuc_dong_kieudang {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .btn-themsanpham {
-            display: flex;
-            background-color: #FFCC57;
-            border: none;
-            color: white;
-            padding: 5px 15px;
-            text-decoration: none;
-            margin: 4px 2px;
-            cursor: pointer;
-            font-family: "Quicksand", sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            outline: none;
-            border-radius: 5px;
-            height: fit-content;
-            width: fit-content;
-            transition: 0.3s;
-        }
-
-        .btn-themsanpham:hover {
-            background: #FFCC57;
-            color: black;
-            transition: 0.3s;
-        }
-    </style>
-
 </head>
 
 <body>
+    <?php include('../../navigation/menu_navigation.php'); ?>
 
-    <?php
-    include('../../navigation/menu_navigation.php');
-    ?>
-    <section class="section_themsanpham">
-            <div class="grid-container">
-                    <?php
-                        if(isset($_SESSION['sp_info'])){
-                            $i = 0;
-                            foreach($_SESSION['sp_info'] as $p){
-                              if($i == 0){
-                                $tensp = $p;
-                                ++$i;
-                                continue;
-                              } if($i == 1){
-                                $giasp = $p;
-                                ++$i;
-                                continue;
-                              } if($i == 2){
-                                $danhmuc = $p;
-                                ++$i;
-                                continue;
-                              } if($i == 3){
-                                $dong = $p;
-                                ++$i;
-                                continue;
-                              }if($i == 4){
-                                $kieudang = $p;
-                                ++$i;
-                                continue;
-                              }if($i == 5){
-                                $thongtin = $p;
-                                ++$i;
-                                break;
-                              }
-                            }
-                    ?>
-                         <div class="grid-item">
-                            <p class="text text-hnm">Thêm sản phẩm</p>
-                            <div class="edit">
-                                <div id="div_themsanpham">
-                                    <label id="label_tensanpham">Tên sản phẩm</label>
-                                    <input type="text" id="input_tensanpham" onclick="un_validate()" name="input_tensanpham" placeholder="Nhập tên sản phẩm" value="<?php echo $tensp; ?>">
-                                </div>
-                                <br>
-                                <div id="div_giasanpham">
-                                    <label id="label_giasanpham">Giá sản phẩm</label>
-                                    <input type="text" id="input_giasanpham" name="input_giasanpham" placeholder="Nhập giá sản phẩm" value="<?php echo $giasp; ?>">
-                                </div>
-                                <br>
-                                <div id="div_danhmuc_dong_kieudang">
-                                    <div id="div_danhmucsanpham">
-                                        <label id="label_danhmucsanpham">Giới tính</label>
-                                        <select id="select_danhmucsanpham" name="select_danhmucsanpham">
-                                            <option value="Nam" <?php if ($danhmuc == 'Nam') echo ' selected="selected"'; ?>>Nam</option>
-                                            <option value="Nữ" <?php if ($danhmuc == 'Nữ') echo ' selected="selected"'; ?>>Nữ</option>
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <div id="div_dongsanpham">
-                                        <label id="label_dongsanpham">Dòng</label>
-                                        <select id="select_dongsanpham" name="select_dongsanpham">
-                                            <option value="Nike" <?php if ($dong == 'Nike') echo ' selected="selected"'; ?>>Nike</option>
-                                            <option value="Adidas" <?php if ($dong == 'Adidas') echo ' selected="selected"'; ?>>Adidas</option>
-                                            <option value="Bitis" <?php if ($dong == 'Bitis') echo ' selected="selected"'; ?>>Biti's</option>
-                                            <option value="Puma" <?php if ($dong == 'Puma') echo ' selected="selected"'; ?>>Puma</option>
-
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <div id="div_kieudang">
-                                        <label id="label_kieudang">Loại giày</label>
-                                        <select id="select_kieudang" name="select_kieudang">
-                                            <option value="Bóng đá" <?php if ($dong == 'Bóng đá') echo ' selected="selected"'; ?>>Bóng đá</option>
-                                            <option value="Bóng rổ"<?php if ($dong == 'Bóng rổ') echo ' selected="selected"'; ?>>Bóng rổ</option>
-                                            <option value="Gym"<?php if ($dong == 'Gym') echo ' selected="selected"'; ?>>Gym</option>
-                                            <option value="Chạy bộ"<?php if ($dong == 'Chạy bộ') echo ' selected="selected"'; ?>>Chạy bộ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div id="div_thongtinsanpham">
-                                    <label id="label_thongtinsanpham">Thông tin sản phẩm</label>
-                                    <textarea id="textarea_thongtinsanpham" name="textarea_thongtinsanpham" rows="8"><?php echo $thongtin ?></textarea>
-                                </div>
-
-                                <input type="submit" name="themsanpham" id="addsp" value="Thêm sản phẩm" class="btn-themsanpham">
-                                <span id="btn_themsp" style="font-weight: bold; color:red"></span>
-
-                            </div>
-                        </div>
-
-                <?php
-
-
-                    }else{ ?>
-                        <div class="grid-item">
-                            <p class="text text-hnm">Thêm sản phẩm</p>
-                            <div class="edit">
-                                <div id="div_themsanpham">
-                                    <label id="label_tensanpham">Tên sản phẩm</label>
-                                    <input type="text" id="input_tensanpham" name="input_tensanpham" placeholder="Nhập tên sản phẩm">
-                                </div>
-                                <br>
-                                <div id="div_giasanpham">
-                                    <label id="label_giasanpham">Giá sản phẩm</label>
-                                    <input type="text" id="input_giasanpham" name="input_giasanpham" placeholder="Nhập giá sản phẩm">
-                                </div>
-                                <br>
-                                <div id="div_danhmuc_dong_kieudang">
-                                    <div id="div_danhmucsanpham">
-                                        <label id="label_danhmucsanpham">Giới tính</label>
-                                        <select id="select_danhmucsanpham" name="select_danhmucsanpham">
-                                            <option value="Nam">Nam</option>
-                                            <option value="Nữ">Nữ</option>
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <div id="div_dongsanpham">
-                                        <label id="label_dongsanpham">Thương hiệu</label>
-                                        <select id="select_dongsanpham" name="select_dongsanpham">
-                                            <option value="Nike">Nike</option>
-                                            <option value="Adidas">Adidas</option>
-                                            <option value="Bitis">Biti's</option>
-                                            <option value="Puma">Puma</option>
-                                        </select>
-                                    </div>
-                                    <br>
-                                    <div id="div_kieudang">
-                                        <label id="label_kieudang">Loại giày</label>
-                                        <select id="select_kieudang" name="select_kieudang">
-                                            <option value="Bóng đá">Bóng đá</option>
-                                            <option value="Bóng rổ">Bóng rổ</option>
-                                            <option value="Gym">Gym</option>
-                                            <option value="Chạy bộ">Chạy bộ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div id="div_thongtinsanpham">
-                                    <label id="label_thongtinsanpham">Thông tin sản phẩm</label>
-                                    <textarea id="textarea_thongtinsanpham" name="textarea_thongtinsanpham" rows="8"></textarea>
-                                </div>
-
-                                <input type="submit" name="themsanpham" id="addsp" value="Thêm sản phẩm" class="btn-themsanpham">
-                                <span id="btn_themsp" style="font-weight: bold; color:red"></span>
-                            </div>
-                        </div>
-                        <?php
-
-                            }
-                        ?>
-
-                <div class="grid-item QuantityPicture">
-                    <div id="div_mausanpham">
-                        <?php
-                            if(isset($_COOKIE['colorid'])){ ?>
-                                <label id="label_mausanpham">Màu sản phẩm:
-                                <select id="select_mausanpham" name="select_mausanpham">
-                                    <option value="color1" <?php if ($_COOKIE['colorid'] == 'color1') echo ' selected="selected"';  ?>>Offwhite/Gum</option>
-                                    <option value="color2" <?php if ($_COOKIE['colorid'] == 'color2') echo ' selected="selected"';  ?>>Rustic</option>
-                                    <option value="color3" <?php if ($_COOKIE['colorid'] == 'color3') echo ' selected="selected"';  ?>>Real Teal</option>
-                                    <option value="color4" <?php if ($_COOKIE['colorid'] == 'color4') echo ' selected="selected"';  ?>>White</option>
-                                    <option value="color5" <?php if ($_COOKIE['colorid'] == 'color5') echo ' selected="selected"';  ?>>Evergreen</option>
-                                    <option value="color6" <?php if ($_COOKIE['colorid'] == 'color6') echo ' selected="selected"';  ?>>Black/Gum</option>
-                                    <option value="color7" <?php if ($_COOKIE['colorid'] == 'color7') echo ' selected="selected"';  ?>>Corluray Mix</option>
-                                    <option value="color8" <?php if ($_COOKIE['colorid'] == 'color8') echo ' selected="selected"';  ?>>Monk\"s Robe</option>
-                                </select>
-                        </label>
-                        <?php
-
-                            }else{ ?>
-                            <label id="label_mausanpham">Màu sản phẩm:
-                                <select id="select_mausanpham" name="select_mausanpham">
-                                    <option value="color1" >Offwhite/Gum</option>
-                                    <option value="color2" >Rustic</option>
-                                    <option value="color3" >Real Teal</option>
-                                    <option value="color4" >White</option>
-                                    <option value="color5" >Evergreen</option>
-                                    <option value="color6" >Black/Gum</option>
-                                    <option value="color7" >Corluray Mix</option>
-                                    <option value="color8" >Monk\"s Robe</option>
-                                </select>
-                        <?php
-
-                            }
-                        ?>
-
-                        <?php
-                            if(isset($_COOKIE['colorid'])){
-                                if(isset($_SESSION['sp'][$_COOKIE['colorid']])){ ?>
-                                    <!-- Neu ton tai session  code html-->
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size36">Size 36</label>
-                                                    <input class="input_size" id="input_size36" name="input_size36" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl36'] ?>">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size39">Size 39</label>
-                                                    <input class="input_size" id="input_size39" name="input_size39" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl39'] ?>">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size42">Size 42</label>
-                                                    <input class="input_size" id="input_size42" name="input_size42" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl42'] ?>">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size37">Size 37</label>
-                                                    <input class="input_size" id="input_size37" name="input_size37" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl37'] ?>">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size40">Size 40</label>
-                                                    <input class="input_size" id="input_size40" name="input_size40" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl40'] ?>">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size43">Size 43</label>
-                                                    <input class="input_size" id="input_size43" name="input_size43" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl43'] ?>">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size38">Size 38</label>
-                                                    <input class="input_size" id="input_size38" name="input_size38" type="text" placeholder="Nhập số lượng..." value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl38'] ?>">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size41">Size 41</label>
-                                                    <input class="input_size" id="input_size41" name="input_size41" type="text" placeholder="Nhập số lượng..."value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl41'] ?>">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <label id="label_size44">Size 44</label>
-                                                    <input class="input_size" id="input_size44" name="input_size44" type="text" placeholder="Nhập số lượng..."value="<?php echo $_SESSION['sp'][$_COOKIE['colorid']]['sl44'] ?>">
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    </table>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div id="div_upload_anh_1">
-                                                    <label id="label_anh1"><b>Ảnh 1</b> </label><br>
-                                                    <input type="file" id="input_upload_anh_1" name="input_upload_anh_1" accept=".jpg, .jpeg, .png">
-                                                    <?php
-                                                            if($_SESSION['sp'][$_COOKIE['colorid']]['img1_alt'] != ""){
-                                                                $alt1 = $_SESSION['sp'][$_COOKIE['colorid']]['img1_alt']; ?>
-
-                                                    <input type="hidden" name="" id="img1" src="../../../uploads/<?php echo $alt1 ?>" alt="<?php echo $alt1 ?>">
-                                                    <div id="div_hienthi_anh1">
-
-                                                            <img src="../../../uploads/<?php echo $alt1 ?>" alt="<?php echo $alt1 ?>">
-                                                        <?php }else {?>
-                                                            <input type="hidden" name="" id="img1" src="" alt="">
-                                                            <div id="div_hienthi_anh1"></div>
-                                                        <?php } ?>
-                                                    </div>
-                                                </div>
-
-
-                                            </td>
-                                            <td>
-                                                <div id="div_upload_anh_2">
-                                                    <label id="label_anh2"><b>Ảnh 2</b> </label><br>
-                                                    <input type="file" id="input_upload_anh_2" name="input_upload_anh_2" accept=".jpg, .jpeg, .png">
-                                                    <?php
-                                                            if( $_SESSION['sp'][$_COOKIE['colorid']]['img2_alt'] != ""){
-                                                                $alt2 = $_SESSION['sp'][$_COOKIE['colorid']]['img2_alt']; ?>
-
-                                                    <input type="hidden" name="" id="img2" src="../../../uploads/<?php echo $alt2 ?>" alt="<?php echo $alt2 ?>">
-                                                    <div id="div_hienthi_anh2">
-
-                                                            <img src="../../../uploads/<?php echo $alt2 ?>" alt="<?php echo $alt2 ?>">
-
-                                                    </div>
-
-                                                    <?php } else {?>
-                                                        <input type="hidden" name="" id="img2" src="" alt="">
-                                                        <div id="div_hienthi_anh2"></div>
-                                                    <?php }  ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div id="div_upload_anh_3">
-                                                    <label id="label_anh3"><b>Ảnh 3</b> </label><br>
-                                                    <input type="file" id="input_upload_anh_3" name="input_upload_anh_3" accept=".jpg, .jpeg, .png">
-                                                    <?php
-                                                            if($_SESSION['sp'][$_COOKIE['colorid']]['img3_alt'] != ""){
-                                                                $alt3 = $_SESSION['sp'][$_COOKIE['colorid']]['img3_alt']; ?>
-
-                                                    <input type="hidden" name="" id="img3" src="../../../uploads/<?php echo $alt3 ?>" alt="<?php echo $alt3 ?>">
-                                                    <div id="div_hienthi_anh3">
-
-                                                            <img src="../../../uploads/<?php echo $alt3 ?>" alt="<?php echo $alt3 ?>">
-                                                        <?php }else { ?>
-                                                            <input type="hidden" name="" id="img3" src="" alt="">
-                                                            <div id="div_hienthi_anh3"></div>
-                                                        <?php }  ?>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div id="div_upload_anh_4">
-                                                    <label id="label_anh4"><b>Ảnh 4</b> </label><br>
-                                                    <input type="file" id="input_upload_anh_4" name="input_upload_anh_4" accept=".jpg, .jpeg, .png">
-                                                    <?php
-                                                            if($_SESSION['sp'][$_COOKIE['colorid']]['img4_alt'] != ""){
-                                                                $alt4 = $_SESSION['sp'][$_COOKIE['colorid']]['img4_alt']; ?>
-
-                                                    <input type="hidden" name="" id="img4" src="../../../uploads/<?php echo $alt4 ?>" alt="<?php echo $alt4 ?>">
-                                                    <div id="div_hienthi_anh4">
-
-                                                            <img src="../../../uploads/<?php echo $alt4 ?>" alt="<?php echo $alt4 ?>">
-
-                                                    </div>
-                                                    <?php }else{ ?>
-                                                        <input type="hidden" name="" id="img4" src="" alt="">
-                                                        <div id="div_hienthi_anh4"></div>
-                                                    <?php } ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                    <input type="submit" class="btn-themsanpham" value="Lưu" id="luu">
-                                    <span id="rs" style="color: red; font-weight: bold; "></span>
-                                </div>
-                            </div>
-
-                            <?php
-                                }else{ ?>
-                                <!-- Neu k ton tai -->
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <label id="label_size36">Size 36</label>
-                                                <input class="input_size" id="input_size36" name="input_size36" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size39">Size 39</label>
-                                                <input class="input_size" id="input_size39" name="input_size39" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size42">Size 42</label>
-                                                <input class="input_size" id="input_size42" name="input_size42" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <label id="label_size37">Size 37</label>
-                                                <input class="input_size" id="input_size37" name="input_size37" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size40">Size 40</label>
-                                                <input class="input_size" id="input_size40" name="input_size40" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size43">Size 43</label>
-                                                <input class="input_size" id="input_size43" name="input_size43" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <label id="label_size38">Size 38</label>
-                                                <input class="input_size" id="input_size38" name="input_size38" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size41">Size 41</label>
-                                                <input class="input_size" id="input_size41" name="input_size41" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size44">Size 44</label>
-                                                <input class="input_size" id="input_size44" name="input_size44" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div id="div_upload_anh_1">
-                                                <label id="label_anh1"><b>Ảnh 1</b> </label><br>
-                                                <input type="file" id="input_upload_anh_1" name="input_upload_anh_1" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img1" src="" alt="">
-                                                <div id="div_hienthi_anh1"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div id="div_upload_anh_2">
-                                                <label id="label_anh2"><b>Ảnh 2</b> </label><br>
-                                                <input type="file" id="input_upload_anh_2" name="input_upload_anh_2" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img2" src="" alt="">
-                                                <div id="div_hienthi_anh2"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div id="div_upload_anh_3">
-                                                <label id="label_anh3"><b>Ảnh 3</b> </label><br>
-                                                <input type="file" id="input_upload_anh_3" name="input_upload_anh_3" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img3" src="" alt="">
-                                                <div id="div_hienthi_anh3"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div id="div_upload_anh_4">
-                                                <label id="label_anh4"><b>Ảnh 4</b> </label><br>
-                                                <input type="file" id="input_upload_anh_4" name="input_upload_anh_4" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img4" src="" alt="">
-                                                <div id="div_hienthi_anh4"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <input type="submit" class="btn-themsanpham" value="Lưu" id="luu">
-                                <span id="rs" style="color: red; font-weight: bold; "></span>
-                            </div>
-                        </div>
-                            <?php
-
-                                }
-                            }else{ ?>
-                                <!-- k ton tai -->
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <label id="label_size36">Size 36</label>
-                                                <input class="input_size" id="input_size36" name="input_size36" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size39">Size 39</label>
-                                                <input class="input_size" id="input_size39" name="input_size39" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size42">Size 42</label>
-                                                <input class="input_size" id="input_size42" name="input_size42" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <label id="label_size37">Size 37</label>
-                                                <input class="input_size" id="input_size37" name="input_size37" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size40">Size 40</label>
-                                                <input class="input_size" id="input_size40" name="input_size40" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size43">Size 43</label>
-                                                <input class="input_size" id="input_size43" name="input_size43" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div>
-                                                <label id="label_size38">Size 38</label>
-                                                <input class="input_size" id="input_size38" name="input_size38" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size41">Size 41</label>
-                                                <input class="input_size" id="input_size41" name="input_size41" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <label id="label_size44">Size 44</label>
-                                                <input class="input_size" id="input_size44" name="input_size44" type="text" placeholder="Nhập số lượng...">
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td>
-
-                                            <div id="div_upload_anh_1">
-                                                <label id="label_anh1"><b>Ảnh 1</b> </label><br>
-                                                <input type="file" id="input_upload_anh_1" name="input_upload_anh_1" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img1" src="" alt="">
-                                                <div id="div_hienthi_anh1"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div id="div_upload_anh_2">
-                                                <label id="label_anh2"><b>Ảnh 2</b> </label><br>
-                                                <input type="file" id="input_upload_anh_2" name="input_upload_anh_2" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img2" src="" alt="">
-                                                <div id="div_hienthi_anh2"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div id="div_upload_anh_3">
-                                                <label id="label_anh3"><b>Ảnh 3</b> </label><br>
-                                                <input type="file" id="input_upload_anh_3" name="input_upload_anh_3" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img3" src="" alt="">
-                                                <div id="div_hienthi_anh3"></div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div id="div_upload_anh_4">
-                                                <label id="label_anh4"><b>Ảnh 4</b> </label><br>
-                                                <input type="file" id="input_upload_anh_4" name="input_upload_anh_4" accept=".jpg, .jpeg, .png">
-                                                <input type="hidden" name="" id="img4" src="" alt="">
-                                                <div id="div_hienthi_anh4"></div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <input type="submit" class="btn-themsanpham" value="Lưu" id="luu">
-                                <span id="rs" style="color: red; font-weight: bold; "></span>
-                            </div>
-                        </div>
-                            <?php
-
-                            }
-
-                        ?>
-
-
-
-
-                <?php
-                    if(isset($_COOKIE['colorid'])){ ?>
-                        <input type="hidden" id="idcolor" value="<?php  echo $_COOKIE['colorid']; ?>">
-
-                    <?php
-
+    <section class="home-section">
+        <div class="container-fluid">
+            
+            <?php
+                // --- LOGIC PHP: CHUẨN BỊ DỮ LIỆU ---
+                // Khởi tạo các biến mặc định là rỗng
+                $tensp = $giasp = $danhmuc = $dong = $kieudang = $thongtin = "";
+                
+                // Nếu có Session (Dữ liệu cũ hoặc đang nhập dở), gán giá trị
+                if(isset($_SESSION['sp_info'])){
+                    $i = 0;
+                    foreach($_SESSION['sp_info'] as $p){
+                        if($i == 0) $tensp = $p;
+                        if($i == 1) $giasp = $p;
+                        if($i == 2) $danhmuc = $p;
+                        if($i == 3) $dong = $p;
+                        if($i == 4) $kieudang = $p;
+                        if($i == 5) $thongtin = $p;
+                        $i++;
                     }
-                ?>
+                }
+            ?>
 
+            <div class="admin-card">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h2 class="admin-title border-0 mb-0">Thêm Sản Phẩm Mới</h2>
+                    <a href="../products/products_management.php" class="btn btn-outline-secondary rounded-pill px-3">
+                        <i class='bx bx-arrow-back'></i> Quay lại
+                    </a>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-7 border-end pe-lg-4">
+                        <h5 class="fw-bold text-primary mb-3"><i class='bx bx-info-circle'></i> Thông Tin Chung</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Tên sản phẩm</label>
+                            <input type="text" class="form-control" id="input_tensanpham" name="input_tensanpham" placeholder="Ví dụ: Nike Air Force 1" value="<?php echo $tensp; ?>">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Giá sản phẩm</label>
+                            <input type="text" class="form-control" id="input_giasanpham" name="input_giasanpham" placeholder="Ví dụ: 2000000" value="<?php echo $giasp; ?>">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Giới tính</label>
+                                <select class="form-select" id="select_danhmucsanpham" name="select_danhmucsanpham">
+                                    <option value="Nam" <?php if ($danhmuc == 'Nam') echo 'selected'; ?>>Nam</option>
+                                    <option value="Nữ" <?php if ($danhmuc == 'Nữ') echo 'selected'; ?>>Nữ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Thương hiệu</label>
+                                <select class="form-select" id="select_dongsanpham" name="select_dongsanpham">
+                                    <option value="Nike" <?php if ($dong == 'Nike') echo 'selected'; ?>>Nike</option>
+                                    <option value="Adidas" <?php if ($dong == 'Adidas') echo 'selected'; ?>>Adidas</option>
+                                    <option value="Bitis" <?php if ($dong == 'Bitis') echo 'selected'; ?>>Biti's</option>
+                                    <option value="Puma" <?php if ($dong == 'Puma') echo 'selected'; ?>>Puma</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Loại giày</label>
+                                <select class="form-select" id="select_kieudang" name="select_kieudang">
+                                    <option value="Bóng đá" <?php if ($kieudang == 'Bóng đá') echo 'selected'; ?>>Bóng đá</option>
+                                    <option value="Bóng rổ" <?php if ($kieudang == 'Bóng rổ') echo 'selected'; ?>>Bóng rổ</option>
+                                    <option value="Gym" <?php if ($kieudang == 'Gym') echo 'selected'; ?>>Gym</option>
+                                    <option value="Chạy bộ" <?php if ($kieudang == 'Chạy bộ') echo 'selected'; ?>>Chạy bộ</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả chi tiết</label>
+                            <textarea class="form-control" id="textarea_thongtinsanpham" name="textarea_thongtinsanpham" rows="6" placeholder="Nhập mô tả sản phẩm..."><?php echo $thongtin; ?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 ps-lg-4">
+                        <h5 class="fw-bold text-primary mb-3"><i class='bx bx-package'></i> Kho & Hình Ảnh</h5>
+
+                        <div class="mb-4 bg-light p-3 rounded">
+                            <label class="form-label fw-bold">Màu sắc sản phẩm</label>
+                            <select class="form-select" id="select_mausanpham" name="select_mausanpham">
+                                <?php 
+                                    $colors = [
+                                        'color1' => 'Offwhite/Gum', 'color2' => 'Rustic', 'color3' => 'Real Teal',
+                                        'color4' => 'White', 'color5' => 'Evergreen', 'color6' => 'Black/Gum',
+                                        'color7' => 'Corluray Mix', 'color8' => 'Monk\'s Robe'
+                                    ];
+                                    $selected_color = isset($_COOKIE['colorid']) ? $_COOKIE['colorid'] : 'color1';
+                                    
+                                    foreach($colors as $val => $name){
+                                        $selected = ($selected_color == $val) ? 'selected' : '';
+                                        echo "<option value='$val' $selected>$name</option>";
+                                    }
+                                ?>
+                            </select>
+                            <small class="text-muted fst-italic mt-1 d-block">*Chọn màu để nhập số lượng và ảnh tương ứng</small>
+                        </div>
+
+                        <label class="form-label fw-bold small text-uppercase text-muted">Số lượng theo Size</label>
+                        <div class="row g-2 mb-4">
+                            <?php 
+                            for($i=36; $i<=44; $i++): 
+                                // Lấy giá trị session nếu có
+                                $sl_val = isset($_SESSION['sp'][$selected_color]["sl$i"]) ? $_SESSION['sp'][$selected_color]["sl$i"] : '';
+                            ?>
+                            <div class="col-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text bg-white">S<?php echo $i; ?></span>
+                                    <input type="text" class="form-control text-center input_size" id="input_size<?php echo $i; ?>" 
+                                           name="input_size<?php echo $i; ?>" value="<?php echo $sl_val; ?>" placeholder="0">
+                                </div>
+                            </div>
+                            <?php endfor; ?>
+                        </div>
+
+                        <label class="form-label fw-bold">Hình ảnh (4 Ảnh)</label>
+                        <div class="row g-3">
+                            <?php for($j=1; $j<=4; $j++): ?>
+                            <div class="col-6">
+                                <div class="border rounded p-2 text-center bg-white shadow-sm position-relative">
+                                    <span class="badge bg-secondary position-absolute top-0 start-0 m-1">Ảnh <?php echo $j; ?></span>
+                                    
+                                    <div id="div_hienthi_anh<?php echo $j; ?>" class="mb-2 d-flex align-items-center justify-content-center" style="height: 100px; overflow: hidden;">
+                                        <?php 
+                                            // Hiển thị ảnh nếu có trong session
+                                            if(isset($_SESSION['sp'][$selected_color]["img{$j}_alt"]) && $_SESSION['sp'][$selected_color]["img{$j}_alt"] != ""){
+                                                $src = $_SESSION['sp'][$selected_color]["img{$j}_alt"];
+                                                echo "<img src='../../../uploads/$src' id='img$j' alt='$src' style='max-width:100%; max-height:100%;'>";
+                                            } else {
+                                                echo "<img src='' id='img$j' alt='' style='display:none;'>"; // Placeholder ẩn
+                                                echo "<i class='bx bx-image-add text-muted fs-1'></i>";
+                                            }
+                                        ?>
+                                    </div>
+                                    <input type="file" class="form-control form-control-sm" id="input_upload_anh_<?php echo $j; ?>" name="input_upload_anh_<?php echo $j; ?>" accept=".jpg, .jpeg, .png">
+                                </div>
+                            </div>
+                            <?php endfor; ?>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-3">
+                            <button type="button" class="btn btn-outline-primary btn-sm rounded-pill" id="luu">
+                                <i class='bx bx-save'></i> Lưu Tạm (Size & Màu)
+                            </button>
+                        </div>
+                        <div id="rs" class="text-end mt-1 text-success fw-bold small"></div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="text-center">
+                    <button type="button" id="addsp" name="themsanpham" class="btn-admin btn-lg px-5">
+                        <i class='bx bx-plus-circle'></i> THÊM SẢN PHẨM HOÀN TẤT
+                    </button>
+                    <div id="btn_themsp" class="mt-2 fw-bold text-danger"></div>
+                </div>
             </div>
+        </div>
     </section>
-</body>
-<script src="../../../jq.js"></script>
-<script src="../dashboard/admin_dashboard.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const colorOptions = document.querySelectorAll(".color-option");
-        const colorSizeUploadImage = document.getElementById("div_color_size_uploadimage");
-        colorSizeUploadImage.style.display = "block";
-        // colorOptions.forEach(function(option) {
-        //     option.addEventListener("click", function() {
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../../../jq.js"></script>
+    <script src="../dashboard/admin_dashboard.js"></script>
 
-        //     });
-        // });
-    });
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const colorOptions = document.querySelectorAll(".color-option");
-        const colorSizeUploadImage = document.getElementById("div_color_size_uploadimage");
-
-        colorOptions.forEach(function(option) {
-            option.addEventListener("click", function() {
-                colorOptions.forEach(function(el) {
-                    el.classList.remove("selected");
-                });
-
-                option.classList.add("selected");
-
-                resetDivColorSizeUploadImage();
-            });
-        });
-
-        function resetDivColorSizeUploadImage() {
-            const sizeInputs = document.querySelectorAll(".input_size");
-            sizeInputs.forEach(function(input) {
-                input.value = "";
-            });
-            resetImagePreview("div_hienthi_anh1", "input_upload_anh_1");
-            resetImagePreview("div_hienthi_anh2", "input_upload_anh_2");
-            resetImagePreview("div_hienthi_anh3", "input_upload_anh_3");
-            resetImagePreview("div_hienthi_anh4", "input_upload_anh_4");
-        }
-
-        function resetImagePreview(imageDivId, inputFileId) {
-            const fileUploader = document.getElementById(inputFileId);
-            const reader = new FileReader();
-            const imageGrid = document.getElementById(imageDivId);
-
-            fileUploader.value = "";
-            imageGrid.innerHTML = "";
-        }
-    });
-</script>
-<script>
-    $(document).ready(function(){
-      $(document).on('change','#input_upload_anh_1',function(){
-        var property = document.getElementById('input_upload_anh_1').files[0];
-        document.getElementById("img1").alt = property.name;
-
-        var image_name = property.name;
-        var image_extension = image_name.split('.').pop().toLowerCase();
-
-        if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
-          alert("Invalid image file");
-        }
-
-        var form_data = new FormData();
-        form_data.append("file",property);
-          $.ajax({
-            url:'../products/upload_img_ajax.php',
-            method:'POST',
-            data:form_data,
-            contentType:false,
-            cache:false,
-            processData:false,
-            beforeSend:function(){
-              $('#div_hienthi_anh1').html('Loading......');
-            },
-            success:function(data){
-              console.log(data);
-              $('#div_hienthi_anh1').html(data);
-            }
-          });
-        });
-
-        $(document).on('change','#input_upload_anh_2',function(){
-          var property = document.getElementById('input_upload_anh_2').files[0];
-          document.getElementById("img2").alt = property.name;
-          var image_name = property.name;
-          var image_extension = image_name.split('.').pop().toLowerCase();
-
-          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
-            alert("Invalid image file");
-          }
-
-          var form_data = new FormData();
-          form_data.append("file",property);
-            $.ajax({
-              url:'../products/upload_img_ajax.php',
-              method:'POST',
-              data:form_data,
-              contentType:false,
-              cache:false,
-              processData:false,
-              beforeSend:function(){
-                $('#div_hienthi_anh2').html('Loading......');
-              },
-              success:function(data){
-                console.log(data);
-                $('#div_hienthi_anh2').html(data);
-              }
-            });
-          });
-
-          $(document).on('change','#input_upload_anh_3',function(){
-          var property = document.getElementById('input_upload_anh_3').files[0];
-          document.getElementById("img3").alt = property.name;
-          var image_name = property.name;
-          var image_extension = image_name.split('.').pop().toLowerCase();
-
-          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
-            alert("Invalid image file");
-          }
-
-          var form_data = new FormData();
-          form_data.append("file",property);
-            $.ajax({
-              url:'../products/upload_img_ajax.php',
-              method:'POST',
-              data:form_data,
-              contentType:false,
-              cache:false,
-              processData:false,
-              beforeSend:function(){
-                $('#div_hienthi_anh3').html('Loading......');
-              },
-              success:function(data){
-                console.log(data);
-                $('#div_hienthi_anh3').html(data);
-              }
-            });
-          });
-
-          $(document).on('change','#input_upload_anh_4',function(){
-          var property = document.getElementById('input_upload_anh_4').files[0];
-          document.getElementById("img4").alt = property.name;
-
-          var image_name = property.name;
-          var image_extension = image_name.split('.').pop().toLowerCase();
-
-          if(jQuery.inArray(image_extension,['gif','jpg','jpeg','png']) == -1){
-            alert("Invalid image file");
-          }
-
-          var form_data = new FormData();
-          form_data.append("file",property);
-            $.ajax({
-              url:'../products/upload_img_ajax.php',
-              method:'POST',
-              data:form_data,
-              contentType:false,
-              cache:false,
-              processData:false,
-              beforeSend:function(){
-                $('#div_hienthi_anh4').html('Loading......');
-              },
-              success:function(data){
-                console.log(data);
-                $('#div_hienthi_anh4').html(data);
-              }
-            });
-          });
-    });
-
-
-</script>
-
-
-
-
-<script type="text/javascript">
-    document.querySelector('#input_tensanpham').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_tensanpham").style.border = "";
-    })
-
-    document.querySelector('#input_giasanpham').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_giasanpham").style.border = "";
-    })
-
-    document.querySelector('#input_size36').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size36").style.border = "";
-    })
-    document.querySelector('#input_size37').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size37").style.border = "";
-    })
-    document.querySelector('#input_size38').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size38").style.border = "";
-    })
-    document.querySelector('#input_size39').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size39").style.border = "";
-    })
-    document.querySelector('#input_size40').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size40").style.border = "";
-    })
-    document.querySelector('#input_size41').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size41").style.border = "";
-    })
-    document.querySelector('#input_size42').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size42").style.border = "";
-    })
-    document.querySelector('#input_size43').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size43").style.border = "";
-    })
-    document.querySelector('#input_size44').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById("input_size44").style.border = "";
-    })
-
-
-
-
-         $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
+            // 1. Xử lý đổi màu sắc (Cookie & Reload)
             $("#select_mausanpham").on("change", function(){
-                history.go(0);
                 createCookie("colorid", $(this).val(), 100);
-
-
-
-
+                history.go(0); // Reload để PHP lấy lại session mới
             });
 
             function createCookie(name, value, days) {
-                var expires;
-
+                var expires = "";
                 if (days) {
                     var date = new Date();
-                    date.setTime(date.getTime() + (days * 1 * 1000));
+                    date.setTime(date.getTime() + (days * 1000)); // Sửa lại logic giây
                     expires = "; expires=" + date.toGMTString();
-                } else {
-                    expires = "";
                 }
-
-                document.cookie = escape(name) + "=" +
-                    escape(value) + expires + "; path=/";
+                document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
             }
-        });
 
-        $(document).on('click', '#addsp', function(event) {
-                $.post("../products/themSP_ajax.php",
-                    {
+            // 2. Xử lý Upload Ảnh (Preview AJAX)
+            function setupImageUpload(id) {
+                $(document).on('change', '#input_upload_anh_' + id, function() {
+                    var property = this.files[0];
+                    if(!property) return;
 
-                    },
-                    function(data,status){
-                        if(status=="success")
-                        {
-                            alert(data);
-                            if(data == "Thành công"){
-                                location.replace("../products/products_management.php");
-                            }
-
-                        }
+                    var image_name = property.name;
+                    var image_extension = image_name.split('.').pop().toLowerCase();
+                    if($.inArray(image_extension, ['gif','jpg','jpeg','png']) == -1) {
+                        alert("Chỉ chấp nhận file ảnh (jpg, png, gif)");
+                        return;
                     }
-                );
-            });
 
-        function validate(){
-            tensp =  document.getElementById('input_tensanpham').value;
-            giasp =  document.getElementById('input_giasanpham').value;
+                    var form_data = new FormData();
+                    form_data.append("file", property);
 
-            sl36 = document.getElementById('input_size36').value;
-            sl37 = document.getElementById('input_size37').value;
-            sl38 = document.getElementById('input_size38').value;
-            sl39 = document.getElementById('input_size39').value;
-            sl40 = document.getElementById('input_size40').value;
-            sl41 = document.getElementById('input_size41').value;
-            sl42 = document.getElementById('input_size42').value;
-            sl43 = document.getElementById('input_size43').value;
-            sl44 = document.getElementById('input_size44').value;
-
-            img1 = document.getElementById('img1');
-            img2 = document.getElementById('img2');
-            img3 = document.getElementById('img3');
-            img4 = document.getElementById('img4');
-
-            img1_alt = img1.getAttribute("alt");
-            img2_alt = img2.getAttribute("alt");
-            img3_alt = img3.getAttribute("alt");
-            img4_alt = img4.getAttribute("alt");
-
-            flag = true;
-
-            const isAlpha = /^[a-zA-Z0-9-' ]*$/;
-            if(isAlpha.test(tensp) == false || tensp == ""){
-                document.getElementById("input_tensanpham").style.borderColor = "red";
-                flag = false;
-            }
-
-            if(isNaN(giasp) || giasp == ""){
-                document.getElementById("input_giasanpham").style.borderColor = "red";
-                flag = false;
-            }
-
-            if(isNaN(sl36)){
-                document.getElementById("input_size36").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl37)){
-                document.getElementById("input_size37").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl38)){
-                document.getElementById("input_size38").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl39)){
-                document.getElementById("input_size39").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl40)){
-                document.getElementById("input_size40").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl41)){
-                document.getElementById("input_size41").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl42)){
-                document.getElementById("input_size42").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl43)){
-                document.getElementById("input_size43").style.borderColor = "red";
-                flag = false;
-            }
-            if(isNaN(sl44)){
-                document.getElementById("input_size44").style.borderColor = "red";
-                flag = false;
-            }
-
-            if(img1_alt == "" || img2_alt == "" || img3_alt == "" || img4_alt == "" || flag == false){
-                return 3;
-            }
-
-            return 1;
-        }
-
-        $(document).ready(function(){
-
-            $("#luu").click(function(){
-                if(validate() == 3){
-                    alert("Vui lòng kiểm tra thông tin và hình ảnh");
-                }
-                else{
-                    tensp =  document.getElementById('input_tensanpham').value;
-                    giasp =  document.getElementById('input_giasanpham').value;
-                    danhmuc =  document.getElementById("select_danhmucsanpham");
-                    danhmuc_val = danhmuc.options[danhmuc.selectedIndex].value;
-
-                    dong =  document.getElementById("select_dongsanpham");
-                    dong_val = dong.options[dong.selectedIndex].value;
-
-                    kieudang =  document.getElementById("select_kieudang");
-                    kieu_val = kieudang.options[kieudang.selectedIndex].value;
-
-                    thongtinsp = document.getElementById('textarea_thongtinsanpham').value;
-
-                    sl36 = document.getElementById('input_size36').value;
-                    sl37 = document.getElementById('input_size37').value;
-                    sl38 = document.getElementById('input_size38').value;
-                    sl39 = document.getElementById('input_size39').value;
-                    sl40 = document.getElementById('input_size40').value;
-                    sl41 = document.getElementById('input_size41').value;
-                    sl42 = document.getElementById('input_size42').value;
-                    sl43 = document.getElementById('input_size43').value;
-                    sl44 = document.getElementById('input_size44').value;
-
-                    img1 = document.getElementById('img1');
-                    img2 = document.getElementById('img2');
-                    img3 = document.getElementById('img3');
-                    img4 = document.getElementById('img4');
-
-                    // img1_src = img1.getAttribute("src");
-                    // img2_src = img2.getAttribute("src");
-                    // img3_src = img3.getAttribute("src");
-                    // img4_src = img4.getAttribute("src");
-
-                    img1_alt = img1.getAttribute("alt");
-                    img2_alt = img2.getAttribute("alt");
-                    img3_alt = img3.getAttribute("alt");
-                    img4_alt = img4.getAttribute("alt");
-
-
-                    e = document.getElementById("select_mausanpham");
-                    value = e.options[e.selectedIndex].value;
-
-                    $.post("../../page/products/luu_size_ajax.php",
-                        {
-                            tensp:tensp,
-                            giasp:giasp,
-                            danhmuc:danhmuc_val ,
-                            dong:dong_val,
-                            kieudang:kieu_val,
-                            thongtinsp:thongtinsp,
-
-                            sl36:sl36,
-                            sl37:sl37,
-                            sl38:sl38,
-                            sl39:sl39,
-                            sl40:sl40,
-                            sl41:sl41,
-                            sl42:sl42,
-                            sl43:sl43,
-                            sl44:sl44,
-
-                            // img1_src:img1_src,
-                            // img2_src:img2_src,
-                            // img3_src:img3_src,
-                            // img4_src:img4_src,
-
-                            img1_alt:img1_alt,
-                            img2_alt:img2_alt,
-                            img3_alt:img3_alt,
-                            img4_alt:img4_alt,
-
-                            colorid:value,
+                    $.ajax({
+                        url: '../products/upload_img_ajax.php',
+                        method: 'POST',
+                        data: form_data,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        beforeSend: function() {
+                            $('#div_hienthi_anh' + id).html('<div class="spinner-border text-primary spinner-border-sm"></div>');
                         },
-                        function(data,status){
-                            if(status=="success")
-                            {
-
-                                $("#rs").text(data);
-                            }
+                        success: function(data) {
+                            $('#div_hienthi_anh' + id).html(data); // PHP trả về thẻ <img>
+                            // Cập nhật alt cho img ẩn để validate hoạt động
+                            var newSrc = $(data).attr('src').split('/').pop(); // Lấy tên file
+                            $('#img' + id).attr('alt', newSrc); 
                         }
-                    );
-                }
+                    });
+                });
+            }
+            setupImageUpload(1); setupImageUpload(2); setupImageUpload(3); setupImageUpload(4);
 
+            // 3. Xử lý Validate
+            function validate() {
+                var isValid = true;
+                // Validate tên, giá
+                if($('#input_tensanpham').val() == "") { $('#input_tensanpham').addClass('is-invalid'); isValid = false; }
+                else { $('#input_tensanpham').removeClass('is-invalid'); }
+
+                if(isNaN($('#input_giasanpham').val()) || $('#input_giasanpham').val() == "") { $('#input_giasanpham').addClass('is-invalid'); isValid = false; }
+                else { $('#input_giasanpham').removeClass('is-invalid'); }
+
+                // Validate Size (Check nếu không phải số)
+                $('.input_size').each(function() {
+                    if(isNaN($(this).val())) { $(this).addClass('is-invalid'); isValid = false; }
+                    else { $(this).removeClass('is-invalid'); }
+                });
+
+                // Validate Ảnh (Kiểm tra xem đã upload chưa thông qua thuộc tính alt của img ẩn hoặc img hiển thị)
+                // Logic cũ của bạn dựa vào getAttribute("alt"). Ở đây ta cần đảm bảo ảnh đã được upload.
+                // Đoạn này có thể cần tùy chỉnh thêm tùy vào cách file upload_img_ajax trả về.
+                return isValid;
+            }
+
+            // 4. Lưu Tạm (AJAX)
+            $("#luu").click(function(){
+                if(!validate()) { alert("Vui lòng kiểm tra lại thông tin nhập!"); return; }
+
+                var colorid = $("#select_mausanpham").val();
+                
+                // Lấy tên file ảnh từ thẻ img được ajax trả về
+                var getImgName = function(id) {
+                    var imgTag = $('#div_hienthi_anh' + id).find('img');
+                    if(imgTag.length > 0) {
+                        // Lấy đường dẫn src, tách lấy tên file
+                        var src = imgTag.attr('src'); 
+                        return src ? src.split('/').pop() : ''; 
+                    }
+                    return '';
+                };
+
+                $.post("../../page/products/luu_size_ajax.php", {
+                    tensp: $('#input_tensanpham').val(),
+                    giasp: $('#input_giasanpham').val(),
+                    danhmuc: $('#select_danhmucsanpham').val(),
+                    dong: $('#select_dongsanpham').val(),
+                    kieudang: $('#select_kieudang').val(),
+                    thongtinsp: $('#textarea_thongtinsanpham').val(),
+                    
+                    sl36: $('#input_size36').val(), sl37: $('#input_size37').val(), sl38: $('#input_size38').val(),
+                    sl39: $('#input_size39').val(), sl40: $('#input_size40').val(), sl41: $('#input_size41').val(),
+                    sl42: $('#input_size42').val(), sl43: $('#input_size43').val(), sl44: $('#input_size44').val(),
+
+                    img1_alt: getImgName(1), img2_alt: getImgName(2),
+                    img3_alt: getImgName(3), img4_alt: getImgName(4),
+                    
+                    colorid: colorid
+                }, function(data) {
+                    $("#rs").text(data).fadeIn().delay(2000).fadeOut();
+                });
             });
 
-
-
-
-
-
-
-
+            // 5. Thêm Sản Phẩm Hoàn Tất
+            $("#addsp").click(function() {
+                // Kiểm tra xem đã lưu ít nhất 1 màu chưa? (Có thể thêm logic check session ở đây nếu cần)
+                // Gửi request thêm sản phẩm
+                $.post("../products/themSp_ajax.php", {}, function(data) {
+                    alert(data);
+                    if(data.trim() == "Thành công"){
+                        window.location.href = "../products/products_management.php";
+                    }
+                });
+            });
         });
     </script>
-
-
-
+</body>
 </html>

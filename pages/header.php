@@ -6,101 +6,102 @@ if (isset($_GET['action']) == 'dangxuat') {
     header('Location:index.php');
 }
 ?>
-<header class="header_area sticky-header" style="margin: 0; padding: 0;">
-    <div class="header-navbar-nm" id="navbarFirst" style="height: 30px;">
-        <ul class="navbar-nav-First  navbar-nav-First-nm" style="margin: 0 auto;">
-            <li class="nav-item nav-item-nm">
-                <a href="index.php?quanly=tracuudonhang" class="btn btn-link btn btn-link-nm" style="text-decoration: none;">Tra cứu đơn hàng | </a>
-            </li>
-            <li class="nav-item nav-item-nm">
-                <a href="./path-to-help.html" class="btn btn-link btn btn-link-nm" style="text-decoration: none;">Trợ giúp | </a>
-            </li>
-
-            <?php
-            if (!isset($_SESSION['dangnhap'])) { ?>
-                <li class="nav-item nav-item-nm">
-                    <a href="index.php?quanly=dangnhap" class="btn btn-signin btn btn-signin-nm">Đăng nhập | </a>
-                </li>
-                <li class="nav-item nav-item-nm">
-                    <a href="index.php?quanly=dangki" class="btn btn-signup btn btn-signup-nm">Đăng kí</a>
-                </li>
-
-            <?php
-            } else {
+<header class="header_area sticky-header">
+    <div class="header-top-bar" style="background-color: #CF7486; padding: 5px 0; font-size: 13px;">
+        <div class="container d-flex justify-content-end align-items-center">
+            <a href="index.php?quanly=tracuudonhang" class="text-white text-decoration-none px-2 border-end border-light">Tra cứu đơn hàng</a>
+            <a href="#" class="text-white text-decoration-none px-2 border-end border-light">Trợ giúp</a>
+            
+            <?php if (!isset($_SESSION['dangnhap'])) { ?>
+                <a href="index.php?quanly=dangnhap" class="text-white text-decoration-none px-2 fw-bold">Đăng nhập</a>
+                <span class="text-white">/</span>
+                <a href="index.php?quanly=dangki" class="text-white text-decoration-none px-2">Đăng kí</a>
+            <?php } else {
                 $sql = "select hoten from khachhang where sodt = '" . $_SESSION['dangnhap'] . "' limit 1";
                 $rs = $connect->query($sql);
                 $row = $rs->fetch_assoc();
-
-                $hoten = $row['hoten'];
             ?>
-                <li class="nav-item nav-item-nm">
-                    <a href="#" class="btn btn-signin btn btn-signin-nm">Xin chào: <?php echo $hoten; ?> |</a>
-                </li>
-
-                <li class="nav-item nav-item-nm">
-                    <a href="index.php?action=dangxuat" class="btn btn-signin btn btn-signin-nm">Đăng xuất</a>
-                </li>
-            <?php
-            }
-            ?>
-        </ul>
+                <span class="px-2 text-white">Xin chào, <b><?php echo $row['hoten']; ?></b></span>
+                <a href="index.php?action=dangxuat" class="text-white text-decoration-none px-2 ms-2 border-start border-light">Đăng xuất</a>
+            <?php } ?>
+        </div>
     </div>
-    <!-- mainmenu -->
-    <nav class="header-navbar-nm" id="navbarSecond">
-        <div class="header-container header-container-nm mainmenu">
-            <div class="logo logo-nm">
-                <a href="index.php"><img src="img/img_homepage/logo1.png" alt="Logo"></a>
-            </div>
-            <div class="menu menu-nm">
-                <ul class="navbar-nav-menu navbar-nav-menu-nm">
-                    <li class="nav-item nav-item-nm">
-                        <p class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Thương hiệu</p>
-                        <div class="menu-child">
-                          <a href="index.php?quanly=danhmucsanpham&id=5" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Nike</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=6" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Adidas</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=7" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Biti's</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=8" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Puma</a>
-                        </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm py-3" style="background-color: #FFE6ED">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.php">
+                <img src="img/img_homepage/logo1.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+                <span style="font-weight: 900; font-size: 24px; color: #CF7486; letter-spacing: -1px;">MTP Shop</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 navbar-nav-menu-nm">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase fw-bold text-dark" href="#" id="brandDropdown" role="button" data-bs-toggle="dropdown">
+                            Thương hiệu
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-lg mt-2">
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=5">Nike</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=6">Adidas</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=7">Biti's</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=8">Puma</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item nav-item-nm">
-                        <p class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Giới tính</p>
-                        <div class="menu-child">
-                          <a href="index.php?quanly=danhmucsanpham&id=2" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Nam</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=3" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Nữ</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=1" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Unisex</a>
-                        </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase fw-bold text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            Giới tính
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-lg mt-2">
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=2">Nam</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=3">Nữ</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=1">Unisex</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item nav-item-nm">
-                        <p class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Loại giày</p>
-                        <div class="menu-child">
-                          <a href="index.php?quanly=danhmucsanpham&id=17" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Bóng đá</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=18" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Bóng rổ</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=19" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Gym</a>
-                          <a href="index.php?quanly=danhmucsanpham&id=20" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Chạy bộ</a>
-                        </div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase fw-bold text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                            Loại giày
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-lg mt-2">
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=17">Bóng đá</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=18">Bóng rổ</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=19">Gym</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=20">Chạy bộ</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item nav-item-nm">
-                        <a href="index.php?quanly=danhmucsanpham&id=4" class="btn-nav-link btn-nav-link-nm" style="text-decoration: none;">Giảm giá</a>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase fw-bold" href="index.php?quanly=danhmucsanpham&id=4" style="color: #CF7486;">Sale Off</a>
                     </li>
                 </ul>
+
+                <div class="d-flex align-items-center mt-3 mt-lg-0">
+                    <form class="d-flex me-4 position-relative" style="justify-content: flex-end;" action="index.php?quanly=timkiem" method="POST">
+                        <input class="form-control ps-4 pe-5 rounded-pill bg-light border-0" type="search" name="tukhoa" placeholder="Tìm kiếm..." aria-label="Search" style="width: 200px;">
+                        <button class="btn position-absolute end-0 top-0 h-100 rounded-pill pe-3 text-white" type="submit" name="timkiem" style="background-color: #CF7486; border-radius: 0 50px 50px 0 !important;">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                    
+                    <a href="#" class="text-dark fs-4 me-3 position-relative hover-pink">
+                        <i class='bx bx-heart'></i>
+                    </a>
+                    
+                    <a href="index.php?quanly=giohang" class="text-dark fs-4 position-relative hover-pink">
+                        <i class='bx bx-shopping-bag'></i>
+                        <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) { ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" style="background-color: #CF7486; font-size: 10px;">
+                                <?php echo count($_SESSION['cart']); ?>
+                            </span>
+                        <?php } ?>
+                    </a>
+                </div>
             </div>
-
-            <ul class="navbar-nav-outside navbar-nav-outside-nm">
-                <form class="navbar-nav-search navbar-nav-search-nm" action="index.php?quanly=timkiem" method="POST">
-                    <div class="input-group input-group-nm">
-                        <input id="search1" class="form-control mr-sm-2" type="text" name="tukhoa" placeholder="Tìm kiếm" aria-label="Search">
-                    </div>
-                    <input type="submit" id="btn-timkiemsp" name="timkiem" value="Tìm kiếm">
-                </form>
-                <li class="nav-item nav-item-nm">
-                    <button type="button" class="btn-nav-link btn-nav-link-nm"><ion-icon name="heart-outline"></ion-icon></button>
-                </li>
-                <li class="nav-item nav-item-nm">
-                    <a href="index.php?quanly=giohang" class="btn-nav-link btn-nav-link-nm"><ion-icon name="cart-outline"></ion-icon></a>
-                </li>
-
-            </ul>
         </div>
     </nav>
-
 </header>

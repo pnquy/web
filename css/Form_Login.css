@@ -1,44 +1,151 @@
-body{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Import Font giống Homepage */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+
+:root {
+    --primary-color: #CF7486;
+    --primary-hover: #b05f6e;
+    --text-color: #333;
+    --bg-light: #fff;
+}
+
+section {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--bg-light);
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
-
-/* Login */
-
-.container-login{
-    width: 500px;
-    height: auto;
-    border: 2px solid black;
-    margin-top: 20px;
-    text-align: center;
-}
-.container-login h2{
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 30px;
-}
-
-#dangnhap{
-    width: 80%;
-    margin: 0 auto;
-}
-.form-group{
-    margin-bottom: 20px;
-}
-.form-group input{
-    background-color: #F6F7F9;
-}
-
-.btn-sub{
+/* Container chính - Dạng thẻ nổi */
+.container-login {
     width: 100%;
-    margin-bottom: 20px;
-}
-
-.btn-back{
+    max-width: 450px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    border: none; 
     text-align: center;
-    width: 60%;
-    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Thanh trang trí màu hồng trên đầu */
+.container-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: var(--primary-color);
+}
+
+.container-login h2 {
+    color: var(--text-color);
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* Input Styles */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-control {
+    height: 50px;
+    padding-left: 20px;
+    font-size: 15px;
+    border: 1px solid #eee;
+    background-color: #fcfcfc;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    background-color: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(207, 116, 134, 0.25);
+}
+
+/* Nút Đăng nhập */
+.btn-sub {
+    width: 100%;
+    height: 50px;
+    background-color: var(--primary-color);
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.btn-sub:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(207, 116, 134, 0.4);
+}
+
+/* Link và Checkbox */
+.form-check-label {
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+
+.link-register {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.link-register:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* Nút quay lại */
+.btn-back {
+    background: transparent;
+    color: #888;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 13px;
+    transition: all 0.3s;
+    width: auto;
+    display: inline-block;
+}
+
+.btn-back:hover {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+/* Alert lỗi */
+#alert-login {
+    background-color: #ffe6e6;
+    border: 1px solid #ffcccc;
+    color: #cc0000;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+#alert-login p {
+    margin: 0;
+}
+footer{
+    margin-top: 0px !important;
+}

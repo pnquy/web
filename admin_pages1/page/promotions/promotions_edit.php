@@ -4,224 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa Khuyến Mãi - Admin MTP</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../dashboard/admin_dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <!-- --sửa---bootstrap 4 w3shcool tạo gợi ý ajax-->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <title>Sửa khuyến mãi</title>
+    
     <style>
-        .section_suakhuyenmai {
+        /* CSS bổ sung cho phần chọn sản phẩm */
+        .search-box-container {
             position: relative;
-            left: 250px;
-            height: 100vh;
-            width: calc(100% - 250px);
-            background: var(--body-color);
-            transition: var(--tran-05);
         }
-
-        .sidebar-hnm.close~.section_suakhuyenmai {
-            left: 88px;
-            width: calc(100% - 88px);
-        }
-
-        .section_suakhuyenmai .text-hnm {
-            font-size: 30px;
-            font-weight: 500;
-            color: var(--text-color);
-            padding: 8px 40px;
-            caret-color: transparent;
-        }
-
-        .section_suakhuyenmai {
-            display: flex;
-            align-items: stretch;
-        }
-
-        .div_promotions_edit_1 {
-            flex: 1;
-            padding: 10px;
-            align-items: center;
-        }
-
-        .div_promotions_edit_2 {
-            flex: 2;
-            padding: 10px;
-        }
-
-        #div_promotions_edit_enter {
-            margin-left: 40px;
-        }
-
-        #div_suatenkhuyenmai,
-        #div_sua_ngaybatdaukhuyenmai,
-        #div_sua_ngayketthuckhuyenmai,
-        #div_sua_discountpercentage {
-            margin-bottom: 10px;
-        }
-
-        #label_sua_tenkhuyenmai,
-        #label_sua_ngaybatdaukhuyenmai,
-        #label_sua_ngayketthuckhuyenmai,
-        #label_sua_discountpercentage,
-        #label_sua_chonkhuyenmai {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        #input_sua_tenkhuyenmai {
+        #show-list {
+            position: absolute;
+            z-index: 999;
             width: 100%;
-            max-width: 317px;
-            padding: 8px;
+            background: white;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            max-height: 200px;
+            overflow-y: auto;
         }
-
-        #input_sua_discountpercentage {
-            width: 100%;
-            max-width: 290px;
-            padding: 8px;
+        #id_table_sua_sanphamcuthe img {
+            width: 50px; height: 50px; object-fit: cover; border-radius: 5px;
         }
-
-        #div_sua_ngaybatdaukhuyenmai_ngayketthuckhuyenmai {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-
-        #div_sua_ngaybatdaukhuyenmai {
-            margin-right: 20px;
-        }
-
-        #input_sua_ngaybatdaukhuyenmai,
-        #input_sua_ngayketthuckhuyenmai {
-            padding: 8px;
-        }
-
-        #label_sua_chonkhuyenmai {
-            margin-top: 72px;
-        }
-
-        .text-hnm {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        #div_radio_sua_chonkhuyenmai {
-            margin-bottom: 20px;
-        }
-
-        #input_radio_sua_sanphamcuthe {
-            margin-bottom: 10px;
-        }
-
-        #input_radio_sua_dongsanpham {
-            margin-bottom: 10px;
-        }
-
-        #select_sua_khuyenmai_dongsanpham {
-            padding: 4px;
-            margin-left: 18px;
-        }
-
-        #id_table_sua_sanphamcuthe {
-            border: solid 3px #ff5f17;
-        }
-
-        #id_table_sua_sanphamcuthe tr td #input_sua_nhapidsanphamcuthe {
-            padding: 8px;
-        }
-
-        #id_table_sua_sanphamcuthe tr td {
-            height: 130px;
-            width: 130px;
-            padding-left: 10px;
-            padding-right: 10px;
-            background-color: white;
-            border: solid 3px #ff5f17;
-        }
-
-        #id_table_sua_sanphamcuthe tr td img {
-            height: 90px;
-            width: 120px;
-        }
-
-        .btn_suasanphamcuthe {
-            display: none;
-            height: 35px;
-            padding: 0;
-            background: #f1f1f1;
+        .delete {
+            background-color: #dc3545;
+            color: white;
             border: none;
-            outline: none;
+            padding: 5px 10px;
             border-radius: 5px;
-            overflow: hidden;
-            font-family: "Quicksand", sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            margin-bottom: 10px;
+            font-size: 12px;
         }
-
-        .btn_suasanphamcuthe-text {
-            display: inline-flex;
-            align-items: center;
-            padding: 0 5px;
-            color: #ff5f17;
-            height: 100%;
-        }
-
-        #select_sua_khuyenmai_dongsanpham {
-            display: none;
-        }
-
-        /* ------------------sửa--------------------- */
-        .suakhuyenmai {
-            padding: 10px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-
-        .searchsp {
-            width: 20rem;
-            height: 2rem;
-            margin-top: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .trangthai {
-            /* margin-top: ; */
-            margin-bottom: 1rem;
-        }
-
-        table {
-            margin-bottom: 5px;
-        }
-
-        .list-group {
-            position: relative;
-            margin-left: 0px;
-            margin-top: -16px;
-            /* height: 1rem; */
-        }
-
-        /* ------------------sửa--------------------- */
     </style>
 </head>
 
@@ -229,351 +42,286 @@
     <?php
     include('../../navigation/menu_navigation.php');
     include('../../../config/config.php');
-    ?>
-    <?php
+
+    // --- LOGIC PHP XỬ LÝ CẬP NHẬT (Giữ nguyên logic của bạn nhưng làm sạch code) ---
     if (isset($_POST['suakhuyenmai'])) {
-        //khi nhấn nút update thì mặc định xóa hết tất cả kmct rồi thêm mới
-        // $tenkm = $_POST['input_tenkhuyenmai'];
         $ngaybd = $_POST['input_sua_ngaybatdaukhuyenmai'];
         $ngaykt = $_POST['input_sua_ngayketthuckhuyenmai'];
         $giatri = $_POST['input_sua_discountpercentage'];
         $saleoffid = $_GET['edit'];
-        $sql_xoa = "DELETE FROM saleoffct WHERE saleoffid = '$saleoffid'";
-        $rs_sql_xoa = $mysqli->query($sql_xoa);
 
-        //nếu chọn sale theo dòng sản phẩm
+        // Xóa chi tiết cũ
+        $mysqli->query("DELETE FROM saleoffct WHERE saleoffid = '$saleoffid'");
+
         if (isset($_POST['input_radio_sua_dongsanpham'])) {
-            // lấy dòng sản phẩm
+            // Case 1: Dòng sản phẩm
             $dongsp = $_POST['select_sua_khuyenmai_dongsanpham'];
-            // productcolorid từ dòng sản phẩm nhập vào
-            $sql3 = "SELECT productcolorid FROM sanpham, productcolor, dongsp WHERE sanpham.sanphamid = productcolor.productid and sanpham.dongspid = dongsp.dongspid and tendongsp = '$dongsp';";
-            $rs3 = $mysqli->query($sql3);
-            if ($rs3->num_rows <= 0) {
-                // Không có sản phẩm, không thêm khuyến mãi và kmct
-                echo "<script> alert(Chưa có sản phẩm nào thuộc dòng '$dongsp'!)</script>";
-            } else {
+            $sql_update = "UPDATE saleoff SET ngaybd ='$ngaybd', ngaykt ='$ngaykt', giatrigiam ='$giatri', loaisp ='$dongsp' WHERE saleoffid = '$saleoffid'";
+            $mysqli->query($sql_update);
 
-                $sql2 = "UPDATE saleoff  SET ngaybd ='$ngaybd', ngaykt ='$ngaykt', giatrigiam ='$giatri',loaisp ='$dongsp' WHERE saleoffid = '$saleoffid';";
-                $mysqli->query($sql2);
-                while ($row3 = $rs3->fetch_row()) {
-                    //nhập id cho từng chi tiết sản phẩm
-                    $sql5 = "INSERT INTO saleoffct(saleoffid, procolorid) VALUES ('$saleoffid','$row3[0]')";
-                    $mysqli->query($sql5);
+            $sql_find = "SELECT productcolorid FROM sanpham sp 
+                         JOIN productcolor pc ON sp.sanphamid = pc.productid 
+                         JOIN dongsp dsp ON sp.dongspid = dsp.dongspid 
+                         WHERE dsp.tendongsp = '$dongsp'";
+            $rs_find = $mysqli->query($sql_find);
+            
+            if ($rs_find->num_rows > 0) {
+                while ($row = $rs_find->fetch_row()) {
+                    $mysqli->query("INSERT INTO saleoffct(saleoffid, procolorid) VALUES ('$saleoffid','$row[0]')");
                 }
+                echo "<script>alert('Cập nhật khuyến mãi thành công!'); window.location.href='promotions_management.php';</script>";
+            } else {
+                echo "<script>alert('Dòng sản phẩm này chưa có sản phẩm nào!');</script>";
             }
 
-        } else if (isset($_POST['input_radio_sua_sanphamcuthe']) && !isset($_POST['input_radio_sua_dongsanpham'])) {
-            $tensp = $_POST['showtensp'];
-            if (count($tensp) <= 0) {
-                echo "Vui lòng nhập sản phẩm!";
-            } else {
+        } else {
+            // Case 2: Sản phẩm cụ thể
+            $list_sp = isset($_POST['showtensp']) ? $_POST['showtensp'] : [];
+            
+            if (count($list_sp) > 0) {
+                $sql_update = "UPDATE saleoff SET ngaybd ='$ngaybd', ngaykt ='$ngaykt', giatrigiam ='$giatri', loaisp = NULL WHERE saleoffid = '$saleoffid'";
+                $mysqli->query($sql_update);
 
-                $sql2 = "UPDATE saleoff  SET ngaybd ='$ngaybd', ngaykt ='$ngaykt', giatrigiam ='$giatri'WHERE saleoffid = '$saleoffid';";
-                $mysqli->query($sql2);
-                $i = 0;
-                while ($i < count($tensp)) {
-                    $sql3 = "SELECT productcolorid FROM sanpham, productcolor WHERE sanpham.sanphamid = productcolor.productid and tensp = '$tensp[$i]';";
-                    $rs3 = $mysqli->query($sql3);
-                    $row3 = $rs3->fetch_row();
-
-                    $sql5 = "INSERT INTO saleoffct(saleoffid, procolorid) VALUES ('$saleoffid','$row3[0]')";
-                    $mysqli->query($sql5);
-
-                    $i++;
+                foreach ($list_sp as $ten) {
+                    $sql_find = "SELECT productcolorid FROM sanpham sp 
+                                 JOIN productcolor pc ON sp.sanphamid = pc.productid 
+                                 WHERE sp.tensp = '$ten'";
+                    $rs_find = $mysqli->query($sql_find);
+                    while ($row = $rs_find->fetch_row()) {
+                        $mysqli->query("INSERT INTO saleoffct(saleoffid, procolorid) VALUES ('$saleoffid','$row[0]')");
+                    }
                 }
+                echo "<script>alert('Cập nhật khuyến mãi thành công!'); window.location.href='promotions_management.php';</script>";
+            } else {
+                echo "<script>alert('Vui lòng chọn ít nhất 1 sản phẩm!');</script>";
             }
         }
     }
-    ?>
-    <?php
+
+    // --- LẤY DỮ LIỆU CŨ ---
     $editval = $_GET["edit"];
-    $sql = "SELECT * FROM saleoff WHERE saleoffid = '$editval'";
-    $rs = $mysqli->query($sql);
-    $row = $rs->fetch_assoc();
+    $sql_old = "SELECT * FROM saleoff WHERE saleoffid = '$editval'";
+    $rs_old = $mysqli->query($sql_old);
+    $row = $rs_old->fetch_assoc();
+    
     $ngayBD = date("Y-m-d", strtotime($row['ngaybd']));
     $ngayKT = date("Y-m-d", strtotime($row['ngaykt']));
+    $loaisp = $row['loaisp']; // Nếu NULL hoặc rỗng là SP cụ thể, ngược lại là Dòng SP
     ?>
 
-    <section class="section_suakhuyenmai">
-        <form action="" method="post">
-            <div class="grid-container">
-                <div class="grid-item">
-                    <div class="div_promotions_edit_1">
-                        <p class="text text-hnm">Sửa khuyến mãi</p>
-                        <div id="div_promotions_edit_enter">
-                            <!-- <div id="div_suatenkhuyenmai">
-                            <label id="label_sua_tenkhuyenmai">Tên khuyến mãi</label>
-                            <input type="text" id="input_sua_tenkhuyenmai" name="input_sua_tenkhuyenmai" placeholder="Nhập tên khuyến mãi" value="">
-                        </div> -->
-                            <div id="div_sua_ngaybatdaukhuyenmai_ngayketthuckhuyenmai">
-                                <div id="div_sua_ngaybatdaukhuyenmai">
-                                    <label id="label_sua_ngaybatdaukhuyenmai">Ngày bắt đầu</label>
-                                    <input type="date" id="input_sua_ngaybatdaukhuyenmai" name="input_sua_ngaybatdaukhuyenmai" min="2023-11-17" <?php echo "value='$ngayBD'" ?>>
-                                </div>
-                                <div id="div_sua_ngayketthuckhuyenmai">
-                                    <label id="label_sua_ngayketthuckhuyenmai">Ngày kết thúc</label>
-                                    <input type="date" id="input_sua_ngayketthuckhuyenmai" name="input_sua_ngayketthuckhuyenmai" min="2023-11-18" <?php echo "value='$ngayKT'" ?>>
-                                </div>
-                            </div>
-
-                            <div id="div_sua_discountpercentage">
-                                <label id="label_sua_discountpercentage">% giảm giá</label>
-                                <input type="number" id="input_sua_discountpercentage" name="input_sua_discountpercentage" min=0 step="1" max=100 value="<?php echo $row['giatrigiam'] ?>">
-                            </div>
-
-                            <input type="submit" class="suakhuyenmai" name="suakhuyenmai" value="Sửa khuyến mãi">
-                        </div>
-                    </div>
+    <section class="home-section">
+        <div class="container-fluid">
+            <div class="admin-card">
+                <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                    <h2 class="admin-title border-0 mb-0">Sửa Khuyến Mãi #<?php echo $editval; ?></h2>
+                    <a href="promotions_management.php" class="btn btn-outline-secondary rounded-pill px-3">
+                        <i class='bx bx-arrow-back'></i> Quay lại
+                    </a>
                 </div>
 
-                <div class="grid-item" style="margin-left: 30px">
-                    <div class="div_promotions_add_2" style="margin-top: 80px">
-                        <label id="label_chonkhuyenmai"><b>Khuyến mãi theo:</b></label>
-                        <div id="div_radio_chonkhuyenmai">
-                            <input id="input_radio_sua_sanphamcuthe" name="input_radio_sua_sanphamcuthe" <?php echo ($row['loaisp'] == "") ? 'checked' : ''; ?> type="radio">Sản phẩm cụ thể</input><br>
-                            <input type="text" class="searchsp" id="searchsp" name="searchsp" style="<?php echo ($row['loaisp'] == "") ? 'display:block' : 'display:none'; ?>">
-                            <!-- input_radio_sua_sanphamcuthe -->
-                            <!-- ---------sửa-------------- -->
-                            <div class="list-group" id="show-list">
-
+                <form action="" method="post" id="form-edit-promotion">
+                    <div class="row">
+                        <div class="col-lg-5 border-end pe-lg-4">
+                            <h5 class="fw-bold text-primary mb-3"><i class='bx bx-time-five'></i> Thời Gian & Giá Trị</h5>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Ngày bắt đầu</label>
+                                <input type="date" class="form-control" name="input_sua_ngaybatdaukhuyenmai" id="input_sua_ngaybatdaukhuyenmai" value="<?php echo $ngayBD; ?>" required>
                             </div>
-                            <!-- ---------sửa-------------- -->
 
-                            <div class="trangthai" <?php echo ($row['loaisp'] == "") ? 'display:block' : 'display:none'; ?>></div>
-                            <table id="id_table_sua_sanphamcuthe" name="id_table_sua_sanphamcuthe" border="1" style="border-collapse:collapse;">
-                                <?php
-                                if ($row['loaisp'] == "") {
-                                    $sql1 = "SELECT tensp, img1, productcolor.productcolorid FROM saleoffct, sanpham, productcolor WHERE saleoffid = '$_GET[edit]' and sanpham.sanphamid = productcolor.productid and saleoffct.procolorid = productcolor.productcolorid;";
-                                    $rs1 = $mysqli->query($sql1);
-                                    while ($row1 = $rs1->fetch_row()) {
-                                        $str = '';
-                                        $str .= '<tr>';
-                                        $str .= '<td><div><input type="hidden" name="showtensp[]" value="' . $row1[0] . '">' . $row1[0] . '</div></td>';
-                                        $str .= '<td><div class="hinhanhsp"><img src="../products/uploads/' . $row1[1] . '"></div></td>';
-                                        $str .= '<td><button proid="' . $row1[2] . '" tensp="' . $row1[0] . '" class="delete">Xóa</button></td>';
-                                        $str .= '</tr>';
-                                        echo $str;
-                                    }
-                                }
-                                ?>
-                            </table>
-                        </div>
-                        <div id="div_promotion_select_dongsanpham" name="div_promotion_select_dongsanpham">
-                            <!-- input_radio_sua_dongsanpham -->
-                            <input type="radio" id="input_radio_sua_dongsanpham" name="input_radio_sua_dongsanpham" <?php echo ($row['loaisp'] != "") ? "checked" : ""; ?>>Dòng sản phẩm</input>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày kết thúc</label>
+                                <input type="date" class="form-control" name="input_sua_ngayketthuckhuyenmai" id="input_sua_ngayketthuckhuyenmai" value="<?php echo $ngayKT; ?>" required>
+                            </div>
 
-                            <select id="select_sua_khuyenmai_dongsanpham" name="select_sua_khuyenmai_dongsanpham" style="<?php echo ($row['loaisp'] != "") ? "display:block" : "display:none"; ?>">
-                                <?php if ($row['loaisp'] != "") { ?>
-                                    <option name="Nike" value="Nike" <?php echo ($row['loaisp'] == "Nike") ? 'selected' : ''; ?>>Nike</option>
-                                    <option name="Adidas" value="Adidas" <?php echo ($row['loaisp'] == "Adidas") ? 'selected' : ''; ?>>Adidas</option>
-                                    <option name="Bitis" value="Bitis" <?php echo ($row['loaisp'] == "Bitis") ? 'selected' : ''; ?>>Biti's</option>
-                                    <option name="Puma" value="Puma" <?php echo ($row['loaisp'] == "Puma") ? 'selected' : ''; ?>>Puma</option>
-
-                                <?php } ?>
-                            </select>
+                            <div class="mb-3">
+                                <label class="form-label">Phần trăm giảm (%)</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" name="input_sua_discountpercentage" id="input_sua_discountpercentage" min="1" max="100" value="<?php echo $row['giatrigiam']; ?>" required>
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
                         </div>
 
+                        <div class="col-lg-7 ps-lg-4">
+                            <h5 class="fw-bold text-primary mb-3"><i class='bx bx-target-lock'></i> Phạm Vi Áp Dụng</h5>
 
+                            <div class="d-flex gap-4 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sua_scope" id="radio_sp_cuthe" 
+                                           <?php echo ($loaisp == "") ? 'checked' : ''; ?>>
+                                    <label class="form-check-label fw-bold" for="radio_sp_cuthe">Sản phẩm cụ thể</label>
+                                    <input type="hidden" name="input_radio_sua_sanphamcuthe" id="hidden_radio_sp" <?php echo ($loaisp == "") ? '' : 'disabled'; ?>>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sua_scope" id="radio_dong_sp"
+                                           <?php echo ($loaisp != "") ? 'checked' : ''; ?>>
+                                    <label class="form-check-label fw-bold" for="radio_dong_sp">Dòng sản phẩm</label>
+                                    <input type="hidden" name="input_radio_sua_dongsanpham" id="hidden_radio_dong" <?php echo ($loaisp != "") ? '' : 'disabled'; ?>>
+                                </div>
+                            </div>
+
+                            <div id="box_dong_sp" style="display: <?php echo ($loaisp != "") ? 'block' : 'none'; ?>;">
+                                <label class="form-label">Chọn dòng sản phẩm:</label>
+                                <select class="form-select" name="select_sua_khuyenmai_dongsanpham">
+                                    <option value="Nike" <?php echo ($loaisp == "Nike") ? 'selected' : ''; ?>>Nike</option>
+                                    <option value="Adidas" <?php echo ($loaisp == "Adidas") ? 'selected' : ''; ?>>Adidas</option>
+                                    <option value="Bitis" <?php echo ($loaisp == "Bitis") ? 'selected' : ''; ?>>Biti's</option>
+                                    <option value="Puma" <?php echo ($loaisp == "Puma") ? 'selected' : ''; ?>>Puma</option>
+                                </select>
+                            </div>
+
+                            <div id="box_sp_cuthe" style="display: <?php echo ($loaisp == "") ? 'block' : 'none'; ?>;">
+                                <div class="search-box-container mb-3">
+                                    <input type="text" class="form-control searchsp" id="searchsp" placeholder="Gõ tên sản phẩm để tìm...">
+                                    <div class="list-group" id="show-list"></div>
+                                </div>
+                                
+                                <div class="trangthai text-danger small mb-2"></div>
+
+                                <div class="table-responsive border rounded">
+                                    <table class="table table-hover mb-0" id="id_table_sua_sanphamcuthe">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            if ($loaisp == "") {
+                                                // Lấy các sản phẩm đang áp dụng khuyến mãi này
+                                                $sql_detail = "SELECT DISTINCT sp.tensp, pc.img1 
+                                                               FROM saleoffct sct
+                                                               JOIN productcolor pc ON sct.procolorid = pc.productcolorid
+                                                               JOIN sanpham sp ON pc.productid = sp.sanphamid
+                                                               WHERE sct.saleoffid = '$editval'";
+                                                $rs_detail = $mysqli->query($sql_detail);
+                                                
+                                                while ($row_d = $rs_detail->fetch_assoc()) {
+                                            ?>
+                                                <tr>
+                                                    <td>
+                                                        <input type="hidden" name="showtensp[]" value="<?php echo $row_d['tensp']; ?>">
+                                                        <?php echo $row_d['tensp']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <img src="../../../uploads/<?php echo $row_d['img1']; ?>">
+                                                    </td>
+                                                    <td><button type="button" class="delete"><i class='bx bx-trash'></i></button></td>
+                                                </tr>
+                                            <?php 
+                                                } 
+                                            } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
+                    <hr class="my-4">
+                    
+                    <div class="text-center">
+                        <button type="submit" name="suakhuyenmai" class="btn-admin btn-lg px-5">
+                            <i class='bx bx-save'></i> LƯU THAY ĐỔI
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </section>
-</body>
-<script src="../../../jq.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="../dashboard/admin_dashboard.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var radioSanPhamCuthe = document.getElementById("input_radio_sua_sanphamcuthe");
-        var radioDongSanPham = document.getElementById("input_radio_sua_dongsanpham");
-        var radiosua = document.getElementsByName("sua");
-        var tableSanPhamCuthe = document.querySelector('#id_table_sua_sanphamcuthe');
-        var selectDongSanPham = document.querySelector('#select_sua_khuyenmai_dongsanpham');
-        var searchsp = document.querySelector('.searchsp');
-        var trangthai = document.querySelector('.trangthai');
-        radioSanPhamCuthe.addEventListener("change", function() {
-            if (radioSanPhamCuthe.checked) {
-                radioDongSanPham.checked = false;
-                selectDongSanPham.style.display = 'none';
-                searchsp.style.display = 'block';
-                trangthai.style.display = 'block';
-                resetSelect();
-            }
-        });
 
-        radioDongSanPham.addEventListener("change", function() {
-            if (radioDongSanPham.checked) {
-                selectDongSanPham.style.display = 'block';
-                radioSanPhamCuthe.checked = false;
-                searchsp.style.display = 'none';
-                trangthai.style.display = 'none';
-                trangthai.innerHTML = '';
-                // -----chưa xóa được search trước đó
-                // searchsp.val = "";
-                resetTable(); // Gọi hàm để reset bảng
-            }
-        });
-        // Hàm để reset bảng
-        function resetTable() {
-            tableSanPhamCuthe.innerHTML = ''; // Xóa nội dung bảng
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="../../../jq.js"></script>
+    <script src="../dashboard/admin_dashboard.js"></script>
 
-            // Các bước khác để reset dữ liệu theo nhu cầu của bạn
-        }
-        // Hàm để reset select
-        function resetSelect() {
-            selectDongSanPham.selectedIndex = 0; // Đặt lại index về giá trị mặc định (hoặc giá trị mong muốn khác)
-            // Các bước khác để reset dữ liệu select theo nhu cầu của bạn
-        }
-    });
-</script>
-
-<script>
-    let table = document.querySelector('#id_table_sua_sanphamcuthe');
-    $(document).ready(function() {
-
-        $('form').submit(function() {
-            return validateSaleForm();
-        });
-
-        function validateSaleForm() {
-            var vngaybd = $('#input_sua_ngaybatdaukhuyenmai').val();
-            var vngaykt = $('#input_sua_ngayketthuckhuyenmai').val();
-            var vgiatrigiam = $('#input_sua_discountpercentage').val();
-            var vtable = $('#id_table_sua_sanphamcuthe').html();
-
-            // Kiểm tra xem radio button có được chọn hay không
-            var vdongsp = $('input[name="input_radio_sua_dongsanpham"]:checked').val();
-
-            var vspcuthe = $('input[name="input_radio_sua_sanphamcuthe"]:checked').val();
-
-            if (vngaybd === '' || vngaykt === '' || vgiatrigiam === '') {
-                flag = true;
-                alert("Vui lòng điền đầy đủ thông tin");
-            } else if (vdongsp === '' && vspcuthe === '') {
-                flag = true;
-                alert("Vui lòng chọn sản phẩm.");
-            } else if (isNegativeNumber(vgiatrigiam)) {
-                flag = true;
-                alert("Giá trị giảm giá không hợp lệ.")
-            } else if (!isDateGreaterThanToday(vngaybd)) {
-                flag = true;
-                alert("Ngày bắt đầu phải lớn hơn hôm nay.")
-            } else if (!isDateGreaterThanToday(vngaykt)) {
-                flag = true;
-                alert("Ngày kết thúc không hợp lệ.")
-            } else if (!isEndDateAfterStartDate(vngaybd, vngaykt)) {
-                flag = true;
-                alert("Ngày kết thúc phải sau ngày bắt đầu.")
-            }
-
-
-            if (flag) {
-                return false;
-            }
-
-            // Nếu không có lỗi, cho phép gửi biểu mẫu
-            alert("Sửa thành công");
-            return true;
+    <script>
+        // Script Toggle Sidebar
+        const body = document.querySelector('body'),
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle-hnm");
+        if(toggle){
+            toggle.addEventListener("click", () =>{ sidebar.classList.toggle("close"); });
         }
 
-        function isNegativeNumber(value) {
-            return typeof value === 'number' && value < 0;
-        }
-
-        function isDateGreaterThanToday(inputDate) {
-            // Chuyển đổi ngày nhập vào thành đối tượng Date
-            var inputDateObject = new Date(inputDate);
-            // alert (inputDateObject);
-
-            // Kiểm tra xem ngày nhập vào có lớn hơn ngày hiện tại hay không
-            return inputDateObject > new Date();
-        }
-
-        function isEndDateAfterStartDate(startDate, endDate) {
-            // Chuyển đổi ngày bắt đầu và ngày kết thúc thành đối tượng Date
-            var startDateObject = new Date(startDate);
-            var endDateObject = new Date(endDate);
-            // Kiểm tra xem ngày kết thúc có lớn hơn ngày bắt đầu hay không
-            return endDateObject > startDateObject;
-        }
-
-        $('#searchsp').keyup(function() {
-            var searchText = $(this).val();
-            if (searchText != '') {
-                $.ajax({
-                    url: 'action.php',
-                    method: 'post',
-                    data: {
-                        query: searchText
-                    },
-                    success: function(response) {
-                        $('#show-list').html(response);
-                    }
-                })
-            } else {
-                $('#show-list').html('');
-            }
-        });
-        $(document).on('click', 'a', function() {
-            $('#searchsp').val($(this).text());
-            $('#show-list').html('');
-            $('.trangthai').empty();
-            input_nhaptensanphamcuthe = $(this).text();
-            var flag = 0;
-            $('table').find('tr').each(function() {
-                if ($(this).find('td').eq(0).text() == input_nhaptensanphamcuthe) {
-                    flag = 1;
-                    return false;
+        $(document).ready(function() {
+            // 1. Xử lý chuyển đổi Radio Button (Phạm vi áp dụng)
+            $('input[name="sua_scope"]').change(function() {
+                if ($('#radio_sp_cuthe').is(':checked')) {
+                    $('#box_sp_cuthe').show();
+                    $('#box_dong_sp').hide();
+                    // Enable/Disable hidden input để PHP nhận diện
+                    $('#hidden_radio_sp').prop('disabled', false);
+                    $('#hidden_radio_dong').prop('disabled', true);
+                } else {
+                    $('#box_sp_cuthe').hide();
+                    $('#box_dong_sp').show();
+                    $('#hidden_radio_sp').prop('disabled', true);
+                    $('#hidden_radio_dong').prop('disabled', false);
                 }
             });
-            if (flag == 1) {
-                $('.trangthai').html("Sản phẩm đã nhập. Vui lòng nhập sản phẩm khác");
-            } else {
-                $.post("timsp_post_ajax.php", {
-                        ten: input_nhaptensanphamcuthe
-                    },
-                    function(data, status) {
-                        if (status == "success") {
-                            if (data == "") {
-                                $('.trangthai').html("Không tìm thấy");
-                            } else {
 
-                                table.innerHTML += data;
-
-                            }
+            // 2. Tìm kiếm sản phẩm (Ajax)
+            $('#searchsp').keyup(function(){
+                var searchText = $(this).val();
+                if(searchText != ''){
+                    $.ajax({
+                        url: 'action.php',
+                        method: 'post',
+                        data: {query: searchText},
+                        success: function(response){
+                            $('#show-list').html(response);
                         }
                     });
-            }
-        })
+                } else {
+                    $('#show-list').html('');
+                }
+            });
 
-        // $(document).on('click', '.delete', function() {
-        // $(this).parents("tr").remove();
-        // $('.delete').click(function() {
-        //     tensp = $(this).attr('tensp');
-        //     proid = $(this).attr('proid');
-        //     makm = <?php $_GET['edit'] ?>;
-        //     $(this).parents("tr").remove();
-        //     $.post("xoaKM_ajax.php", {
-        //             sua: 1,
-        //             tensp: text,
-        //             makm: makm,
-        //             proid: proid
-        //         },
-        //         function(data, status) {
-        //             if (status == "success") {
+            // 3. Chọn sản phẩm từ list gợi ý
+            $(document).on('click', '#show-list a', function(e){
+                e.preventDefault();
+                var tenSP = $(this).text();
+                $('#searchsp').val(''); // Clear input
+                $('#show-list').html(''); // Clear suggestion
 
-        //             }
-        //         });
-        // })
-        // })
-        $(document).on('click', '.delete', function() {
-            $(this).parents("tr").remove();
+                // Kiểm tra trùng lặp
+                var exists = false;
+                $('#id_table_sua_sanphamcuthe input[name="showtensp[]"]').each(function(){
+                    if($(this).val() === tenSP) exists = true;
+                });
 
-        })
+                if(exists){
+                    $('.trangthai').text("Sản phẩm này đã được thêm rồi!");
+                    setTimeout(() => $('.trangthai').text(''), 3000);
+                } else {
+                    // Gọi Ajax lấy hình ảnh và thêm vào bảng
+                    $.post("timsp_post_ajax.php", { ten: tenSP }, function(data){
+                        $('#id_table_sua_sanphamcuthe tbody').append(data);
+                    });
+                }
+            });
 
-    });
-</script>
+            // 4. Xóa sản phẩm khỏi bảng
+            $(document).on('click', '.delete', function() {
+                $(this).closest("tr").remove();
+            });
 
+            // 5. Validate Form trước khi submit
+            $('form').submit(function() {
+                var ngaybd = $('#input_sua_ngaybatdaukhuyenmai').val();
+                var ngaykt = $('#input_sua_ngayketthuckhuyenmai').val();
+                
+                if(ngaybd > ngaykt) {
+                    alert("Ngày kết thúc phải sau ngày bắt đầu!");
+                    return false;
+                }
+                return true;
+            });
+        });
+    </script>
+</body>
 </html>

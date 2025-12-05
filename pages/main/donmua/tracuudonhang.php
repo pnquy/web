@@ -4,132 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tra cứu đơn hàng - MTP</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <title>Tra cứu đơn hàng</title>
-    <style>
-        .mainmenu {
-            margin-top: 20px;
-            width: 100%;
-            height: 54px;
-        }
-
-        .mainmenu a {
-            font-size: larger;
-        }
-
-        .search{
-            margin-top: 20px;
-        }
-        .look_order_list_container {
-            margin-top: 20px;
-        }
-
-        .lookup_order_list {
-            text-align: center;
-            border-collapse: collapse;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .lookup_order_list tr th {
-            background-color: #FFCC57;
-            color: black;
-        }
-
-        .lookup_order_list tr td {
-            background-color: white;
-            font-weight: bold;
-        }
-
-        .bx-receipt {
-            font-size: 1.3em;
-            color: black;
-        }
-
-        .bx-receipt:hover {
-            color: #FFCC57;
-        }
-
-        #lookup-order-section {
-            margin-bottom: 540px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/tracuudonhang.css"> </head>
 
 <body>
-    <section class="tracuu tracuudonhang" id="lookup-order-section">
-        <div class="container">
+    <div class="container container-order">
+        <h2 class="page-title"><i class="fa fa-history me-2"></i> Lịch sử đơn hàng</h2>
 
-            <!-- <div class="btn-group btn-group-toggle mainmenu" data-toggle="buttons">
-                <a href="" class="btn btn-light active">Tất cả</a>
-                <a href="" class="btn btn-light">Chờ xác nhận</a>
-                <a href="#" class="btn btn-light">Đang giao</a>
-                <a href="#" class="btn btn-light">Hoàn thành</a>
-                <a href="#" class="btn btn-light">Trả hàng/hoàn tiền</a>
-            </div> -->
+        <div class="search-box">
+            <i class="fa fa-search search-icon"></i>
+            <input class="form-control" id="tableSearch" type="text" placeholder="Tìm kiếm theo Mã đơn, Ngày đặt, Tổng tiền...">
+        </div>
 
-            <div class="search">
-                <input class="form-control mb-4" id="tableSearch" type="text" placeholder=" Bạn có thể tìm kiếm theo Tên sản phẩm, ID đơn hàng,..">
-            </div>
-
-            <div class="look_order_list_container">
-                <table class="lookup_order_list" border="1" id="example">
-                    <thead>
-                        <th>ID đơn hàng</th>
-                        <th>Ngày đặt hàng</th>
-                        <th>Hình thức thanh toán</th>
-                        <th>ID mã giảm giá</th>
+        <div class="table-responsive">
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Mã đơn hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Thanh toán</th>
+                        <th>Khuyến mãi</th>
                         <th>Tổng tiền</th>
                         <th>Chi tiết</th>
-                    </thead>
-                    <tbody id="myTable">
-                        <?php
-                            if(isset($_SESSION['dangnhap'])){
-                                $sdt = $_SESSION['dangnhap'];
-                                $sql_find_khachhangid = "Select khachhangid from khachhang where sodt = '" . $sdt . "'";
-                                $result_find_khachhangid = $connect->query($sql_find_khachhangid);
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    <?php
+                        if(isset($_SESSION['dangnhap'])){
+                            $sdt = $_SESSION['dangnhap'];
+                            // Lấy ID khách hàng
+                            $sql_find_khachhangid = "Select khachhangid from khachhang where sodt = '" . $sdt . "'";
+                            $result_find_khachhangid = $connect->query($sql_find_khachhangid);
+                            
+                            if($result_find_khachhangid->num_rows > 0) {
                                 $row_find_khachhangid = $result_find_khachhangid->fetch_assoc();
                                 $khachhangid = $row_find_khachhangid['khachhangid'];
 
-                                $sql_select_thanhtoan = "SELECT * FROM thanhtoan WHERE khachhangid = '" . $khachhangid . "'";
+                                // Lấy danh sách đơn hàng
+                                $sql_select_thanhtoan = "SELECT * FROM thanhtoan WHERE khachhangid = '" . $khachhangid . "' ORDER BY thanhtoanid DESC";
                                 $result_select_thanhtoan = $connect->query($sql_select_thanhtoan);
+                                
                                 if ($result_select_thanhtoan->num_rows > 0) {
-                                    while ($row_select_thanhtoan = $result_select_thanhtoan->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td id='id_lookup_order_list_idorder' name='id_lookup_order_list_idorder'>" . $row_select_thanhtoan['thanhtoanid'] . "</td>";
-                                        echo "<td id='id_lookup_order_list_orderdate' name='id_lookup_order_list_orderdate'>" . $row_select_thanhtoan['ngayorder'] . "</td>";
-                                        echo "<td id='id_lookup_order_list_purchasetype' name='id_lookup_order_list_purchasetype'>" . $row_select_thanhtoan['hinhthucthanhtoan'] . "</td>";
-                                        if ($row_select_thanhtoan['magiamgiaid'] === "") {
-                                            echo "<td id='id_lookup_order_list_idpromotion' name='id_lookup_order_list_idpromotion'>Không có</td>";
-                                        } else {
-                                            echo "<td id='id_lookup_order_list_idpromotion' name='id_lookup_order_list_idpromotion'>" . $row_select_thanhtoan['magiamgiaid'] . "</td>";
-                                        }
-                                        echo "<td id='id_lookup_order_list_tongtien' name='id_lookup_order_list_tongtien'>" . $row_select_thanhtoan['tongtien'] . "</td>";
-                                        echo "<td><a href='index.php?quanly=chitietdonhang&id=" . $row_select_thanhtoan['thanhtoanid'] . "'><i class='bx bx-receipt'></i></a></td>";
-                                        echo "</tr>";
+                                    while ($row = $result_select_thanhtoan->fetch_assoc()) {
+                                        ?>
+                                        <tr>
+                                            <td class="font-weight-bold">#<?php echo $row['thanhtoanid']; ?></td>
+                                            <td><?php echo date("d/m/Y", strtotime($row['ngayorder'])); ?></td>
+                                            <td>
+                                                <?php 
+                                                    if($row['hinhthucthanhtoan'] == 'momo') echo '<span class="badge badge-danger p-2">Ví MoMo</span>';
+                                                    else if($row['hinhthucthanhtoan'] == 'thẻ ngân hàng') echo '<span class="badge badge-primary p-2">Thẻ ATM</span>';
+                                                    else echo '<span class="badge badge-secondary p-2">COD</span>';
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php echo ($row['magiamgiaid'] === "") ? '<span class="text-muted">-</span>' : '<span class="text-success font-weight-bold">'.$row['magiamgiaid'].'</span>'; ?>
+                                            </td>
+                                            <td class="text-danger font-weight-bold"><?php echo number_format($row['tongtien'], 0, ',', '.'); ?> đ</td>
+                                            <td>
+                                                <a href='index.php?quanly=chitietdonhang&id=<?php echo $row['thanhtoanid']; ?>' class="btn-detail" title="Xem chi tiết">
+                                                    <i class='bx bx-search-alt'></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <?php
                                     }
+                                } else {
+                                    echo "<tr><td colspan='6' class='text-center py-4'>Bạn chưa có đơn hàng nào.</td></tr>";
                                 }
-                            }else{
-                                echo "Vui lòng đăng nhập để xem đơn hàng";
                             }
-
-                        ?>
-                    </tbody>
-                </table>
-            </div>
+                        } else {
+                            echo "<tr><td colspan='6' class='text-center py-4'>Vui lòng <a href='index.php?quanly=dangnhap' class='text-primary'>đăng nhập</a> để xem lịch sử đơn hàng.</td></tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
+    </div>
 
-    </section>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(function() {
+        $(document).ready(function(){
             $("#tableSearch").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
                 $("#myTable tr").filter(function() {
@@ -138,7 +98,5 @@
             });
         });
     </script>
-
 </body>
-
 </html>

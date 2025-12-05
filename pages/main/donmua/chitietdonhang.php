@@ -1,289 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Connect CSS -->
-    <link rel="stylesheet" type="text/css" href="/css/Thanhtoan.css" />
-    <!-- javascripts -->
-    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-    <script src="js/Thanhtoan.js"></script>
-
-    <title>Chi tiết đơn hàng</title>
-    <style>
-        @media (min-width: 1025px) {
-            .h-custom {
-                height: 100vh !important;
-            }
-        }
-
-        .horizontal-timeline .items {
-            border-top: 2px solid #ddd;
-        }
-
-        .horizontal-timeline .items .items-list {
-            position: relative;
-            margin-right: 0;
-        }
-
-        .horizontal-timeline .items .items-list:before {
-            content: "";
-            position: absolute;
-            height: 8px;
-            width: 8px;
-            border-radius: 50%;
-            background-color: #ddd;
-            top: 0;
-            margin-top: -5px;
-        }
-
-        .horizontal-timeline .items .items-list {
-            padding-top: 15px;
-        }
-
-        .section_orderdetail {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 540px;
-        }
-
-        .div_orders_detail_1 {
-            flex: 1;
-            padding: 10px;
-            align-items: center;
-        }
-
-        #div_orders_display {
-            margin-left: 40px;
-        }
-
-        #div_hienthi_iddonhang,
-        #div_hienthi_idkhachhang,
-        #div_hienthi_ngaydathang,
-        #div_hienthi_hinhthucthanhtoan {
-            margin-bottom: 10px;
-        }
-
-        #label_iddonhang,
-        #label_idkhachhang,
-        #label_ngaydathang,
-        #label_hinhthucthanhtoan {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        #display_iddonhang,
-        #display_idkhachhang,
-        #display_ngaydathang,
-        #display_hinhthucthanhtoan {
-            width: 100%;
-            max-width: 260px;
-            padding: 8px;
-        }
-
-        .div_orders_detail_2 {
-            flex: 2;
-            padding: 10px;
-            margin-top: 60px;
-        }
-
-        .order_detail_list tr th {
-            background-color: #FFCC57;
-            color: white;
-        }
-
-        .order_detail_list tr td {
-            background-color: white;
-            font-weight: bold;
-        }
-
-        #id_order_detail_list_ordnumber,
-        #id_order_detail_list_tensanpham,
-        #id_order_detail_list_procolorsizeid,
-        #id_order_detail_list_soluongsanpham {
-            text-align: center;
-        }
-
-        #id_order_detail_list_giatiensanpham,
-        #id_order_detail_list_tongtienhang,
-        #id_order_detail_list_tongtienhang_display,
-        #id_order_detail_list_phivanchuyen,
-        #id_order_detail_list_phivanchuyen_display,
-        #id_order_detail_list_thanhtien,
-        #id_order_detail_list_thanhtien_display,
-        #id_order_detail_list_magiamgia,
-        #id_order_detail_list_magiamgia_display {
-            text-align: right;
-        }
-    </style>
+    <title>Chi Tiết Đơn Hàng - MTP</title>
+    <link rel="stylesheet" href="css/tracuudonhang.css">
 </head>
-
 <body>
+    <?php
+    $iddonhang = isset($_GET['id']) ? $_GET['id'] : '';
+    
+    // 1. Lấy thông tin đơn hàng và khách hàng
+    $sql_order = "SELECT t.*, k.hoten, k.sodt, k.diachi, k.phuongxa, k.quanhuyen, k.tinhthanh 
+                  FROM thanhtoan t
+                  JOIN khachhang k ON t.khachhangid = k.khachhangid
+                  WHERE t.thanhtoanid = '$iddonhang'";
+                  
+    $res_order = $connect->query($sql_order);
+    
+    if($res_order && $res_order->num_rows > 0){
+        $order = $res_order->fetch_assoc();
+        $trangthai = $order['trangthai'];
+    ?>
 
-    <body>
-        <?php
-        $connect = new mysqli('localhost', 'root', '', 'dbdoan');
-        $iddonhang = $_GET['id'];
-        $sql_select_donhang = "SELECT * FROM thanhtoan WHERE thanhtoanid = '" . $iddonhang . "'";
-        $result_select_donhang = $connect->query($sql_select_donhang);
-        $row_select_donhang = $result_select_donhang->fetch_assoc();
-        ?>
+    <div class="container container-order">
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+            <h4 class="m-0 text-dark fw-bold">ĐƠN HÀNG #<?php echo $iddonhang; ?></h4>
+            <a href="index.php?quanly=tracuudonhang" class="text-muted text-decoration-none"><i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
+        </div>
 
-        <section class="section_orderdetail">
+        <div class="timeline-steps">
+            <?php 
+                $steps = ["Chờ xác nhận", "Đã xác nhận", "Đang giao", "Hoàn thành"];
+                $currentIndex = -1;
+                
+                if($trangthai == "Chờ xác nhận") $currentIndex = 0;
+                else if($trangthai == "Đã xác nhận") $currentIndex = 1;
+                else if($trangthai == "Đang giao hàng" || $trangthai == "Đang giao") $currentIndex = 2; 
+                else if($trangthai == "Giao hàng thành công" || $trangthai == "Hoàn thành") $currentIndex = 3;
 
-            <div class="container py-5 h-100">
-                <div class="row d-flex justify-content-center align-items-center ">
-                    <div class="col">
-                        <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
-                            <div class="card-body p-5">
+                foreach($steps as $index => $label){
+                    $activeClass = ($index <= $currentIndex) ? 'active' : '';
+                    echo '
+                    <div class="step '.$activeClass.'">
+                        <div class="step-icon"><i class="fa fa-check"></i></div>
+                        <div class="step-text">'.$label.'</div>
+                    </div>';
+                }
+            ?>
+        </div>
 
-                                <p class="lead fw-bold mb-5" style="color: #E6A32D;">Chi tiết đơn hàng</p>
-                                <div class="row">
-                                    <div class="col mb-8">
-                                        <p class="small text-muted mb-1">Ngày đặt hàng</p>
-                                        <p><?php echo $row_select_donhang['ngayorder'] ?></p>
-                                    </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h6 class="text-uppercase text-muted small fw-bold">Địa chỉ nhận hàng</h6>
+                <p class="mb-1 fw-bold"><?php echo $order['hoten']; ?></p>
+                <p class="mb-1 small"><?php echo $order['sodt']; ?></p>
+                <p class="small text-secondary">
+                    <?php echo $order['diachi'] . ", " . $order['phuongxa'] . ", " . $order['quanhuyen'] . ", " . $order['tinhthanh']; ?>
+                </p>
+            </div>
+            <div class="col-md-6 text-md-right">
+                <h6 class="text-uppercase text-muted small fw-bold">Thông tin thanh toán</h6>
+                <p class="mb-1 small">Phương thức: <strong><?php echo ucfirst($order['hinhthucthanhtoan']); ?></strong></p>
+                <p class="mb-1 small">Ngày đặt: <?php echo date("d/m/Y H:i", strtotime($order['ngayorder'])); ?></p>
+            </div>
+        </div>
 
-                                    <div class="col mb-3" style="padding-left: 530px;">
-                                        <p class="small text-muted mb-1">Mã đơn hàng</p>
-                                        <p><?php echo $row_select_donhang['thanhtoanid'] ?></p>
-                                    </div>
-                                </div>
+        <div class="table-responsive">
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Phân loại</th>
+                        <th>Size</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-right">Đơn giá</th>
+                        <th class="text-right">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // SỬA LỖI TẠI ĐÂY: Đổi tct.giasp thành sp.giasp (Vì giá nằm trong bảng sanpham)
+                    $sql_detail = "SELECT sp.tensp, c.colorname, pcs.size, tct.soluong, sp.giasp 
+                                   FROM thanhtoanct tct
+                                   JOIN procolorsize pcs ON tct.productcolorsizeid = pcs.procolorsizeid
+                                   JOIN productcolor pc ON pcs.procolorid = pc.productcolorid
+                                   JOIN color c ON pc.colorid = c.colorid  
+                                   JOIN sanpham sp ON pc.productid = sp.sanphamid
+                                   WHERE tct.thanhtoanid = '$iddonhang'";
+                    
+                    $res_detail = $connect->query($sql_detail);
+                    $tam_tinh = 0;
 
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="text-muted">Phương thức thanh toán: <span style="color: black;"><?php echo $row_select_donhang['hinhthucthanhtoan'] ?></span></p>
-                                    </div>
-                                </div>
+                    if($res_detail && $res_detail->num_rows > 0){
+                        while($item = $res_detail->fetch_assoc()){
+                            $thanh_tien = $item['soluong'] * $item['giasp'];
+                            $tam_tinh += $thanh_tien;
+                    ?>
+                        <tr>
+                            <td><?php echo $item['tensp']; ?></td>
+                            <td><span class="badge badge-light border text-dark"><?php echo $item['colorname']; ?></span></td>
+                            <td><?php echo $item['size']; ?></td>
+                            <td class="text-center"><?php echo $item['soluong']; ?></td>
+                            <td class="text-right"><?php echo number_format($item['giasp'], 0, ',', '.'); ?> đ</td>
+                            <td class="text-right fw-bold"><?php echo number_format($thanh_tien, 0, ',', '.'); ?> đ</td>
+                        </tr>
+                    <?php } } ?>
+                </tbody>
+            </table>
+        </div>
 
-                                <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
-                                    <table class="order_detail_list" style="border-collapse:collapse;width:100%;background-color: #f2f2f2;">
-                                        <?php
-                                        $sql_select_chitietsanpham = "select * from thanhtoan,thanhtoanct,procolorsize,productcolor,sanpham,color where thanhtoanct.thanhtoanid=thanhtoan.thanhtoanid and thanhtoanct.productcolorsizeid=procolorsize.procolorsizeid and procolorsize.procolorid=productcolor.productcolorid and productcolor.productid=sanpham.sanphamid and color.colorid=productcolor.colorid and thanhtoan.thanhtoanid='" . $iddonhang . "';";
-
-                                        $result_select_chitietsanpham = $connect->query($sql_select_chitietsanpham);
-
-                                        $stt = 0;
-                                        $tongtienhang = 0;
-                                        $tongtienhoadon = 0;
-
-                                        if ($result_select_chitietsanpham->num_rows > 0) {
-                                            while ($row_select_chitietsanpham = $result_select_chitietsanpham->fetch_assoc()) {
-                                                $tongtienhoadon = $row_select_chitietsanpham['tongtien'];
-                                                $tongtienhang = $tongtienhang + $row_select_chitietsanpham['soluong'] * $row_select_chitietsanpham['giasp'];
-                                                $stt++;
-                                                echo "<tr>";
-                                                echo "<td id='id_order_detail_list_ordnumber' name='id_order_detail_list_ordnumber'>$stt</td>";
-                                                echo "<td id='id_order_detail_list_tensanpham' name='id_order_detail_list_tensanpham'>" . $row_select_chitietsanpham['tensp'] . "</td>";
-                                                echo "<td id='id_order_detail_list_procolorsizeid' name='id_order_detail_list_procolorsizeid'>" . $row_select_chitietsanpham['colorname'] . "</td>";
-                                                echo "<td id='id_order_detail_list_soluongsanpham' name='id_order_detail_list_soluongsanpham'>" . $row_select_chitietsanpham['soluong'] . "</td>";
-                                                echo "<td id='id_order_detail_list_giatiensanpham' name='id_order_detail_list_giatiensanpham'>" . $row_select_chitietsanpham['giasp'] . " VND</td>";
-                                                echo "</tr>";
-                                            }
-                                        }
-                                        ?>
-                                    </table>
-
-                                    <div class="row">
-                                        <div class="col-md-8 col-lg-9">
-                                            <p class="mb-0">Tổng tiền</p>
-                                        </div>
-                                        <div class="col-md-4 col-lg-3">
-                                            <p class="mb-0"><?php echo $row_select_donhang['tienhang'] ?> VND</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-8 col-lg-9">
-                                            <p>Giảm giá</p>
-                                        </div>
-                                        <div class="col-md-4 col-lg-3">
-                                            <p><?php echo $row_select_donhang['magiamgiaid'] ?></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-8 col-lg-9">
-                                            <p class="mb-0">Phí vận chuyển</p>
-                                        </div>
-                                        <div class="col-md-4 col-lg-3">
-                                            <p class="mb-0"><?php echo $row_select_donhang['phiship'] ?> VND</p>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row my-4">
-                                    <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                                        <p class="lead fw-bold mb-0" style="color: #E6A32D;"><?php echo $row_select_donhang['tongtien'] ?> VND</p>
-                                    </div>
-                                </div>
-
-                                <p class="lead fw-bold mb-4 pb-2" style="color: #E6A32D;">Tình trạng</p>
-
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-
-                                        <div class="horizontal-timeline">
-                                            <?php
-                                            $trangthai = $row_select_donhang['trangthai'];
-
-                                            if ($trangthai == "Đã xác nhận") {
-                                                echo '<ul class="list-inline items d-flex justify-content-between">
-                <li class="list-inline-item items-list">
-                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Đặt hàng</p>
-                </li>
-                <li class="list-inline-item items-list">
-                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Chờ xác nhận</p>
-                </li>
-                <li class="list-inline-item items-list text-end">
-                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Đã xác nhận</p>
-                </li>
-            </ul>';
-                                            } else if ($trangthai == "Chờ xác nhận") {
-                                                echo '<ul class="list-inline items d-flex justify-content-between">
-                <li class="list-inline-item items-list">
-                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Đặt hàng</p>
-                </li>
-                <li class="list-inline-item items-list text-end">
-                    <p class="py-1 px-2 rounded text-black" style="background-color: #FFCC57;">Chờ xác nhận</p>
-                </li>
-            </ul>';
-                                            }
-                                            ?>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
+        <div class="row mt-3">
+            <div class="col-md-5 offset-md-7">
+                <div class="border-top pt-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Tổng tiền hàng</span>
+                        <span><?php echo number_format($tam_tinh, 0, ',', '.'); ?> đ</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Phí vận chuyển</span>
+                        <span><?php echo number_format($order['phiship'], 0, ',', '.'); ?> đ</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">Giảm giá</span>
+                        <span class="text-success">
+                            <?php echo ($order['magiamgiaid'] != "") ? $order['magiamgiaid'] : "0đ"; ?>
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold text-dark">Thành tiền</h5>
+                        <h4 class="fw-bold" style="color: #CF7486;"><?php echo number_format($order['tongtien'], 0, ',', '.'); ?> đ</h4>
                     </div>
                 </div>
             </div>
+        </div>
 
-
-        </section>
-    </body>
+    </div>
+    <?php } else { echo "<div class='container mt-5 text-center'>Không tìm thấy đơn hàng!</div>"; } ?>
 </body>
-
 </html>

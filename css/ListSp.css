@@ -1,225 +1,256 @@
-body{
-    margin: 20px;
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&display=swap');
+
+:root {
+    --primary-color: #CF7486;
+    --primary-hover: #b05f6e;
+    --text-color: #333;
+    --bg-light: #f8f9fa;
+    --border-color: #eee;
+}
+
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: var(--bg-light);
+    margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container-list{
-    width: auto;
-    height: auto;
+.container-list {
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
-.col-menu{
-    padding-bottom: 20px;
+/* --- SIDEBAR STYLES --- */
+.col-menu {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: fit-content;
+}
+
+/* Top Menu (Tất cả | Nam | Nữ) */
+.left-row-menu {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-
 }
 
-.col-list{
-    width: auto;
-    height: auto;
+.nav-link-a {
+    font-size: 16px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    transition: 0.3s;
+    padding: 5px 0;
 }
 
-.left-row-menu{
-    height: auto;
-    border-bottom: 2px solid black;
-    padding-bottom: 10px;
-    margin-right: 10px;
+.nav-link-a:hover, .nav-link-a.active {
+    color: var(--primary-color);
 }
 
-.nav-item-menu{
-    position: relative;
+.nav-item-menu span {
+    color: #ddd;
+    margin: 0 5px;
 }
 
-.nav-item-menu a{
+/* Accordion Menu (Loại giày, Hãng...) */
+/* Sửa lỗi font chữ menu bên trái */
+.btn-same {
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 800; /* Độ đậm chữ */
+    text-transform: uppercase;
+    color: var(--text-color) !important;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: none !important;
+    box-shadow: none !important;
+    
+    /* QUAN TRỌNG: Thêm dòng này để nhận font chung của body */
+    font-family: 'Nunito Sans', sans-serif !important; 
+    text-decoration: none !important; /* Bỏ gạch chân nếu có */
+}
+
+/* Sửa thêm cho các link con bên trong (Bóng đá, Nike...) */
+.status-item a {
     text-decoration: none;
-}
-.nav-item-menu span{
-    position: absolute;
-    top: 5px;
-    right: 0px;
-    font-size: 25px;
-    color: gainsboro;
-}
-
-.nav-link-a{
-    font-size: 25px;
-    font-weight: 600;
-    color: gainsboro;
-}
-
-.nav-link-a:hover{
-    color: black;
-}
-
-
-
-/* Css right item list */
-
-
-.item{
-    height: auto;
-    margin-bottom: 25px;
-}
-
-.item-img{
-    width: 100%;
-    height: 270px;
-    background-repeat: no-repeat, repeat;
-    background-size: contain;
-}
-
-.item-img img:last-child {
-    display: none;
-}
-.item:hover img:last-child {
+    color: #555;
+    font-size: 15px;
     display: block;
-}
-.item:hover img:first-child {
-    display: none;
+    font-weight: 600; /* Tăng độ đậm một chút cho dễ đọc */
+    font-family: 'Nunito Sans', sans-serif !important; /* Đảm bảo nhận đúng font */
 }
 
-.item-img img{
+.btn-same:hover {
+    color: var(--primary-color) !important;
+}
+
+.row-menu-under {
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.status-item {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+}
+
+.status-item li {
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.status-item li:hover {
+    background-color: #fff0f3; /* Hồng rất nhạt */
+}
+
+.status-item a {
+    text-decoration: none;
+    color: #555;
+    font-size: 15px;
+    display: block;
+    font-weight: 500;
+}
+
+.status-item li:hover a {
+    color: var(--primary-color);
+}
+
+/* --- PRODUCT GRID STYLES (Giống Homepage) --- */
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: 100%;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: #ffe0e6;
+}
+
+/* Image Container */
+.item-img {
+    width: 100%;
+    aspect-ratio: 1/1; /* Vuông */
+    position: relative;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.item-img img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
 }
 
-.img-button{
-    height: 65px;
-    position: relative;
-    bottom: 0;
-    top: -65px;
-    text-align: center;
-    margin-bottom: -65px;
-    display: none;
+/* Logic đổi ảnh hover */
+.item-img .hover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
 }
 
-.img-button a{
-    width: 150px;
-    height: auto;
-    background-color: #FFCC57;
-    color: black;
-    padding: 13px;
-    display: inline-block;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 20px;
+.product-card:hover .hover-img {
+    opacity: 1;
 }
 
-.img-button:hover a{
-  transition: 0.3s;
-  color: white;
-  background-color: #E6A32D;
-  text-decoration: none;
+/* Button Mua Hàng */
+.add-to-cart-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+    width: 80%;
 }
 
-.item:hover .img-button{
-    display: block;
-}
-
-.item-info{
+.add-to-cart-btn .btn {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50px;
     width: 100%;
-    height: auto;
-    text-align: center;
-
-}
-
-.item-info hr{
-    border: 1px dashed black;
-    margin-bottom: 5px;
-}
-
-.item-info a{
+    font-weight: 700;
     font-size: 14px;
-    color: black;
-    text-decoration: none;
-    font-weight: 800;
-}
-
-.item-info a:hover{
-    color: #F15E2C;
-}
-
-.item-info p{
-    margin-bottom: 0px;
-    font-size: 14px;
-}
-
-.item-info span{
-    font-weight: 700;
-}
-
-/* Css left menu*/
-
-.left-row-item{
-    width: 100%;
-}
-
-.nav-item-under{
-    width: 100%;
-    border-bottom: 2px solid black;
-    padding-bottom: 10px;
-}
-
-.nav-item-under a{
-    text-decoration: none;
-    color: black;
-    font-size: 17px;
-}
-
-.list-item-under{
-    border: none;
-    padding-bottom: 5px;
-    margin-top: 10px;
-}
-
-.list-item-under:hover{
-    background-color: gainsboro;
-}
-
-.row-menu-under{
-    padding-left: 0px;
-    border-bottom: 2px dashed black;
-}
-
-.btn-same{
-    font-size: 23px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-weight: 700;
+    padding: 8px 0;
+    box-shadow: 0 4px 10px rgba(207, 116, 134, 0.4);
     border: none;
 }
 
-.status-item{
-    margin-left: 0px;
-    padding-left: 0px;
+.add-to-cart-btn .btn:hover {
+    background-color: var(--primary-hover);
 }
 
-.status-item li{
-    margin-bottom: 5px;
-    list-style: none;
-    padding-left: 30px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.product-card:hover .add-to-cart-btn {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
-.status-item a{
-    text-decoration: none;
-    color: black;
-    font-size: 17px;
-
+/* Product Info */
+.item-info {
+    padding: 15px;
+    text-align: center;
 }
 
-.status-item li:hover{
-    background-color: gainsboro;
-}
-
-.caret.caret-up {
-    border-top-width: 0;
-    border-bottom: 4px solid #fff;
-}
-
-.row-menu-under span{
+.product-name {
     font-size: 15px;
-    margin-left: 6px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 44px; /* Cố định chiều cao tên */
+}
+
+.product-name:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.price-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-new {
+    color: var(--primary-color);
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.price-old {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 13px;
+    font-weight: 400;
 }
