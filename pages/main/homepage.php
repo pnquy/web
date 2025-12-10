@@ -19,7 +19,7 @@
 
 <body>
     <section class="hero mb-5">
-        <div class="hero__slider owl-carousel">
+        <div class="">
             <div class="container-fluid p-0">
                 <img src="img/img_homepage/banner.png" alt="Banner" class="w-100" style="object-fit: cover; max-height: 600px;">
             </div>
