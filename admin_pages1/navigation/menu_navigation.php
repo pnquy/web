@@ -13,12 +13,12 @@
             </div>
         </div>
 
-        <i class='bx bx-chevron-right toggle-hnm'></i>
+        <i class='bx bx-chevron-right toggle-hnm' style="display:flex"></i>
     </header>
 
     <div class="menu-bar menu-hnm">
         <div class="menu">
-            <ul class="menu-links">
+            <ul class="menu-links" style="padding:0px">
                 <li class="nav-link-hnm">
                     <a href="../products/products_management.php">
                         <i class='bx bx-store-alt icon'></i>
