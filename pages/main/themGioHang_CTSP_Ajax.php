@@ -1,54 +1,61 @@
 <?php 
-    $connect = new mysqli('localhost','root','','dbdoan');
     session_start();
+    include('../../config/config.php'); // Đảm bảo đường dẫn kết nối đúng
 
-    $id = $_POST['id'];
-    $size = $_POST['size'];
-    $sl = $_POST['sl'];
-    $ten = $_POST['ten'];
-    $gia = $_POST['gia'];
-    $img = $_POST['img'];
-    // echo $id;
-    // $ten = $_SESSION['dangnhap'];
-    // $sql = "select khachhangid from khachhang where hoten = '" . $ten . "' limit 1";
-    // $sodt = $_SESSION['dangnhap'];
-    // $sql = "select khachhangid from khachhang where sodt = '" . $sodt . "' limit 1";
-    // $rs3 = $connect->query($sql);
-    // $khid = "";
-    // while ($row3 = $rs3->fetch_row()) {
-    //   $khid = $row3[0];
-    // }
-
-
-    $sql1 = "select procolorsizeid from procolorsize, productcolor where procolorsize.procolorid = productcolor.productcolorid and procolorid='" . $id . "' and size='" . $size . "'";
-    $rs4 = $connect->query($sql1);
-    $procolorsizeid = "";
-    while ($row4 = $rs4->fetch_row()) {
-        $procolorsizeid = $row4[0];
+    // Kiểm tra kết nối
+    if (!isset($connect)) {
+        $connect = new mysqli('localhost','root','','dbdoan');
+        $connect->set_charset("utf8");
     }
 
+    if(isset($_POST['id']) && isset($_POST['size'])) {
+        $id = $_POST['id'];     // Đây là procolorid
+        $size = $_POST['size'];
+        $sl = (int)$_POST['sl']; // Ép kiểu số ngay từ đầu
+        $ten = $_POST['ten'];
+        $gia = $_POST['gia'];
+        $img = $_POST['img'];
 
-    if (!isset($_SESSION['cart'][$procolorsizeid])) {
-        $_SESSION['cart'][$procolorsizeid] = array(
-        'ten' => $ten,
-        'size' => $size,
-        'sl' => $sl,
-        'gia' => $gia,
-        'img' => $img,
-        'productcolorsizeid' => $procolorsizeid,
-        'productcolorid' => $id
-        );
-        $check = true;
-        echo "Thêm sản phẩm thành công";
-
+        // 1. Tìm ID chi tiết sản phẩm (procolorsizeid)
+        $sql1 = "SELECT procolorsizeid FROM procolorsize WHERE procolorid='" . $id . "' AND size='" . $size . "'";
+        $rs4 = $connect->query($sql1);
         
+        $procolorsizeid = "";
+        if ($rs4 && $rs4->num_rows > 0) {
+            $row4 = $rs4->fetch_row();
+            $procolorsizeid = $row4[0];
+        }
+
+        // 2. Kiểm tra nếu tìm thấy ID hợp lệ mới xử lý
+        if ($procolorsizeid != "") {
+            
+            // Trường hợp 1: Sản phẩm chưa có trong giỏ -> Thêm mới
+            if (!isset($_SESSION['cart'][$procolorsizeid])) {
+                $_SESSION['cart'][$procolorsizeid] = array(
+                    'ten' => $ten,
+                    'size' => $size,
+                    'sl' => $sl,         // Key là 'sl'
+                    'gia' => $gia,
+                    'img' => $img,
+                    'productcolorsizeid' => $procolorsizeid,
+                    'productcolorid' => $id
+                );
+                echo "Thêm sản phẩm thành công";
+            } 
+            // Trường hợp 2: Sản phẩm đã có -> Cộng dồn số lượng
+            else {
+                // SỬA LỖI: Dùng đúng key $procolorsizeid và đúng trường 'sl'
+                $sl_hien_tai = (int)$_SESSION['cart'][$procolorsizeid]['sl'];
+                $sl_moi = $sl_hien_tai + $sl;
+                
+                $_SESSION['cart'][$procolorsizeid]['sl'] = $sl_moi;
+                echo "Cập nhật số lượng thành công";  
+            }
+
+        } else {
+            echo "Lỗi: Không tìm thấy thông tin sản phẩm (Size không hợp lệ)";
+        }
     } else {
-        $_SESSION['cart'][$procolorsizeid]['sl'] += $sl;
-        echo "Cập nhật số lượng thành công";
-        
+        echo "Lỗi: Dữ liệu gửi lên không đủ";
     }
-    
-    
-      
-    
 ?>

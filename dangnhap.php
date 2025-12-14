@@ -48,7 +48,7 @@
             
             <div class="text-center mb-4">
                 <span style="font-size: 14px; color: #666;">Chưa có tài khoản? </span>
-                <a href='dangki.php' class="link-register">Đăng ký ngay</a>
+                <a href='index.php?quanly=dangki' class="link-register">Đăng ký ngay</a>
             </div>
         </div>
 

@@ -14,7 +14,7 @@
     if ($rs->num_rows > 0) {
         while ($row = $rs->fetch_row()) {
             if(password_verify($matkhau, $row[0])){
-                if (isset($_SESSION['url']) && $_SESSION['url'] != "http://localhost:3000/index.php?quanly=dangki")
+                if (isset($_SESSION['url']) && $_SESSION['url'] != "http://localhost:3000/index.php")
                     $url = $_SESSION['url'];
                 else
                     $url = "index.php"; 

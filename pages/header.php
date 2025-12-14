@@ -1,5 +1,5 @@
 <?php
-if (isset($_GET['action']) == 'dangxuat') {
+if (isset($_GET['action']) && $_GET['action'] == 'dangxuat') {
     unset($_SESSION['dangnhap']);
     unset($_SESSION['cart']);
     unset($_SESSION['magiamgia']);
@@ -45,10 +45,10 @@ if (isset($_GET['action']) == 'dangxuat') {
                             Thương hiệu
                         </a>
                         <ul class="dropdown-menu border-0 shadow-lg mt-2">
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=5">Nike</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=6">Adidas</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=7">Biti's</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=8">Puma</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&brand=dongsp1">Nike</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&brand=dongsp2">Adidas</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&brand=dongsp3">Biti's</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&brand=dongsp4">Puma</a></li>
                         </ul>
                     </li>
 
@@ -57,9 +57,9 @@ if (isset($_GET['action']) == 'dangxuat') {
                             Giới tính
                         </a>
                         <ul class="dropdown-menu border-0 shadow-lg mt-2">
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=2">Nam</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=3">Nữ</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=1">Unisex</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&gender=Nam">Nam</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&gender=Nữ">Nữ</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham">Tất cả</a></li>
                         </ul>
                     </li>
 
@@ -68,15 +68,15 @@ if (isset($_GET['action']) == 'dangxuat') {
                             Loại giày
                         </a>
                         <ul class="dropdown-menu border-0 shadow-lg mt-2">
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=17">Bóng đá</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=18">Bóng rổ</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=19">Gym</a></li>
-                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&id=20">Chạy bộ</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&style=style1">Bóng đá</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&style=style2">Bóng rổ</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&style=style3">Gym</a></li>
+                            <li><a class="dropdown-item py-2" href="index.php?quanly=danhmucsanpham&style=style4">Chạy bộ</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-uppercase fw-bold" href="index.php?quanly=danhmucsanpham&id=4" style="color: #CF7486;">Sale Off</a>
+                        <a class="nav-link text-uppercase fw-bold" href="index.php?quanly=danhmucsanpham&sale=1" style="color: #CF7486;">Sale Off</a>
                     </li>
                 </ul>
 

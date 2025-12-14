@@ -4,6 +4,7 @@ if (isset($_SERVER["HTTP_REFERER"])) {
     $_SESSION['url'] = $_SERVER["HTTP_REFERER"];
 }
 ?>
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 

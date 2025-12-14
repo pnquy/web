@@ -3,7 +3,7 @@
 <?php
 if (!isset($_SESSION['dangnhap'])) {
     echo "<div class='container py-5 text-center'>
-            <img src='img/img_homepage/login.png' style='width: 100px; opacity: 0.5;'>
+            <img src='img/img_homepage/logo.png' style='width: 100px; opacity: 0.5;'>
             <h4 class='mt-3'>Vui lòng đăng nhập để thanh toán</h4>
             <a href='index.php?quanly=dangnhap' class='btn btn-dark rounded-pill px-4 mt-2'>Đăng nhập ngay</a>
           </div>";

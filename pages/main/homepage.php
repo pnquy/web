@@ -74,7 +74,7 @@
             $str_nike = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp1' LIMIT 4";
             $str_adidas = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp2' LIMIT 4";
             $str_bitis = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp3' LIMIT 4";
-
+            $str_puma = "SELECT productcolorid, tensp, giasp, img1, img2 FROM sanpham, productcolor, dongsp WHERE sanpham.dongspid = dongsp.dongspid AND sanpham.sanphamid = productcolor.productid AND dongsp.dongspid = 'dongsp4' LIMIT 4";
             // --- NIKE SECTION ---
             $rs_nike = $connect->query($str_nike);
             if ($rs_nike && $rs_nike->num_rows > 0) {
@@ -142,6 +142,34 @@
                 echo "<h3 class='mb-4 border-bottom pb-2' style='border-color: #000 !important; display:inline-block;'>Biti's Collection</h3>";
                 echo "<div class='row'>";
                 while ($row = $rs_bitis->fetch_row()) { ?>
+                    <div class="col-lg-3 col-md-4 col-6 mb-4">
+                        <div class="card product-card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+                            <div class="product-img-wrap position-relative bg-light">
+                                <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>">
+                                    <img src="uploads/<?php echo $row[3] ?>" class="card-img-top img-fluid" style="max-height: 262px;" alt="<?php echo $row[1] ?>">
+                                    <img src="uploads/<?php echo $row[4] ?>" class="card-img-top img-fluid position-absolute top-0 start-0 hover-img" style="opacity:0; transition:0.3s;" alt="<?php echo $row[1] ?>">
+                                </a>
+                                <div class="add-to-cart-btn position-absolute bottom-0 start-50 translate-middle-x mb-3" style="opacity:0; transition:0.3s;">
+                                    <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>" class="btn btn-dark rounded-pill px-4 shadow">Xem ngay</a>
+                                </div>
+                            </div>
+                            <div class="card-body text-center d-flex flex-column justify-content-between">
+                                <h6 class="card-title mb-2">
+                                    <a href="index.php?quanly=chitietsanpham&id=<?php echo $row[0] ?>" class="text-decoration-none text-dark fw-bold"><?php echo $row[1] ?></a>
+                                </h6>
+                                <p class="card-text text-danger fw-bold fs-5"><?php echo number_format($row[2], 0, ',', '.') ?>đ</p>
+                            </div>
+                        </div>
+                    </div>
+                <?php }
+                echo "</div></div>";
+            }
+            $rs_puma = $connect->query($str_puma);
+            if ($rs_puma && $rs_puma->num_rows > 0) {
+                echo "<div class='brand-section mb-5'>";
+                echo "<h3 class='mb-4 border-bottom pb-2' style='border-color: #000 !important; display:inline-block;'>Biti's Collection</h3>";
+                echo "<div class='row'>";
+                while ($row = $rs_puma->fetch_row()) { ?>
                     <div class="col-lg-3 col-md-4 col-6 mb-4">
                         <div class="card product-card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
                             <div class="product-img-wrap position-relative bg-light">
