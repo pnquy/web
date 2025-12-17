@@ -15,7 +15,6 @@
 </head>
 <body>
     <?php
-    // Include Config & Menu
     include('../../../config/config.php');
     include('../../navigation/menu_navigation.php');
     ?>
@@ -23,7 +22,6 @@
     <section class="home-section">
         <div class="container-fluid">
             <?php 
-                // Gọi nội dung thống kê
                 include('../../menu/blog_section.php'); 
             ?>
         </div>
@@ -34,7 +32,6 @@
     <script src="../../../jq.js"></script>
     <script src="../dashboard/admin_dashboard.js"></script>
     <script>
-        // Script toggle sidebar
         const body = document.querySelector('body'),
         sidebar = body.querySelector('nav'),
         toggle = body.querySelector(".toggle-hnm");

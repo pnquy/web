@@ -1,12 +1,10 @@
 <?php
-// Kết nối Database
 $connect = new mysqli('localhost', 'root', '', 'dbdoan');
 if ($connect->errno !== 0) {
     die("Error: Could not connect to the database. An error " . $connect->error . " ocurred.");
 }
 $connect->set_charset('utf8');
 
-// Logic xử lý query dựa trên ID (Giữ nguyên logic của bạn)
 $idsp = isset($_GET['idsp']) ? $_GET['idsp'] : 1;
 $str = "";
 
@@ -14,7 +12,6 @@ switch ($idsp) {
     case 1: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid;"; break;
     case 2: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and danhmuc = 'Nam';"; break;
     case 3: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and danhmuc = 'Nữ';"; break;
-    // ... (Giữ nguyên các case khác của bạn để tiết kiệm diện tích) ...
     case 4: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid;"; break;
     case 5: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp1';"; break;
     case 6: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and dongsp.dongspid='dongsp2';"; break;
@@ -32,7 +29,6 @@ switch ($idsp) {
     case 20: $str = "select productcolorid, tensp, giasp, img1, img2 from sanpham, productcolor, dongsp where sanpham.dongspid = dongsp.dongspid and sanpham.sanphamid = productcolor.productid and sanpham.styleid='style4';"; break;
 }
 
-// Logic Khuyến mãi
 $str1 = "SELECT * FROM saleoff";
 date_default_timezone_set('Asia/Jakarta');
 $datenow = date("Y-m-d G:i:s", time());
@@ -58,7 +54,6 @@ if(count($arr) != 0){
     }
 }
 
-// Thực thi query sản phẩm
 $rs = $connect->query($str);
 if($rs && $rs->num_rows > 0){
     while($row = $rs->fetch_row()){
@@ -74,7 +69,6 @@ if($rs && $rs->num_rows > 0){
             $has_sale = true;
         }
 
-        // Nếu là trang Sale Off (idsp=4) thì chỉ hiện sp giảm giá
         if($idsp == 4 && !$has_sale) continue;
         ?>
 

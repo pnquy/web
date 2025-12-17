@@ -35,14 +35,11 @@
                     $mysqli = new mysqli("localhost", "root", "", "dbdoan");
                 }
 
-                // Lấy danh sách đơn hàng + Tên khách hàng (nếu có thể join)
-                // Ở đây tôi dùng bảng thanhtoan, bạn có thể join thêm bảng khachhang nếu muốn hiện tên
                 $sql_order = "SELECT * FROM thanhtoan ORDER BY thanhtoanid DESC";
                 $rs_order = $mysqli->query($sql_order);
 
                 if($rs_order && $rs_order->num_rows > 0) {
                     while($row = $rs_order->fetch_assoc()) {
-                        // Xử lý màu trạng thái
                         $status_class = 'bg-secondary';
                         if($row['trangthai'] == 'Chờ xác nhận') $status_class = 'bg-warning text-dark';
                         elseif($row['trangthai'] == 'Đã xác nhận') $status_class = 'bg-info text-dark';

@@ -1,22 +1,20 @@
 <?php 
     session_start();
-    include('../../config/config.php'); // Đảm bảo đường dẫn kết nối đúng
+    include('../../config/config.php');
 
-    // Kiểm tra kết nối
     if (!isset($connect)) {
         $connect = new mysqli('localhost','root','','dbdoan');
         $connect->set_charset("utf8");
     }
 
     if(isset($_POST['id']) && isset($_POST['size'])) {
-        $id = $_POST['id'];     // Đây là procolorid
+        $id = $_POST['id'];
         $size = $_POST['size'];
-        $sl = (int)$_POST['sl']; // Ép kiểu số ngay từ đầu
+        $sl = (int)$_POST['sl'];
         $ten = $_POST['ten'];
         $gia = $_POST['gia'];
         $img = $_POST['img'];
 
-        // 1. Tìm ID chi tiết sản phẩm (procolorsizeid)
         $sql1 = "SELECT procolorsizeid FROM procolorsize WHERE procolorid='" . $id . "' AND size='" . $size . "'";
         $rs4 = $connect->query($sql1);
         
@@ -26,15 +24,13 @@
             $procolorsizeid = $row4[0];
         }
 
-        // 2. Kiểm tra nếu tìm thấy ID hợp lệ mới xử lý
         if ($procolorsizeid != "") {
             
-            // Trường hợp 1: Sản phẩm chưa có trong giỏ -> Thêm mới
             if (!isset($_SESSION['cart'][$procolorsizeid])) {
                 $_SESSION['cart'][$procolorsizeid] = array(
                     'ten' => $ten,
                     'size' => $size,
-                    'sl' => $sl,         // Key là 'sl'
+                    'sl' => $sl,
                     'gia' => $gia,
                     'img' => $img,
                     'productcolorsizeid' => $procolorsizeid,
@@ -42,14 +38,12 @@
                 );
                 echo "Thêm sản phẩm thành công";
             } 
-            // Trường hợp 2: Sản phẩm đã có -> Cộng dồn số lượng
             else {
-                // SỬA LỖI: Dùng đúng key $procolorsizeid và đúng trường 'sl'
                 $sl_hien_tai = (int)$_SESSION['cart'][$procolorsizeid]['sl'];
                 $sl_moi = $sl_hien_tai + $sl;
                 
                 $_SESSION['cart'][$procolorsizeid]['sl'] = $sl_moi;
-                echo "Cập nhật số lượng thành công";  
+                echo "Cập nhật số lượng thành công";
             }
 
         } else {

@@ -95,23 +95,20 @@
             <div class="col-lg-9 col-md-8">
                 <div class="row right-item">
                     <?php
-                    // --- LOGIC XỬ LÝ KHUYẾN MÃI (Giữ nguyên logic của bạn) ---
                     date_default_timezone_set('Asia/Jakarta');
                     $datenow = date("Y-m-d G:i:s", time());
                     $arr = array();
                     
-                    // Lấy danh sách chương trình khuyến mãi đang chạy
                     $sql_sale = "SELECT * FROM saleoff";
                     $rs_sale = $connect->query($sql_sale);
                     if ($rs_sale->num_rows > 0) {
                         while ($row_sale = $rs_sale->fetch_row()) {
                             if("$datenow" >= date($row_sale[1]) && "$datenow" < date($row_sale[2])){
-                                $arr["$row_sale[0]"] = "$row_sale[3]"; // Lưu % giảm giá
+                                $arr["$row_sale[0]"] = "$row_sale[3]";
                             }
                         }
                     }
 
-                    // Map sản phẩm với mức giảm giá
                     $arr_info = array();
                     if(count($arr) != 0){
                         foreach($arr as $sale_id => $percent){
@@ -119,16 +116,14 @@
                             $rs_detail = $connect->query($sql_detail);
                             if($rs_detail->num_rows > 0){
                                 while($row_detail = $rs_detail->fetch_row()){
-                                    $arr_info[$row_detail[2]] = $sale_id; // Map ProductID -> SaleID
+                                    $arr_info[$row_detail[2]] = $sale_id;
                                 }
                             }
                         }
                     }
 
-                    // --- LOGIC TÌM KIẾM ---
                     if (isset($_POST['timkiem'])) {
                         $tukhoa = $_POST['tukhoa'];
-                        // Tìm kiếm theo tên sản phẩm
                         $sql_search = "SELECT productcolorid, tensp, giasp, img1, img2, sanpham.sanphamid 
                                        FROM sanpham 
                                        JOIN productcolor ON sanpham.sanphamid = productcolor.productid 
@@ -139,12 +134,11 @@
 
                         if ($rs->num_rows > 0) {
                             while ($row = $rs->fetch_row()) {
-                                $product_id_goc = $row[5]; // ID gốc trong bảng sanpham
+                                $product_id_goc = $row[5];
                                 $giasp = $row[2];
                                 $giasp_giam = $giasp;
                                 $has_sale = false;
 
-                                // Kiểm tra giảm giá
                                 if(array_key_exists($product_id_goc, $arr_info)){
                                     $saleoffid = $arr_info[$product_id_goc];
                                     $percent = $arr[$saleoffid];
@@ -189,7 +183,7 @@
                                 </div>
 
                             <?php 
-                            } // End while
+                            }
                         } else {
                             echo "<div class='col-12 text-center py-5'>";
                             echo "<img src='img/img_homepage/empty-box.png' style='width: 100px; opacity: 0.5;'><br>";

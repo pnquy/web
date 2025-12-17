@@ -12,7 +12,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-        /* CSS tìm kiếm sản phẩm */
+        
         .search-box-container { position: relative; }
         #show-list {
             position: absolute;
@@ -38,7 +38,7 @@
             padding-left: 20px;
         }
         
-        /* Table trong form */
+        
         #id_table_sanphamcuthe img {
             width: 50px; height: 50px; 
             object-fit: cover; 
@@ -53,20 +53,16 @@
     include('../../navigation/menu_navigation.php');
     include('../../../config/config.php');
 
-    // --- LOGIC PHP XỬ LÝ FORM ---
     if (isset($_POST['themkhuyenmai'])) {
         $ngaybd = $_POST['input_ngaybatdaukhuyenmai'];
         $ngaykt = $_POST['input_ngayketthuckhuyenmai'];
         $giatri = $_POST['input_discountpercentage'];
         
-        // Kiểm tra loại phạm vi áp dụng (Dựa vào radio button 'scope')
-        $scope = $_POST['scope']; // 'line' hoặc 'specific'
+        $scope = $_POST['scope'];
 
         if ($scope == 'line') {
-            // TRƯỜNG HỢP 1: Theo Dòng Sản Phẩm
             $dongsp = $_POST['select_khuyenmai_dongsanpham'];
             
-            // Tìm tất cả ID sản phẩm thuộc dòng này (join qua bảng sanpham -> dongsp)
             $sql_find = "SELECT pc.productcolorid 
                          FROM sanpham sp
                          JOIN productcolor pc ON sp.sanphamid = pc.productid
@@ -75,13 +71,11 @@
             $rs_find = $mysqli->query($sql_find);
 
             if ($rs_find->num_rows > 0) {
-                // 1. Tạo khuyến mãi cha
                 $sql_insert_km = "INSERT INTO saleoff(ngaybd, ngaykt, giatrigiam, loaisp) VALUES ('$ngaybd','$ngaykt', '$giatri' , '$dongsp')";
                 
                 if ($mysqli->query($sql_insert_km)) {
-                    $kmid = $mysqli->insert_id; // Lấy ID vừa tạo
+                    $kmid = $mysqli->insert_id;
 
-                    // 2. Tạo chi tiết khuyến mãi
                     while ($row = $rs_find->fetch_assoc()) {
                         $procolorid = $row['productcolorid'];
                         $mysqli->query("INSERT INTO saleoffct(saleoffid, procolorid) VALUES ('$kmid', '$procolorid')");
@@ -95,19 +89,15 @@
             }
 
         } else {
-            // TRƯỜNG HỢP 2: Theo Sản Phẩm Cụ Thể
             if (isset($_POST['showtensp']) && count($_POST['showtensp']) > 0) {
                 $list_tensp = $_POST['showtensp'];
 
-                // 1. Tạo khuyến mãi cha (loaisp để trống)
                 $sql_insert_km = "INSERT INTO saleoff(ngaybd, ngaykt, giatrigiam) VALUES ('$ngaybd','$ngaykt', '$giatri')";
                 
                 if ($mysqli->query($sql_insert_km)) {
                     $kmid = $mysqli->insert_id;
 
-                    // 2. Lặp qua danh sách tên sản phẩm
                     foreach ($list_tensp as $ten) {
-                        // Tìm ProductColorID theo tên
                         $sql_find_id = "SELECT pc.productcolorid 
                                         FROM sanpham sp
                                         JOIN productcolor pc ON sp.sanphamid = pc.productid 
@@ -237,7 +227,6 @@
 
     <script>
         $(document).ready(function() {
-            // Script Toggle Sidebar
             const body = document.querySelector('body'),
             sidebar = body.querySelector('nav'),
             toggle = body.querySelector(".toggle-hnm");
@@ -245,7 +234,6 @@
                 toggle.addEventListener("click", () =>{ sidebar.classList.toggle("close"); });
             }
 
-            // 1. Xử lý chuyển đổi Radio Button
             $('input[name="scope"]').change(function() {
                 if ($('#radio_sp_cuthe').is(':checked')) {
                     $('#box_sp_cuthe').show();
@@ -256,12 +244,11 @@
                 }
             });
 
-            // 2. Tìm kiếm sản phẩm (Ajax)
             $('#searchsp').keyup(function(){
                 var searchText = $(this).val();
                 if(searchText != ''){
                     $.ajax({
-                        url: 'action.php', // Đảm bảo file này tồn tại và trả về danh sách <a>...</a>
+                        url: 'action.php',
                         method: 'post',
                         data: {query: searchText},
                         success: function(response){
@@ -273,14 +260,12 @@
                 }
             });
 
-            // 3. Chọn sản phẩm từ list gợi ý
             $(document).on('click', '#show-list a', function(e){
                 e.preventDefault();
                 var tenSP = $(this).text();
-                $('#searchsp').val(''); // Clear input
-                $('#show-list').html(''); // Clear suggestion
+                $('#searchsp').val('');
+                $('#show-list').html('');
 
-                // Kiểm tra trùng lặp trong bảng
                 var exists = false;
                 $('#id_table_sanphamcuthe input[name="showtensp[]"]').each(function(){
                     if($(this).val() === tenSP) exists = true;
@@ -290,21 +275,17 @@
                     $('.trangthai').text("Sản phẩm này đã được thêm rồi!");
                     setTimeout(() => $('.trangthai').text(''), 3000);
                 } else {
-                    // Gọi Ajax lấy hình ảnh và thêm vào bảng (timsp_post_ajax.php)
-                    // File này phải trả về <tr>...</tr> chuẩn
                     $.post("timsp_post_ajax.php", { ten: tenSP }, function(data){
                         $('#id_table_sanphamcuthe tbody').append(data);
                     });
                 }
             });
 
-            // 4. Xóa sản phẩm khỏi bảng
             $(document).on('click', '.delete', function(e) {
                 e.preventDefault();
                 $(this).closest("tr").remove();
             });
 
-            // 5. Validate Form
             $('#form-add-promotion').submit(function() {
                 var ngaybd = $('#input_ngaybatdaukhuyenmai').val();
                 var ngaykt = $('#input_ngayketthuckhuyenmai').val();
@@ -320,7 +301,6 @@
                     return false;
                 }
 
-                // Nếu chọn SP cụ thể thì phải có ít nhất 1 dòng trong bảng
                 if ($('#radio_sp_cuthe').is(':checked')) {
                     if ($('#id_table_sanphamcuthe tbody tr').length === 0) {
                         alert("Vui lòng chọn ít nhất 1 sản phẩm để khuyến mãi!"); 

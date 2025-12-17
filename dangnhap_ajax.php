@@ -18,7 +18,6 @@
                     $url = $_SESSION['url'];
                 else
                     $url = "index.php"; 
-                // $_SESSION['dangnhap'] = $row[0];
                 $_SESSION['dangnhap'] = $taikhoan;
     
                 echo $url;
@@ -27,7 +26,7 @@
             }
             
         }
-    } else {//sai mk
+    } else {
         $sql = "select password from admin where username = '".$taikhoan."'";
         $rs1 = $connect->query($sql);
         
@@ -45,11 +44,5 @@
             echo "5";
         }
     }
-
-    // echo $matkhau;
-    // $hashedPassword = password_hash($matkhau, PASSWORD_DEFAULT);
-    // echo $hashedPassword;
-    // $sql = "update admin set password = '".$hashedPassword."' where adminid = 'ad01'";
-    // $rs = $connect->query($sql);
 
 ?>

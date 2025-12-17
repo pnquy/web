@@ -51,7 +51,6 @@
 
 <script>
 $(document).ready(function() {
-    // Tìm kiếm
     $("#tableSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#myTable tr").filter(function() {
@@ -59,7 +58,6 @@ $(document).ready(function() {
         });
     });
 
-    // Xóa khuyến mãi
     $('.deleteKM').click(function() {
         if(confirm('Bạn có chắc muốn xóa khuyến mãi này?')){
             var maKM = $(this).attr('maKM');

@@ -23,7 +23,6 @@
 
         $khid = $row1['khachhangid'];
                 
-        // Update lại thông tin khách hàng
         $str = "update khachhang set hoten='" . $tenkh . "',diachi='" . $diachi . "',tinhthanh='" . $tinhthanh . "',quanhuyen='" . $quanhuyen . "',phuongxa='" . $phuongxa . "',email='" . $email . "' WHERE sodt = '" . $sdt . "'";
         $rs = $connect->query($str);
 
@@ -33,10 +32,8 @@
         $row5 = $rs5->fetch_assoc();
 
         $ngayorder = $row5['date'];
-        // $ngayorder = date("Y-m-d H:i:s");
 
         $magiamgiaid = "";
-        // Nếu có add mã giảm giá thì lấy mã giảm giá
         if (isset($_SESSION['magiamgia'])) {
             $sessionMGG = $_SESSION['magiamgia'];
             $sql2 = "select magiamgiaid from magiamgia where codemagiamgia = '" . $sessionMGG . "'";
@@ -45,12 +42,9 @@
             $magiamgiaid = $row2['magiamgiaid'];
         }
         
-        // Chèn thông tin vào bảng thanh toán
         $sql4 = "INSERT INTO `thanhtoan`(`khachhangid`, `ngayorder`, `magiamgiaid`, `tongtien`, `hinhthucthanhtoan`, `tienhang`, `phiship`, `trangthai`) VALUES ('" . $khid . "','" . $ngayorder . "','" . $magiamgiaid . "','" . $tongcong . "','" . $phuongthuc . "', '" . $tienhang . "' , '" . $phiShip . "','Chờ xác nhận')";
         $rs4 = $connect->query($sql4);
 
-        
-        // Chèn vào bảng thanh toán chi tiết
         if ($rs4 == true) {
             $sql3 = "select thanhtoanid from thanhtoan where khachhangid = '".$khid."' ORDER BY thanhtoanid DESC LIMIT 1; ";
             $rs3 = $connect->query($sql3);

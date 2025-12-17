@@ -170,7 +170,7 @@
                 filter_data();
             });
 
-            filter_data(); 
+            filter_data();
         });
     </script>
 </body>

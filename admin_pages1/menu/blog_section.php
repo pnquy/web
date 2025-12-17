@@ -1,12 +1,9 @@
 <?php
-// Kết nối (Nếu chưa có biến $mysqli từ file cha)
 if(!isset($mysqli)){
     $mysqli = new mysqli("localhost", "root", "", "dbdoan");
 }
 
-// --- LOGIC PHP THỐNG KÊ (Giữ nguyên logic của bạn) ---
 
-// 1. Thống kê doanh thu theo ngày (Biểu đồ 1)
 $sqladmin = "SELECT ngayorder, SUM(tongtien) AS total FROM thanhtoan GROUP BY ngayorder ORDER BY ngayorder ASC";
 $query_admin = $mysqli->query($sqladmin);
 $xValues = []; $yValues = [];
@@ -15,7 +12,7 @@ while ($row = $query_admin->fetch_assoc()) {
     $yValues[] = $row['total'];
 }
 
-// 2. Thống kê sản phẩm bán ra theo ngày (Biểu đồ 2)
+
 $sqladmin1 = "SELECT ngayorder, SUM(soluong) AS total FROM thanhtoanct 
               JOIN thanhtoan ON thanhtoanct.thanhtoanid = thanhtoan.thanhtoanid 
               GROUP BY ngayorder ORDER BY ngayorder ASC";
@@ -26,35 +23,30 @@ while ($row = $query_admin1->fetch_assoc()) {
     $yValues1[] = $row['total'];
 }
 
-// 3. Thống kê Hôm nay vs Hôm qua
+
 $today = date('Y-m-d');
 $yesterday = date('Y-m-d', strtotime('-1 day'));
 
-// Hôm nay
 $sqlToday = "SELECT SUM(soluong) AS total FROM thanhtoanct JOIN thanhtoan ON thanhtoanct.thanhtoanid = thanhtoan.thanhtoanid WHERE ngayorder = '$today'";
 $totalSoldToday = $mysqli->query($sqlToday)->fetch_assoc()['total'] ?? 0;
 
 $sqlRevToday = "SELECT SUM(tongtien) AS total FROM thanhtoan WHERE ngayorder = '$today'";
 $totalRevenueToday = $mysqli->query($sqlRevToday)->fetch_assoc()['total'] ?? 0;
 
-// Hôm qua
 $sqlYesterday = "SELECT SUM(soluong) AS total FROM thanhtoanct JOIN thanhtoan ON thanhtoanct.thanhtoanid = thanhtoan.thanhtoanid WHERE ngayorder = '$yesterday'";
 $totalSoldYesterday = $mysqli->query($sqlYesterday)->fetch_assoc()['total'] ?? 0;
 
 $sqlRevYesterday = "SELECT SUM(tongtien) AS total FROM thanhtoan WHERE ngayorder = '$yesterday'";
 $totalRevenueYesterday = $mysqli->query($sqlRevYesterday)->fetch_assoc()['total'] ?? 0;
 
-// Tính phần trăm thay đổi
 $percentageChangeSold = ($totalSoldYesterday != 0) ? (($totalSoldToday - $totalSoldYesterday) / $totalSoldYesterday) * 100 : 0;
 $percentageChangeRevenue = ($totalRevenueYesterday != 0) ? (($totalRevenueToday - $totalRevenueYesterday) / $totalRevenueYesterday) * 100 : 0;
 
-// 4. Tổng khách hàng
 $sqlTotalCustomers = "SELECT COUNT(*) AS totalCustomers FROM khachhang";
 $totalTotalCustomers = $mysqli->query($sqlTotalCustomers)->fetch_assoc()['totalCustomers'] ?? 0;
 ?>
 
 <style>
-    /* CSS Riêng cho trang Thống kê */
     .stats-card {
         background: #fff;
         border-radius: 15px;
@@ -208,7 +200,7 @@ $totalTotalCustomers = $mysqli->query($sqlTotalCustomers)->fetch_assoc()['totalC
         x: xArray,
         y: yArray,
         type: "bar",
-        marker: { color: "#CF7486" } // Màu hồng MTP
+        marker: { color: "#CF7486" }
     }];
 
     const layout1 = {
@@ -219,7 +211,6 @@ $totalTotalCustomers = $mysqli->query($sqlTotalCustomers)->fetch_assoc()['totalC
 
     Plotly.newPlot("myPlot", data1, layout1, {displayModeBar: false});
 
-    // 2. Biểu đồ Sản lượng (Dạng Đường)
     const xValuesChart2 = <?php echo json_encode($xValues1); ?>;
     const yValuesChart2 = <?php echo json_encode($yValues1); ?>;
 
@@ -227,7 +218,7 @@ $totalTotalCustomers = $mysqli->query($sqlTotalCustomers)->fetch_assoc()['totalC
         x: xValuesChart2,
         y: yValuesChart2,
         mode: "lines+markers",
-        line: { color: "#2eca6a", width: 3 }, // Màu xanh lá
+        line: { color: "#2eca6a", width: 3 },
         marker: { size: 6 }
     }];
 

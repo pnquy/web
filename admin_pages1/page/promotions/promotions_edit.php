@@ -11,7 +11,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <style>
-        /* CSS bổ sung cho phần chọn sản phẩm */
+        
         .search-box-container {
             position: relative;
         }
@@ -43,18 +43,15 @@
     include('../../navigation/menu_navigation.php');
     include('../../../config/config.php');
 
-    // --- LOGIC PHP XỬ LÝ CẬP NHẬT (Giữ nguyên logic của bạn nhưng làm sạch code) ---
     if (isset($_POST['suakhuyenmai'])) {
         $ngaybd = $_POST['input_sua_ngaybatdaukhuyenmai'];
         $ngaykt = $_POST['input_sua_ngayketthuckhuyenmai'];
         $giatri = $_POST['input_sua_discountpercentage'];
         $saleoffid = $_GET['edit'];
 
-        // Xóa chi tiết cũ
         $mysqli->query("DELETE FROM saleoffct WHERE saleoffid = '$saleoffid'");
 
         if (isset($_POST['input_radio_sua_dongsanpham'])) {
-            // Case 1: Dòng sản phẩm
             $dongsp = $_POST['select_sua_khuyenmai_dongsanpham'];
             $sql_update = "UPDATE saleoff SET ngaybd ='$ngaybd', ngaykt ='$ngaykt', giatrigiam ='$giatri', loaisp ='$dongsp' WHERE saleoffid = '$saleoffid'";
             $mysqli->query($sql_update);
@@ -75,7 +72,6 @@
             }
 
         } else {
-            // Case 2: Sản phẩm cụ thể
             $list_sp = isset($_POST['showtensp']) ? $_POST['showtensp'] : [];
             
             if (count($list_sp) > 0) {
@@ -98,7 +94,6 @@
         }
     }
 
-    // --- LẤY DỮ LIỆU CŨ ---
     $editval = $_GET["edit"];
     $sql_old = "SELECT * FROM saleoff WHERE saleoffid = '$editval'";
     $rs_old = $mysqli->query($sql_old);
@@ -106,7 +101,7 @@
     
     $ngayBD = date("Y-m-d", strtotime($row['ngaybd']));
     $ngayKT = date("Y-m-d", strtotime($row['ngaykt']));
-    $loaisp = $row['loaisp']; // Nếu NULL hoặc rỗng là SP cụ thể, ngược lại là Dòng SP
+    $loaisp = $row['loaisp'];
     ?>
 
     <section class="home-section">
@@ -191,7 +186,6 @@
                                         <tbody>
                                             <?php
                                             if ($loaisp == "") {
-                                                // Lấy các sản phẩm đang áp dụng khuyến mãi này
                                                 $sql_detail = "SELECT DISTINCT sp.tensp, pc.img1 
                                                                FROM saleoffct sct
                                                                JOIN productcolor pc ON sct.procolorid = pc.productcolorid
@@ -239,7 +233,6 @@
     <script src="../dashboard/admin_dashboard.js"></script>
 
     <script>
-        // Script Toggle Sidebar
         const body = document.querySelector('body'),
         sidebar = body.querySelector('nav'),
         toggle = body.querySelector(".toggle-hnm");
@@ -248,12 +241,10 @@
         }
 
         $(document).ready(function() {
-            // 1. Xử lý chuyển đổi Radio Button (Phạm vi áp dụng)
             $('input[name="sua_scope"]').change(function() {
                 if ($('#radio_sp_cuthe').is(':checked')) {
                     $('#box_sp_cuthe').show();
                     $('#box_dong_sp').hide();
-                    // Enable/Disable hidden input để PHP nhận diện
                     $('#hidden_radio_sp').prop('disabled', false);
                     $('#hidden_radio_dong').prop('disabled', true);
                 } else {
@@ -264,7 +255,6 @@
                 }
             });
 
-            // 2. Tìm kiếm sản phẩm (Ajax)
             $('#searchsp').keyup(function(){
                 var searchText = $(this).val();
                 if(searchText != ''){
@@ -281,14 +271,12 @@
                 }
             });
 
-            // 3. Chọn sản phẩm từ list gợi ý
             $(document).on('click', '#show-list a', function(e){
                 e.preventDefault();
                 var tenSP = $(this).text();
-                $('#searchsp').val(''); // Clear input
-                $('#show-list').html(''); // Clear suggestion
+                $('#searchsp').val('');
+                $('#show-list').html('');
 
-                // Kiểm tra trùng lặp
                 var exists = false;
                 $('#id_table_sua_sanphamcuthe input[name="showtensp[]"]').each(function(){
                     if($(this).val() === tenSP) exists = true;
@@ -298,19 +286,16 @@
                     $('.trangthai').text("Sản phẩm này đã được thêm rồi!");
                     setTimeout(() => $('.trangthai').text(''), 3000);
                 } else {
-                    // Gọi Ajax lấy hình ảnh và thêm vào bảng
                     $.post("timsp_post_ajax.php", { ten: tenSP }, function(data){
                         $('#id_table_sua_sanphamcuthe tbody').append(data);
                     });
                 }
             });
 
-            // 4. Xóa sản phẩm khỏi bảng
             $(document).on('click', '.delete', function() {
                 $(this).closest("tr").remove();
             });
 
-            // 5. Validate Form trước khi submit
             $('form').submit(function() {
                 var ngaybd = $('#input_sua_ngaybatdaukhuyenmai').val();
                 var ngaykt = $('#input_sua_ngayketthuckhuyenmai').val();

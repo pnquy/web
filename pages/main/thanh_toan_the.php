@@ -180,14 +180,12 @@
 
     <script>
         $(document).ready(function() {
-            // Tự động thêm dấu cách cho số thẻ
             $('#cardNumber').on('keyup', function() {
                 var val = $(this).val().replace(/\D/g, '').substring(0,16);
                 var newVal = val.replace(/(\d{4})(?=\d)/g, "$1 ");
                 $(this).val(newVal);
             });
 
-            // Tự động thêm dấu / cho ngày hết hạn
             $('#cardExpiry').on('keyup', function() {
                 var val = $(this).val().replace(/\D/g, '').substring(0,4);
                 if(val.length > 2) {
@@ -197,21 +195,16 @@
                 }
             });
 
-            // Xử lý nút Thanh toán
             $('#btnPay').click(function() {
-                // Validate cơ bản
                 if($('#cardNumber').val().length < 16 || $('#cardExpiry').val() == '' || $('#cardCvv').val() == '' || $('#cardName').val() == '') {
                     alert('Vui lòng nhập đầy đủ thông tin thẻ!');
                     return;
                 }
 
-                // Hiệu ứng Loading
                 var btn = $(this);
                 btn.html('<i class="fa fa-spinner fa-spin me-2"></i> ĐANG XỬ LÝ...').prop('disabled', true).css('opacity', '0.8');
 
-                // Giả lập delay 2 giây xử lý thanh toán
                 setTimeout(function() {
-                    // Hiện Popup
                     $('#successPopup').fadeIn();
                 }, 2000);
             });

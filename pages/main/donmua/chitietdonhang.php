@@ -9,7 +9,6 @@
     <?php
     $iddonhang = isset($_GET['id']) ? $_GET['id'] : '';
     
-    // 1. Lấy thông tin đơn hàng và khách hàng
     $sql_order = "SELECT t.*, k.hoten, k.sodt, k.diachi, k.phuongxa, k.quanhuyen, k.tinhthanh 
                   FROM thanhtoan t
                   JOIN khachhang k ON t.khachhangid = k.khachhangid
@@ -79,7 +78,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    // SỬA LỖI TẠI ĐÂY: Đổi tct.giasp thành sp.giasp (Vì giá nằm trong bảng sanpham)
                     $sql_detail = "SELECT sp.tensp, c.colorname, pcs.size, tct.soluong, sp.giasp 
                                    FROM thanhtoanct tct
                                    JOIN procolorsize pcs ON tct.productcolorsizeid = pcs.procolorsizeid

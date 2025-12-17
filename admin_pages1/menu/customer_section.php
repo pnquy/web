@@ -41,7 +41,6 @@
                 
                 if ($rs && $rs->num_rows > 0) {
                     while ($row = $rs->fetch_row()) {
-                        // Gộp địa chỉ cho gọn
                         $full_address = $row[3];
                         if($row[6]) $full_address .= ", " . $row[6];
                         if($row[5]) $full_address .= ", " . $row[5];
@@ -79,7 +78,6 @@
 </div>
 
 <script>
-    // Script tìm kiếm
     $(document).ready(function(){
         $("#customerSearch").on("keyup", function() {
             var value = $(this).val().toLowerCase();
