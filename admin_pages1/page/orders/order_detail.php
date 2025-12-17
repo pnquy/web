@@ -1,5 +1,4 @@
 <?php
-// Kiểm tra đường dẫn include cho chính xác với cấu trúc thư mục của bạn
 include('../../navigation/menu_navigation.php');
 include('../../../config/config.php');
 ?>
@@ -70,7 +69,6 @@ include('../../../config/config.php');
             if(isset($_GET['thanhtoanid'])) {
                 $thanhtoanid = $_GET['thanhtoanid'];
                 
-                // Lấy thông tin đơn hàng
                 $sql = "SELECT thanhtoan.*, magiamgia.giatrigiam FROM thanhtoan 
                         LEFT JOIN magiamgia ON thanhtoan.magiamgiaid = magiamgia.magiamgiaid 
                         WHERE thanhtoanid = '$thanhtoanid'";
@@ -138,7 +136,6 @@ include('../../../config/config.php');
                                 </thead>
                                 <tbody>
                                     <?php
-                                    // SỬA LỖI TẠI ĐÂY: Đổi tct.giasp thành sp.giasp
                                     $sql1 = "SELECT sp.tensp, tct.productcolorsizeid, tct.soluong, sp.giasp
                                              FROM thanhtoanct tct
                                              JOIN procolorsize pcs ON tct.productcolorsizeid = pcs.procolorsizeid
@@ -221,21 +218,16 @@ include('../../../config/config.php');
     <script src="../dashboard/admin_dashboard.js"></script>
     <script>
         $(document).ready(function() {
-            // Add click event to the "Xác nhận" button
             $("#btnXac_Nhan").click(function() {
-                // Perform AJAX request
                 $.ajax({
-                    url: "update_status.php", // Replace with the actual PHP script to update the status
+                    url: "update_status.php",
                     method: "POST",
                     data: {
                         thanhtoanid: "<?php echo $_GET['thanhtoanid']; ?>"
                     },
                     success: function(response) {
-                        // Check if the update was successful
                         if (response === "success") {
-                            // Update the status in the HTML
                             $(".order-details").html('<span class="check1"><i class="fa fa-check"></i></span><span class="font-weight-bold">Đã xác nhận</span>');
-                            // Reload the page
                             location.reload();
                         } else {
                             alert("Update failed. Please try again.");

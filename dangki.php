@@ -98,7 +98,6 @@
     $(document).ready(function() {
       $('input, select').on('focus click change', function() {
          var id = $(this).attr('id');
-         // Mapping ID input sang ID thông báo lỗi tương ứng
          var alertMap = {
              'name': '#alert-signup-name',
              'email': '#alert-signup-email',
@@ -116,7 +115,7 @@
       });
     });
 
-    // 2. Logic Validate Form (Giữ nguyên logic của bạn)
+   
     function validateForm() {
       var flag = false;
       
@@ -131,7 +130,7 @@
       var district = $('#district').val();
       var ward = $('#ward').val();
 
-      // Check trống địa chỉ hành chính
+      
       if(city == "") { $('#alert-signup-tinhthanh').text('Vui lòng chọn Tỉnh/Thành').show(); flag = true; }
       if(district == "") { $('#alert-signup-quanhuyen').text('Vui lòng chọn Quận/Huyện').show(); flag = true; }
       if(ward == "") { $('#alert-signup-phuongxa').text('Vui lòng chọn Phường/Xã').show(); flag = true; }
@@ -153,7 +152,7 @@
     function isValidPhoneNumber(phoneNumber) { return /((09|03|07|08|05)+([0-9]{8})\b)/g.test(phoneNumber); }
     function displayRadioValue() { return $('input[name="sex"]:checked').val(); }
 
-    // 3. API Địa chính (Giữ nguyên)
+    /
     var citis = document.getElementById("city");
     var districts = document.getElementById("district");
     var wards = document.getElementById("ward");
@@ -192,10 +191,10 @@
       };
     }
 
-    // 4. Xử lý Submit
+    
     $('#dk').click(function(e) {
-      if(validateForm() == false){ // Nếu không có lỗi (flag = false)
-        // Hiệu ứng loading
+      if(validateForm() == false){
+        
         var btn = $(this);
         var originalText = btn.text();
         btn.html('<span class="spinner-border spinner-border-sm"></span> Đang xử lý...').prop('disabled', true);

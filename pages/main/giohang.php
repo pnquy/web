@@ -1,5 +1,4 @@
 <?php ob_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,75 +12,100 @@
     <link rel="stylesheet" href="css/giohang.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style> a{ text-decoration: none; } </style>
 </head>
-<style>
-    a{
-        text-decoration: none;
-    }
-</style>
+
 <body>
     <div class="container" style="margin-top: 40px; margin-bottom: 60px;">
         <div id="alert-update-size-quantity"></div>
 
         <div class="row">
             <?php
-            // Logic PHP xử lý Session/Cookie (Giữ nguyên)
-            if (isset($_POST['xoahet'])) { unset($_SESSION['cart']); }
+            // 1. Xóa hết giỏ hàng
+            if (isset($_POST['xoahet'])) { 
+                unset($_SESSION['cart']); 
+            }
             
+            // 2. Xóa 1 sản phẩm (Cookie 'masp')
             if (isset($_COOKIE['masp'])) {
-                if(isset($_SESSION['cart'])){
-                    if (count($_SESSION['cart']) == 0) { unset($_SESSION['cart']); } 
-                    else { unset($_SESSION['cart'][$_COOKIE['masp']]); }
+                if(isset($_SESSION['cart']) && isset($_SESSION['cart'][$_COOKIE['masp']])){
+                    unset($_SESSION['cart'][$_COOKIE['masp']]);
+                    if (count($_SESSION['cart']) == 0) { unset($_SESSION['cart']); }
                 }
+                // Xóa cookie sau khi xử lý để tránh lặp lại khi reload
+                setcookie("masp", "", time() - 3600);
             }
 
-            // Logic cập nhật Size/SL từ Cookie (Giữ nguyên logic của bạn)
+            // 3. Cập nhật Size (Cookie 'size_change')
             if (isset($_COOKIE['size_change'])) {
-                $masp = $_COOKIE['size_change'];
-                $size = $_COOKIE['masp_size'];
-                $sl = $_COOKIE['masp_sl'];
-                unset($_SESSION['cart'][$masp]);
+                $masp_cu = $_COOKIE['size_change'];
+                $size_moi = $_COOKIE['masp_size'];
+                $sl_moi = $_COOKIE['masp_sl'];
 
-                $str = "select procolorid from procolorsize where procolorsizeid = '" . $masp . "'";
-                $rs = $connect->query($str);
-                if ($rs->num_rows > 0) {
-                    while ($row = $rs->fetch_row()) {
+                // Chỉ xử lý nếu sản phẩm cũ tồn tại trong giỏ
+                if(isset($_SESSION['cart'][$masp_cu])){
+                    // Lấy thông tin sản phẩm cũ để backup
+                    $sp_backup = $_SESSION['cart'][$masp_cu];
+                    
+                    // Tìm thông tin biến thể mới (dựa trên size mới)
+                    // Lấy procolorid từ masp cũ (productcolorsizeid)
+                    $str = "SELECT procolorid FROM procolorsize WHERE procolorsizeid = '" . $masp_cu . "'";
+                    $rs = $connect->query($str);
+                    
+                    if ($rs && $rs->num_rows > 0) {
+                        $row = $rs->fetch_row();
                         $procolorid = $row[0];
-                        $str1 = "select procolorsizeid from procolorsize where procolorid = '" . $procolorid . "' and size = '" . $size . "'";
+
+                        // Tìm productcolorsizeid mới dựa trên procolorid và size mới
+                        $str1 = "SELECT procolorsizeid FROM procolorsize WHERE procolorid = '" . $procolorid . "' AND size = '" . $size_moi . "'";
                         $rs1 = $connect->query($str1);
-                        if ($rs1->num_rows > 0) {
-                            while ($row1 = $rs1->fetch_row()) {
-                                $str2 = "select tensp, giasp, img1 from productcolor, sanpham where productcolor.productid = sanpham.sanphamid and productcolorid = '" . $procolorid . "'";
-                                $rs2 = $connect->query($str2);
-                                if ($rs2->num_rows > 0) {
-                                    while ($row2 = $rs2->fetch_row()) {
-                                        if (!isset($_SESSION['cart'][$row1[0]])) {
-                                            $_SESSION['cart'][$row1[0]] = array(
-                                                'ten' => $row2[0],
-                                                'size' => $size,
-                                                'sl' => $sl,
-                                                'gia' => $row2[1],
-                                                'img' => $row2[2],
-                                                'productcolorsizeid' => $row1[0],
-                                                'productcolorid' => $row[0]
-                                            );
-                                        }
-                                    }
-                                }
-                            }
+
+                        if ($rs1 && $rs1->num_rows > 0) {
+                            $row1 = $rs1->fetch_row();
+                            $masp_moi = $row1[0];
+
+                            // Cập nhật Session: Xóa cũ, Thêm mới
+                            unset($_SESSION['cart'][$masp_cu]);
+                            
+                            // Tạo phần tử mới với ID mới nhưng thông tin (Tên, Giá, Ảnh) giữ nguyên từ backup
+                            $_SESSION['cart'][$masp_moi] = array(
+                                'ten' => $sp_backup['ten'],
+                                'size' => $size_moi,
+                                'sl' => $sl_moi,
+                                'gia' => $sp_backup['gia'],
+                                'img' => $sp_backup['img'],
+                                'productcolorsizeid' => $masp_moi,
+                                'productcolorid' => $sp_backup['productcolorid']
+                            );
+
+                            echo '<script>
+                                $("#alert-update-size-quantity").html(`<div class="alert alert-success shadow-sm" role="alert"><i class="fa fa-check-circle me-2"></i> Cập nhật kích thước thành công!</div>`).fadeIn().delay(3000).fadeOut();
+                            </script>';
+                        } else {
+                            // Size mới không tồn tại hoặc hết hàng -> Không làm gì (giữ nguyên size cũ)
+                             echo '<script>alert("Kích thước này hiện không có sẵn!");</script>';
                         }
                     }
                 }
-                echo '<script>
-                    $("#alert-update-size-quantity").html(`<div class="alert alert-success shadow-sm" role="alert"><i class="fa fa-check-circle me-2"></i> Cập nhật kích thước thành công!</div>`).fadeIn().delay(3000).fadeOut();
-                </script>';
+                // Xóa cookie xử lý xong
+                setcookie("size_change", "", time() - 3600);
+                setcookie("masp_size", "", time() - 3600);
+                setcookie("masp_sl", "", time() - 3600);
             }
 
+            // 4. Cập nhật Số lượng (Cookie 'masp_change')
             if (isset($_COOKIE['masp_change'])) {
-                $_SESSION['cart'][$_COOKIE['masp_change']]['sl'] = $_COOKIE['masp_sl'];
-                echo '<script>
-                    $("#alert-update-size-quantity").html(`<div class="alert alert-success shadow-sm" role="alert"><i class="fa fa-check-circle me-2"></i> Cập nhật số lượng thành công!</div>`).fadeIn().delay(3000).fadeOut();
-                </script>';
+                $masp = $_COOKIE['masp_change'];
+                $sl = $_COOKIE['masp_sl'];
+                
+                if(isset($_SESSION['cart'][$masp])){
+                    $_SESSION['cart'][$masp]['sl'] = $sl;
+                    echo '<script>
+                        $("#alert-update-size-quantity").html(`<div class="alert alert-success shadow-sm" role="alert"><i class="fa fa-check-circle me-2"></i> Cập nhật số lượng thành công!</div>`).fadeIn().delay(3000).fadeOut();
+                    </script>';
+                }
+                setcookie("masp_change", "", time() - 3600);
+                setcookie("masp_sl", "", time() - 3600);
             }
             ?>
 
@@ -98,37 +122,51 @@
                     <?php } else { ?>
                         
                         <form action="" method="post">
-                            <?php foreach ($_SESSION['cart'] as $pro) { ?>
+                            <?php foreach ($_SESSION['cart'] as $key => $pro) { 
+                                // Kiểm tra key tồn tại để tránh lỗi Warning
+                                $ten = isset($pro['ten']) ? $pro['ten'] : 'Sản phẩm lỗi';
+                                $img = isset($pro['img']) ? $pro['img'] : 'no-image.png';
+                                $gia = isset($pro['gia']) ? $pro['gia'] : 0;
+                                $size = isset($pro['size']) ? $pro['size'] : '';
+                                $sl = isset($pro['sl']) ? $pro['sl'] : 1;
+                                $pid = isset($pro['productcolorid']) ? $pro['productcolorid'] : '';
+                                $psid = isset($pro['productcolorsizeid']) ? $pro['productcolorsizeid'] : $key;
+                            ?>
                                 <div class="cart-item cart-items">
                                     <div class="me-3">
-                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $pro['productcolorid'] ?>">
-                                            <img class="cart-item-img" src="uploads/<?php echo $pro['img'] ?>">
+                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $pid ?>">
+                                            <img class="cart-item-img" src="uploads/<?php echo $img ?>">
                                         </a>
                                     </div>
                                     
                                     <div class="cart-item-info">
-                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $pro['productcolorid'] ?>" class="cart-item-name">
-                                            <h5><?php echo $pro['ten'] ?></h5>
+                                        <a href="index.php?quanly=chitietsanpham&id=<?php echo $pid ?>" class="cart-item-name">
+                                            <h5><?php echo $ten ?></h5>
                                         </a>
                                         
                                         <div class="cart-meta">
-                                            <span class="d-none" id="masp"><?php echo $pro['productcolorsizeid'] ?></span>
-                                            <span class="d-none price"><?php echo $pro['gia'] ?></span>
+                                            <span class="d-none" id="masp"><?php echo $psid ?></span>
+                                            <span class="d-none price"><?php echo $gia ?></span>
                                             
                                             <div class="row g-2 align-items-center mt-2">
                                                 <div class="col-auto">
                                                     <label class="small text-muted">Size:</label>
                                                     <select class="form-select form-select-sm d-inline-block w-auto ms-1 form-select-size">
                                                         <?php
-                                                            $sq = "select size, sl, procolorsizeid from procolorsize where procolorid = '".$pro['productcolorid']."'";
-                                                            $res = $connect->query($sq);
-                                                            if ($res->num_rows > 0) {
-                                                                while ($rw = $res->fetch_row()) {
-                                                                    if($rw[1] > 0){
-                                                                        $selected = ($pro['productcolorsizeid'] == $rw[2]) ? 'selected' : '';
-                                                                        echo "<option value='$rw[0]' $selected>$rw[0]</option>";
+                                                            // Load size options
+                                                            if($pid != ''){
+                                                                $sq = "SELECT size, sl, procolorsizeid FROM procolorsize WHERE procolorid = '$pid'";
+                                                                $res = $connect->query($sq);
+                                                                if ($res && $res->num_rows > 0) {
+                                                                    while ($rw = $res->fetch_row()) {
+                                                                        if($rw[1] > 0){ // Chỉ hiện size còn hàng
+                                                                            $selected = ($psid == $rw[2]) ? 'selected' : '';
+                                                                            echo "<option value='$rw[0]' $selected>$rw[0]</option>";
+                                                                        }
                                                                     }
                                                                 }
+                                                            } else {
+                                                                echo "<option value='$size'>$size</option>";
                                                             }
                                                         ?>
                                                     </select>
@@ -137,7 +175,7 @@
                                                     <label class="small text-muted ms-3">Số lượng:</label>
                                                     <select class="form-select form-select-sm d-inline-block w-auto ms-1 form-select-quantity">
                                                         <?php for($i=1; $i<=8; $i++) {
-                                                            $selected = ($pro['sl'] == $i) ? 'selected' : '';
+                                                            $selected = ($sl == $i) ? 'selected' : '';
                                                             echo "<option value='$i' $selected>$i</option>";
                                                         } ?>
                                                     </select>
@@ -147,9 +185,8 @@
                                     </div>
 
                                     <div class="cart-item-actions">
-                                        <div class="total-price-item">
-                                            </div>
-                                        <button type="button" class="btn-remove" id="btn-xoa" title="Xóa sản phẩm">
+                                        <div class="total-price-item fw-bold text-danger"></div>
+                                        <button type="button" class="btn-remove mt-2" id="btn-xoa" title="Xóa sản phẩm">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </button>
                                     </div>
@@ -184,12 +221,13 @@
                         </form>
                         <?php
                         $giatrigiam = 0;
+                        // Logic mã giảm giá (Giữ nguyên)
                         if (isset($_POST['btnKM'])) {
                             if (isset($_SESSION['cart'])) {
-                                $codegiamgia = $_POST['codegiamgia'];
+                                $codegiamgia = $connect->real_escape_string($_POST['codegiamgia']);
                                 $sql_giamgia = "SELECT DISTINCT giatrigiam from magiamgia where codemagiamgia = '$codegiamgia'";
                                 $row_giamgia = $connect->query($sql_giamgia);
-                                if ($row_giamgia->num_rows > 0) {
+                                if ($row_giamgia && $row_giamgia->num_rows > 0) {
                                     $giamgia = $row_giamgia->fetch_row();
                                     $giatrigiam = $giamgia[0] * 100;
                                     $_SESSION['magiamgia'] = $codegiamgia;
@@ -199,11 +237,11 @@
                                 }
                             }
                         }
-                        // Lấy lại giá trị nếu đã có session
                         if (isset($_SESSION['magiamgia'])) {
-                            $sql_check = "SELECT DISTINCT giatrigiam from magiamgia where codemagiamgia = '" . $_SESSION['magiamgia'] . "'";
+                            $code = $connect->real_escape_string($_SESSION['magiamgia']);
+                            $sql_check = "SELECT DISTINCT giatrigiam from magiamgia where codemagiamgia = '$code'";
                             $res_check = $connect->query($sql_check);
-                            if($res_check->num_rows > 0) {
+                            if($res_check && $res_check->num_rows > 0) {
                                 $giatrigiam = $res_check->fetch_row()[0] * 100;
                             }
                         }
@@ -226,16 +264,16 @@
                         
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <h5 class="fw-bold mb-0">TỔNG CỘNG</h5>
-                            <h5 class="finalPrice fw-bold mb-0">0 VNĐ</h5>
+                            <h5 class="finalPrice fw-bold mb-0" style="color: #CF7486;">0 VNĐ</h5>
                         </div>
                         
                         <div class="mt-4">
                             <?php if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
                                 <a href="index.php?quanly=thanhtoan">
-                                    <button class="btnThanhToan shadow-sm">Thanh toán ngay</button>
+                                    <button class="btnThanhToan shadow-sm w-100">Thanh toán ngay</button>
                                 </a>
                             <?php else: ?>
-                                <button class="btnThanhToan opacity-50" disabled>Giỏ hàng trống</button>
+                                <button class="btnThanhToan opacity-50 w-100" disabled>Giỏ hàng trống</button>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -252,7 +290,7 @@
                 var expires = "";
                 if (days) {
                     var date = new Date();
-                    date.setTime(date.getTime() + (days * 1000)); // Sửa lại logic giây
+                    date.setTime(date.getTime() + (days * 1000));
                     expires = "; expires=" + date.toGMTString();
                 }
                 document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";

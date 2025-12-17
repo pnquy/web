@@ -16,7 +16,6 @@
     <section class="home-section">
         <div class="container-fluid">
             <?php 
-                // Logic điều hướng
                 if (isset($_GET['action']) && $_GET['query']) {
                     $tam = $_GET['action'];
                     $query = $_GET['query'];
@@ -28,9 +27,8 @@
                 if ($tam == 'products_management' && $query == 'products_add') {
                     include("products_add.php");
                 } else if ($tam == 'products_management' && $query == 'products_edit') {
-                    include("products_edit.php"); // Sửa đường dẫn nếu cần
+                    include("products_edit.php");
                 } else {
-                    // Mặc định hiện danh sách
                     include('../../menu/product_section.php');
                 }
             ?>

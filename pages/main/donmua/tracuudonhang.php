@@ -37,7 +37,6 @@
                     <?php
                         if(isset($_SESSION['dangnhap'])){
                             $sdt = $_SESSION['dangnhap'];
-                            // Lấy ID khách hàng
                             $sql_find_khachhangid = "Select khachhangid from khachhang where sodt = '" . $sdt . "'";
                             $result_find_khachhangid = $connect->query($sql_find_khachhangid);
                             
@@ -45,7 +44,6 @@
                                 $row_find_khachhangid = $result_find_khachhangid->fetch_assoc();
                                 $khachhangid = $row_find_khachhangid['khachhangid'];
 
-                                // Lấy danh sách đơn hàng
                                 $sql_select_thanhtoan = "SELECT * FROM thanhtoan WHERE khachhangid = '" . $khachhangid . "' ORDER BY thanhtoanid DESC";
                                 $result_select_thanhtoan = $connect->query($sql_select_thanhtoan);
                                 

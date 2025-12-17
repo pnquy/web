@@ -3,7 +3,7 @@
 <?php
 if (!isset($_SESSION['dangnhap'])) {
     echo "<div class='container py-5 text-center'>
-            <img src='img/img_homepage/login.png' style='width: 100px; opacity: 0.5;'>
+            <img src='img/img_homepage/logo.png' style='width: 100px; opacity: 0.5;'>
             <h4 class='mt-3'>Vui lòng đăng nhập để thanh toán</h4>
             <a href='index.php?quanly=dangnhap' class='btn btn-dark rounded-pill px-4 mt-2'>Đăng nhập ngay</a>
           </div>";
@@ -216,7 +216,6 @@ if (!isset($_SESSION['dangnhap'])) {
     </html>
 
     <script>
-        // ... (Phần logic tính tiền, format tiền giữ nguyên như cũ) ...
         var productFee = <?php echo $total; ?>;
         function formatCurrency(amount) {
             return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
@@ -242,7 +241,6 @@ if (!isset($_SESSION['dangnhap'])) {
         updateTotal(); 
         $('input[name="LoaiGiaoHang"]').change(function() { updateTotal(); });
 
-        // --- LOGIC ĐẶT HÀNG VÀ CHUYỂN HƯỚNG ---
         $(document).ready(function(){
             $('input').on('click focus', function() {
                 var id = $(this).attr('id');
@@ -296,17 +294,13 @@ if (!isset($_SESSION['dangnhap'])) {
                                 if(data.trim() == "Chưa có giỏ hàng"){
                                     $("#ketqua").text(data);
                                 } else {
-                                    // === LOGIC CHUYỂN HƯỚNG MỚI TẠI ĐÂY ===
                                     if(phuongthuc == 'momo'){
-                                        // Chuyển sang trang QR MoMo (kèm tổng tiền)
                                         window.location.href = "pages/main/thanh_toan_momo.php?tongtien=" + tongcong;
                                     } 
                                     else if(phuongthuc == 'thẻ ngân hàng'){
-                                        // Chuyển sang trang nhập thẻ
                                         window.location.href = "pages/main/thanh_toan_the.php?tongtien=" + tongcong;
                                     } 
                                     else {
-                                        // Thanh toán trực tiếp -> Hiện Popup thành công
                                         $("#success-message").fadeIn();
                                     }
                                 }

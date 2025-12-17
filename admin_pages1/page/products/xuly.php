@@ -2,7 +2,7 @@
 $mysqli = new mysqli("localhost","root","","dbdoan");
 
 if (isset($_POST['suasanpham'])) {
-    // Update existing product
+
     $sanphamid = $_GET['sanphamid'];
     $colorid = $_GET['colorid'];
     $tensanpham = mysqli_real_escape_string($mysqli, $_POST['input_sua_tensanpham']);
@@ -11,7 +11,7 @@ if (isset($_POST['suasanpham'])) {
     $dongsanpham = $_POST['select_sua_dongsanpham'];
     $styleid = $_POST['select_sua_kieudang'];
     $thongtinsanpham = $_POST['textarea_sua_thongtinsanpham'];
-    // Map values using associative arrays
+
     $dongsp_mapping = [
       'Nike' => 'dongsp1',
       'Adidas' => 'dongsp2',
@@ -38,7 +38,7 @@ if (isset($_POST['suasanpham'])) {
 
     $anc_sua_sanpham =  mysqli_query($mysqli, $sql_sua_sanpham);
 
-    // Handle picture updates
+
     $hinhanh1 = $_FILES['input_sua_upload_anh_1']['name'];
     $hinhanh_tmp1 = $_FILES['input_sua_upload_anh_1']['tmp_name'];
 
@@ -92,8 +92,6 @@ if (isset($_POST['suasanpham'])) {
     }
 
 
-
-    // Handle quantity updates
     $sizes = ['36', '37', '38', '39', '40', '41', '42', '43', '44'];
     foreach ($sizes as $size) {
         $quantity = $_POST['input_sua_size' . $size];
@@ -112,8 +110,4 @@ if (isset($_POST['suasanpham'])) {
     } else {
         echo "<script>alert('Lỗi! Cập nhật sản phẩm thất bại.\\nVui lòng thử lại sau.');</script>";
     }
-} else {
-    // Delete existing product
-
-
 }

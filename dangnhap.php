@@ -48,7 +48,7 @@
             
             <div class="text-center mb-4">
                 <span style="font-size: 14px; color: #666;">Chưa có tài khoản? </span>
-                <a href='dangki.php' class="link-register">Đăng ký ngay</a>
+                <a href='index.php?quanly=dangki' class="link-register">Đăng ký ngay</a>
             </div>
         </div>
 
@@ -59,12 +59,12 @@
 
     <script>
         $(document).ready(function() {
-            // Ẩn thông báo lỗi khi click vào ô input
+            
             $("#login-sdt, #login-password").on("click focus", function() {
                 $("#alert-login").slideUp();
             });
 
-            // Hàm xử lý đăng nhập
+            
             function handleLogin() {
                 var sodt = $('#login-sdt').val().trim();
                 var pass = $('#login-password').val().trim();
@@ -98,7 +98,7 @@
                 }
             }
 
-            // Sự kiện nhấn phím Enter
+           
             $(document).keypress(function(event) {
                 var keycode = (event.keyCode ? event.keyCode : event.which);
                 if (keycode == '13') {
@@ -106,9 +106,9 @@
                 }
             });
 
-            // Sự kiện click nút Đăng nhập
+            
             $('#dn').click(function(e) {
-                e.preventDefault(); // Ngăn submit form mặc định
+                e.preventDefault(); 
                 handleLogin();
             });
         });

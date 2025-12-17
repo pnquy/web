@@ -1,5 +1,4 @@
 <?php
-// Giữ nguyên phần kết nối và lấy dữ liệu
 $mysqli = new mysqli("localhost", "root", "", "dbdoan");
 $sanphamid = $_GET['sanphamid'];
 $colorid = $_GET['colorid'];
@@ -13,7 +12,6 @@ $sql_lietke = "SELECT * FROM sanpham sp
 $query_lietke = $mysqli->query($sql_lietke);
 $row = $query_lietke->fetch_assoc();
 
-// Lấy số lượng size
 $sql_size = "SELECT size, sl FROM procolorsize WHERE procolorid = (SELECT productcolorid FROM productcolor WHERE productid='$sanphamid' AND colorid='$colorid')";
 $query_size = $mysqli->query($sql_size);
 $quantity = array_fill_keys(range(36, 44), 0);

@@ -18,7 +18,6 @@
             </thead>
             <tbody>
                 <?php
-                // Kết nối CSDL nếu chưa có
                 if(!isset($mysqli)){
                     $mysqli = new mysqli("localhost", "root", "", "dbdoan");
                 }

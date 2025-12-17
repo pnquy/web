@@ -22,7 +22,6 @@
     <script src="../../../jq.js"></script>
     <script src="../dashboard/admin_dashboard.js"></script>
     <script>
-        // Script toggle sidebar đơn giản nếu file js chưa load kịp
         const body = document.querySelector('body'),
         sidebar = body.querySelector('nav'),
         toggle = body.querySelector(".toggle-hnm");

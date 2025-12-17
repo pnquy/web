@@ -31,10 +31,8 @@
             </thead>
             <tbody id="myTable">
                 <?php
-                // Kết nối CSDL
                 $mysqli = new mysqli("localhost", "root", "", "dbdoan");
                 
-                // Query lấy dữ liệu (Bao gồm cả colorid để phục vụ việc xóa)
                 $sql_lietke_danhmuc_sp = "
                             SELECT *
                             FROM (
@@ -95,7 +93,6 @@
 </div>
 
 <script>
-    // 1. Script tìm kiếm nhanh trên bảng
     $(function() {
         $("#tableSearch").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -105,13 +102,10 @@
         });
     });
 
-    // 2. Script Xóa Sản Phẩm (Gọi Ajax)
     function deleteProduct(sanphamid, colorid) {
         if (confirm("Bạn có chắc chắn muốn xóa sản phẩm (màu này) không?")) {
             $.ajax({
                 method: 'POST',
-                // Lưu ý: Đảm bảo file AjaxDel.php nằm cùng thư mục với file cha (products_management.php)
-                // Hoặc điều chỉnh đường dẫn này cho đúng vị trí file AjaxDel.php
                 url: 'AjaxDel.php', 
                 data: {
                     sanphamid: sanphamid,
@@ -119,7 +113,7 @@
                 },
                 success: function(data) {
                     alert("Đã xóa thành công!");
-                    location.reload(); // Tải lại trang để cập nhật danh sách
+                    location.reload();
                 },
                 error: function() {
                     alert("Lỗi! Không thể xóa sản phẩm. Vui lòng kiểm tra lại.");

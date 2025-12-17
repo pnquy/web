@@ -139,7 +139,6 @@
     <body>
         <?php
         $connect = new mysqli('localhost', 'root', '', 'dbdoan');
-        //$iddonhang = $_GET['id'];
         $sql_select_donhang = "SELECT * FROM thanhtoan WHERE thanhtoanid = '".$iddonhang."'";
         $result_select_donhang = $connect->query($sql_select_donhang);
         $row_select_donhang = $result_select_donhang->fetch_assoc();

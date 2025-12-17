@@ -19,11 +19,8 @@
         <div class="container-fluid">
             
             <?php
-                // --- LOGIC PHP: CHUẨN BỊ DỮ LIỆU ---
-                // Khởi tạo các biến mặc định là rỗng
                 $tensp = $giasp = $danhmuc = $dong = $kieudang = $thongtin = "";
                 
-                // Nếu có Session (Dữ liệu cũ hoặc đang nhập dở), gán giá trị
                 if(isset($_SESSION['sp_info'])){
                     $i = 0;
                     foreach($_SESSION['sp_info'] as $p){
@@ -121,7 +118,6 @@
                         <div class="row g-2 mb-4">
                             <?php 
                             for($i=36; $i<=44; $i++): 
-                                // Lấy giá trị session nếu có
                                 $sl_val = isset($_SESSION['sp'][$selected_color]["sl$i"]) ? $_SESSION['sp'][$selected_color]["sl$i"] : '';
                             ?>
                             <div class="col-4">
@@ -143,12 +139,11 @@
                                     
                                     <div id="div_hienthi_anh<?php echo $j; ?>" class="mb-2 d-flex align-items-center justify-content-center" style="height: 100px; overflow: hidden;">
                                         <?php 
-                                            // Hiển thị ảnh nếu có trong session
                                             if(isset($_SESSION['sp'][$selected_color]["img{$j}_alt"]) && $_SESSION['sp'][$selected_color]["img{$j}_alt"] != ""){
                                                 $src = $_SESSION['sp'][$selected_color]["img{$j}_alt"];
                                                 echo "<img src='../../../uploads/$src' id='img$j' alt='$src' style='max-width:100%; max-height:100%;'>";
                                             } else {
-                                                echo "<img src='' id='img$j' alt='' style='display:none;'>"; // Placeholder ẩn
+                                                echo "<img src='' id='img$j' alt='' style='display:none;'>";
                                                 echo "<i class='bx bx-image-add text-muted fs-1'></i>";
                                             }
                                         ?>
@@ -186,23 +181,21 @@
 
     <script>
         $(document).ready(function() {
-            // 1. Xử lý đổi màu sắc (Cookie & Reload)
             $("#select_mausanpham").on("change", function(){
                 createCookie("colorid", $(this).val(), 100);
-                history.go(0); // Reload để PHP lấy lại session mới
+                history.go(0);
             });
 
             function createCookie(name, value, days) {
                 var expires = "";
                 if (days) {
                     var date = new Date();
-                    date.setTime(date.getTime() + (days * 1000)); // Sửa lại logic giây
+                    date.setTime(date.getTime() + (days * 1000));
                     expires = "; expires=" + date.toGMTString();
                 }
                 document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
             }
 
-            // 2. Xử lý Upload Ảnh (Preview AJAX)
             function setupImageUpload(id) {
                 $(document).on('change', '#input_upload_anh_' + id, function() {
                     var property = this.files[0];
@@ -229,9 +222,8 @@
                             $('#div_hienthi_anh' + id).html('<div class="spinner-border text-primary spinner-border-sm"></div>');
                         },
                         success: function(data) {
-                            $('#div_hienthi_anh' + id).html(data); // PHP trả về thẻ <img>
-                            // Cập nhật alt cho img ẩn để validate hoạt động
-                            var newSrc = $(data).attr('src').split('/').pop(); // Lấy tên file
+                            $('#div_hienthi_anh' + id).html(data);
+                            var newSrc = $(data).attr('src').split('/').pop();
                             $('#img' + id).attr('alt', newSrc); 
                         }
                     });
@@ -239,39 +231,30 @@
             }
             setupImageUpload(1); setupImageUpload(2); setupImageUpload(3); setupImageUpload(4);
 
-            // 3. Xử lý Validate
             function validate() {
                 var isValid = true;
-                // Validate tên, giá
                 if($('#input_tensanpham').val() == "") { $('#input_tensanpham').addClass('is-invalid'); isValid = false; }
                 else { $('#input_tensanpham').removeClass('is-invalid'); }
 
                 if(isNaN($('#input_giasanpham').val()) || $('#input_giasanpham').val() == "") { $('#input_giasanpham').addClass('is-invalid'); isValid = false; }
                 else { $('#input_giasanpham').removeClass('is-invalid'); }
 
-                // Validate Size (Check nếu không phải số)
                 $('.input_size').each(function() {
                     if(isNaN($(this).val())) { $(this).addClass('is-invalid'); isValid = false; }
                     else { $(this).removeClass('is-invalid'); }
                 });
 
-                // Validate Ảnh (Kiểm tra xem đã upload chưa thông qua thuộc tính alt của img ẩn hoặc img hiển thị)
-                // Logic cũ của bạn dựa vào getAttribute("alt"). Ở đây ta cần đảm bảo ảnh đã được upload.
-                // Đoạn này có thể cần tùy chỉnh thêm tùy vào cách file upload_img_ajax trả về.
                 return isValid;
             }
 
-            // 4. Lưu Tạm (AJAX)
             $("#luu").click(function(){
                 if(!validate()) { alert("Vui lòng kiểm tra lại thông tin nhập!"); return; }
 
                 var colorid = $("#select_mausanpham").val();
                 
-                // Lấy tên file ảnh từ thẻ img được ajax trả về
                 var getImgName = function(id) {
                     var imgTag = $('#div_hienthi_anh' + id).find('img');
                     if(imgTag.length > 0) {
-                        // Lấy đường dẫn src, tách lấy tên file
                         var src = imgTag.attr('src'); 
                         return src ? src.split('/').pop() : ''; 
                     }
@@ -299,10 +282,7 @@
                 });
             });
 
-            // 5. Thêm Sản Phẩm Hoàn Tất
             $("#addsp").click(function() {
-                // Kiểm tra xem đã lưu ít nhất 1 màu chưa? (Có thể thêm logic check session ở đây nếu cần)
-                // Gửi request thêm sản phẩm
                 $.post("../products/themSp_ajax.php", {}, function(data) {
                     alert(data);
                     if(data.trim() == "Thành công"){

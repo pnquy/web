@@ -4,10 +4,6 @@ include('../../../config/config.php');
 $sanphamid = $_POST['sanphamid'];
 $colorid = $_POST['colorid'];
 
-
-// $sanphamid = $_GET['sanphamid'];
-//     $colorid = $_GET['colorid'];
-
     $sql_xoa_hinhanh = "SELECT * FROM productcolor WHERE productid = '" . $sanphamid . "' AND  colorid = '" . $colorid . "' LIMIT 1";
     $query_xoa_hinhanh = mysqli_query($mysqli, $sql_xoa_hinhanh);
 

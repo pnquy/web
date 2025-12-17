@@ -40,11 +40,6 @@
     $sl43 = $_POST['sl43'];
     $sl44 = $_POST['sl44'];
 
-    // $img1_src = $_POST['img1_src'];
-    // $img2_src = $_POST['img2_src'];
-    // $img3_src = $_POST['img3_src'];
-    // $img4_src = $_POST['img4_src'];
-
     $img1_alt = $_POST['img1_alt'];
     $img2_alt = $_POST['img2_alt'];
     $img3_alt = $_POST['img3_alt'];
@@ -63,11 +58,6 @@
             'sl42' => $sl42,
             'sl43' => $sl43,
             'sl44' => $sl44,
-
-            // 'img1_src' => $img1_src,
-            // 'img2_src' => $img2_src,
-            // 'img3_src' => $img3_src,
-            // 'img4_src' => $img4_src,
 
             'img1_alt' => $img1_alt,
             'img2_alt' => $img2_alt,
@@ -89,11 +79,6 @@
         $_SESSION['sp'][$colorid]['sl42'] = $sl42;
         $_SESSION['sp'][$colorid]['sl43'] = $sl43;
         $_SESSION['sp'][$colorid]['sl44'] = $sl44;
-
-        // $_SESSION['sp'][$colorid]['img1_src'] = $img1_src;
-        // $_SESSION['sp'][$colorid]['img2_src'] = $img2_src;
-        // $_SESSION['sp'][$colorid]['img3_src'] = $img3_src;
-        // $_SESSION['sp'][$colorid]['img4_src'] = $img4_src;
 
         $_SESSION['sp'][$colorid]['img1_alt'] = $img1_alt;
         $_SESSION['sp'][$colorid]['img2_alt'] = $img2_alt;

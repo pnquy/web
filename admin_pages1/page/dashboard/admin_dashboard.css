@@ -20,7 +20,7 @@ body {
     padding: 0;
 }
 
-/* --- SIDEBAR --- */
+
 .sidebar-hnm {
     position: fixed;
     top: 0;
@@ -38,7 +38,7 @@ body {
     width: 88px;
 }
 
-/* Logo & Header */
+
 .sidebar-hnm header {
     position: relative;
 }
@@ -154,7 +154,7 @@ body {
     opacity: 0;
 }
 
-/* Hover Effect */
+
 .nav-link-hnm:hover {
     background-color: var(--primary-color);
 }
@@ -164,7 +164,7 @@ body {
     color: #fff;
 }
 
-/* --- MAIN CONTENT AREA --- */
+
 .home-section {
     position: relative;
     height: 100vh;
@@ -180,7 +180,7 @@ body {
     width: calc(100% - 88px);
 }
 
-/* --- CARD STYLE (Dùng cho Form thêm mới, bảng dữ liệu...) --- */
+
 .admin-card {
     background: #fff;
     padding: 30px;
@@ -198,7 +198,7 @@ body {
     padding-bottom: 15px;
 }
 
-/* --- FORM ELEMENTS --- */
+
 .form-group {
     margin-bottom: 20px;
 }
@@ -227,7 +227,7 @@ body {
     box-shadow: 0 0 0 4px rgba(207, 116, 134, 0.1);
 }
 
-/* Button */
+
 .btn-admin {
     background-color: var(--primary-color);
     color: #fff;
@@ -255,7 +255,7 @@ body {
     font-size: 18px;
 }
 
-/* Table Style (Cho các trang quản lý) */
+
 .table-admin {
     width: 100%;
     border-collapse: separate;
