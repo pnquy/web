@@ -167,7 +167,7 @@
             $rs_puma = $connect->query($str_puma);
             if ($rs_puma && $rs_puma->num_rows > 0) {
                 echo "<div class='brand-section mb-5'>";
-                echo "<h3 class='mb-4 border-bottom pb-2' style='border-color: #000 !important; display:inline-block;'>Biti's Collection</h3>";
+                echo "<h3 class='mb-4 border-bottom pb-2' style='border-color: #000 !important; display:inline-block;'>Puma Collection</h3>";
                 echo "<div class='row'>";
                 while ($row = $rs_puma->fetch_row()) { ?>
                     <div class="col-lg-3 col-md-4 col-6 mb-4">

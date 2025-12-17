@@ -55,7 +55,10 @@
                     </li>
                     <li class="mb-3">
                         <span class="d-block fw-bold mb-1">Team Members:</span>
-                        <span class="opacity-75">Phan Nhật Quý, Lê Thị Minh Nguyệt, </span>
+                        <span class="opacity-75">Phan Nhật Quý </span><br>
+                        <span class="opacity-75">Lê Thị Minh Nguyệt </span><br>
+                        <span class="opacity-75">Trần Dương Tuấn </span><br>
+                        <span class="opacity-75">Phạm Hùng Quốc Việt </span>
                     </li>
                 </ul>
             </div>
